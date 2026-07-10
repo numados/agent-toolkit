@@ -1,0 +1,6 @@
+.DS_Store
+!AGENTS.md
+.env
+.env.*
+!.env.example
+apm_modules/
