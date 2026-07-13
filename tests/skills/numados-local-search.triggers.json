@@ -1,0 +1,22 @@
+[
+  {"query":"Find the local files that explain our retry architecture, even if they use different terminology.","should_trigger":true},
+  {"query":"Search these repositories for every implementation of rate normalization without dumping all matches.","should_trigger":true},
+  {"query":"Choose between rg and Auggie to locate why this feed becomes stale.","should_trigger":true},
+  {"query":"Find all PDF and Markdown documents under this folder that mention settlement limits.","should_trigger":true},
+  {"query":"Search my approved work folders for files whose names resemble an old design document.","should_trigger":true},
+  {"query":"Locate code that structurally calls SendAsync inside retry loops.","should_trigger":true},
+  {"query":"Use parallel search branches across these four independent repositories.","should_trigger":true},
+  {"query":"Recover the history of the local note that introduced this architecture decision.","should_trigger":true},
+  {"query":"Search this large local knowledge store with strict path and token limits.","should_trigger":true},
+  {"query":"I do not know the filename or exact words; find the relevant content on this machine.","should_trigger":true},
+  {"query":"Search the web for current ripgrep releases.","should_trigger":false},
+  {"query":"Query Azure DevOps for pull requests containing this class.","should_trigger":false},
+  {"query":"Open src/RateProvider.cs at line 40.","should_trigger":false},
+  {"query":"Save this research into my Obsidian vault.","should_trigger":false},
+  {"query":"Audit whether this skill has all required search tools installed.","should_trigger":false},
+  {"query":"Install ast-grep on Ubuntu now.","should_trigger":false},
+  {"query":"Explain how regular expressions work.","should_trigger":false},
+  {"query":"Commit the files currently staged in Git.","should_trigger":false},
+  {"query":"Search production logs for this exception.","should_trigger":false},
+  {"query":"List the files in the current directory.","should_trigger":false}
+]

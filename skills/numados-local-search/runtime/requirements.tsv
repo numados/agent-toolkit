@@ -1,0 +1,10 @@
+# capability	need	when	providers	purpose
+runtime.shell	required	bundled scripts	cmd:bash	Run deterministic bounded search and capability probes
+filesystem.filename	required	filename or path discovery	cmd:rg|cmd:fd|cmd:fdfind|cmd:find|harness:filesystem-search|mcp:filesystem-search	Enumerate candidates within an explicit root
+filesystem.lexical	required	exact text or regex search	cmd:rg|harness:filesystem-search|mcp:filesystem-search	Find bounded content evidence
+code.structural	optional	code syntax or relationship queries	verified:ast-grep|verified:sg|harness:structural-search	Match code structure without text false positives
+filesystem.semantic	optional	conceptual queries or uncertain terminology	harness:semantic-search|verified:qmd|mcp:semantic-search	Rank meaning-related local content
+document.extraction	optional	PDF, Office, archive, media metadata, or SQLite search	verified:rga|mcp:document-search	Extract searchable text from non-plain files
+filesystem.filename-index	optional	repeated machine-wide filename lookup	verified:plocate|verified:locate|harness:filename-index	Use a maintained filename index
+history.git	optional	provenance or change-history queries	verified:git|harness:git	Search bounded path history
+execution.subagent	optional	independent multi-root or multi-provider branches	harness:subagent-search	Isolate and parallelize broad retrieval

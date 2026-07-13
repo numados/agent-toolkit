@@ -4,6 +4,7 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "$0")/.." && pwd -P)"
 doctor="$repo_root/skills/numados-skill-doctor/scripts/inspect-runtime.sh"
 obsidian_skill="$repo_root/skills/numados-obsidian-knowledge"
+local_search_skill="$repo_root/skills/numados-local-search"
 temporary_root="$(mktemp -d)"
 trap 'rm -rf "$temporary_root"' EXIT
 
@@ -122,6 +123,56 @@ if command -v rg >/dev/null 2>&1; then
   match_count="$(printf '%s\n' "$output" | grep -c 'bounded needle')"
   [ "$match_count" -eq 1 ] || { printf 'FAIL bounded search: expected 1 snippet, got %s\n%s\n' "$match_count" "$output" >&2; exit 1; }
   checks=$((checks + 1))
+
+  mkdir -p "$temporary_root/search"
+  printf '%s\n' 'semantic needle one' > "$temporary_root/search/one.md"
+  printf '%s\n' 'semantic needle two' > "$temporary_root/search/two.md"
+  output="$("$local_search_skill/scripts/bounded-search.sh" \
+    --root "$temporary_root/search" \
+    --query 'semantic needle' \
+    --mode text \
+    --limit 1 \
+    --context 0)"
+  match_count="$(printf '%s\n' "$output" | grep -c 'semantic needle')"
+  [ "$match_count" -eq 1 ] || { printf 'FAIL local bounded search: expected 1 snippet, got %s\n%s\n' "$match_count" "$output" >&2; exit 1; }
+  checks=$((checks + 1))
+
+  mkdir -p "$temporary_root/search/.git"
+  printf '%s\n' 'semantic needle vcs metadata' > "$temporary_root/search/.git/hidden.md"
+  output="$("$local_search_skill/scripts/bounded-search.sh" \
+    --root "$temporary_root/search" \
+    --query 'semantic needle' \
+    --mode text \
+    --hidden \
+    --limit 10 \
+    --context 0)"
+  assert_not_contains "$output" '.git/hidden.md' 'vcs metadata exclusion'
 fi
+
+if "$local_search_skill/scripts/bounded-search.sh" \
+  --root / \
+  --query test \
+  --mode path >/dev/null 2>&1; then
+  printf '%s\n' 'FAIL filesystem root guard: / search returned success' >&2
+  exit 1
+fi
+checks=$((checks + 1))
+
+if "$local_search_skill/scripts/bounded-search.sh" \
+  --root "$temporary_root" \
+  --query '[' \
+  --mode regex >/dev/null 2>&1; then
+  printf '%s\n' 'FAIL invalid regex: search returned success' >&2
+  exit 1
+fi
+checks=$((checks + 1))
+
+mkdir -p "$temporary_root/bin-sg-conflict"
+link_command bash "$temporary_root/bin-sg-conflict"
+printf '%s\n' '#!/usr/bin/env bash' 'printf "%s\n" "ripgrep test"' > "$temporary_root/bin-sg-conflict/rg"
+printf '%s\n' '#!/usr/bin/env bash' 'printf "%s\n" "Usage: sg group [[-c] command]"' > "$temporary_root/bin-sg-conflict/sg"
+chmod +x "$temporary_root/bin-sg-conflict/rg" "$temporary_root/bin-sg-conflict/sg"
+output="$(PATH="$temporary_root/bin-sg-conflict" "$local_search_skill/scripts/probe-search-tools.sh")"
+assert_contains "$output" $'code.structural\tconflict\tcmd:sg' 'ast-grep command collision'
 
 printf 'PASS runtime checks: %s\n' "$checks"

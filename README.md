@@ -32,6 +32,7 @@ The portable core stays independent of a particular client. Harness-specific pat
 
 - `skill-author` creates, updates, and reviews reusable skills.
 - `numados-skill-doctor` audits whether a skill is ready for the current machine, harness, and target scope.
+- `numados-local-search` routes local retrieval to bounded lexical, structural, semantic, document, indexed, or history providers.
 - `numados-obsidian-knowledge` provides bounded, portable Obsidian vault operations.
 
 ## Validation

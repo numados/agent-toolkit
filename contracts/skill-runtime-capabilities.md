@@ -25,7 +25,7 @@ filesystem.lexical<TAB>required<TAB>content search<TAB>cmd:rg|mcp:filesystem-sea
 
 Do not put install commands, absolute machine paths, credentials, versions, or provider configuration in the manifest.
 
-Use `cmd:<name>` only when command presence is enough to use it safely. Use `verified:<name>` for stateful commands whose readiness requires additional proof, such as an initialized index, downloaded model, running application, authenticated session, target-specific configuration, or a Git worktree. The doctor counts a `verified:` provider only when the active agent passes the same value through `--provide` after a read-only readiness check.
+Use `cmd:<name>` only when command presence is enough to use it safely. Use `verified:<name>` when readiness requires additional proof: a stateful index, downloaded model, running application, authenticated session, target-specific configuration, Git worktree, or command identity where aliases may collide. The doctor counts a `verified:` provider only when the active agent passes the same value through `--provide` after a read-only identity or readiness check.
 
 ## Provider states
 

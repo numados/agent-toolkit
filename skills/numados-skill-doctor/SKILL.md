@@ -22,7 +22,7 @@ Obtain:
 3. Run `scripts/inspect-runtime.sh --skill <dir> [--target <root>]`. Pass each verified harness, MCP, or stateful CLI provider with `--provide <namespace:name>`.
 4. Compare the detected providers with the requested operations. Missing optional features do not block unrelated core operations.
 5. For search workflows, state the actual route for filename, lexical content, structured/graph, semantic/indexed, and history queries. Read [capability assessment](references/capability-assessment.md) when ranking search providers or recommending one.
-6. Recommend the smallest change that closes a real gap. Prefer an already-applicable harness or MCP capability over installing a duplicate CLI.
+6. Recommend the smallest change that closes a real gap. Prefer an already-applicable harness or MCP capability over installing a duplicate CLI. For search gaps, read [search tool recommendations](references/search-tool-recommendations.md) and name only tools relevant to the requested query classes.
 
 Never treat these as equivalent:
 
@@ -51,16 +51,20 @@ Search plan
 - semantic/indexed: <provider or disabled>
 - history: <provider or unavailable>
 
+Tool improvements (only requested capabilities)
+- [ ] <candidate> — <benefit; readiness proof; setup/index/privacy cost>
+
 Actions
 - Required: <none or exact next action>
 - Optional: <at most two justified improvements>
 ```
 
-Keep each capability to one line. Include paths or versions only when they prove provider origin or explain a conflict. Mark unknown facts as unknown. Do not emit generic inventories or installation commands that were not verified for the current operating system.
+Keep each capability to one line. Include paths or versions only when they prove provider origin or explain a conflict. Mark unknown facts as unknown. Omit the tool-improvement section when no requested operation benefits. Do not emit generic inventories or installation commands that were not verified for the current operating system.
 
 ## Safe recommendations
 
 - Do not install an optional provider unless the requested workflow benefits materially.
+- Do not emit a generic tool shopping list; tie each recommendation to a missing or inefficient operation.
 - Explain storage, model download, indexing, daemon, GUI, network, and maintenance costs before recommending them.
 - Ask for confirmation before any installation or configuration change.
 - Re-run the audit after an approved setup change and report what changed.
@@ -69,4 +73,5 @@ Keep each capability to one line. Include paths or versions only when they prove
 
 - `scripts/inspect-runtime.sh`: dependency-free Bash probe for declared command and caller-verified providers.
 - [Capability assessment](references/capability-assessment.md): provider applicability, search-efficiency, and recommendation rules.
+- [Search tool recommendations](references/search-tool-recommendations.md): feature-driven CLI, index, MCP, and subagent options.
 - `runtime/requirements.tsv`: the doctor's own runtime declaration.

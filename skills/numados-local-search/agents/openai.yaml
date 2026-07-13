@@ -1,0 +1,4 @@
+interface:
+  display_name: "numados: Local Search"
+  short_description: "Route local searches to the best provider"
+  default_prompt: "Use $numados-local-search to find relevant local files with the fastest precise provider."

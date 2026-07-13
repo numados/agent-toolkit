@@ -9,6 +9,7 @@
   {"query":"Would installing a semantic index materially improve this skill?","should_trigger":true},
   {"query":"The skill dependency check fails after my harness update.","should_trigger":true},
   {"query":"Give me a short readiness checklist for all capabilities declared by this skill.","should_trigger":true},
+  {"query":"Which missing local search tools would materially improve this skill on my machine?","should_trigger":true},
   {"query":"Search my Obsidian vault for Redis notes.","should_trigger":false},
   {"query":"Write a new Agent Skill for reviewing pull requests.","should_trigger":false},
   {"query":"Review whether this SKILL.md follows the Agent Skills writing standard.","should_trigger":false},

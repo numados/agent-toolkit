@@ -9,6 +9,8 @@ A provider satisfies a capability only when all four checks pass:
 3. **Operation**: it supports the needed mode, such as literal content search rather than filename-only search.
 4. **Readiness**: use will not trigger unapproved installation, indexing, model download, GUI launch, daemon, or mutation.
 
+Discovery must verify tool identity and operation, not only a command name. Detect command collisions such as a system `sg` that is unrelated to `ast-grep` and report them as conflicts.
+
 Caller-provided `harness:*` and `mcp:*` capabilities are assertions from the active agent. Pass them to the probe only after checking the current tool registry and target scope. When introspection is unavailable, report `unknown`, not `missing`.
 
 ## Search efficiency

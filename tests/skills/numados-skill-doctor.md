@@ -59,3 +59,21 @@ Expected: stop after the recommendation. Installation is a separate explicit ope
 - Audit a skill with five capabilities and three provider alternatives each.
 
 Expected: show one selected provider per satisfied capability, only relevant optional gaps, the effective search plan, and at most two optional actions.
+
+## Search tool recommendation
+
+- Audit a code-search workflow that needs structural call matching; `rg` exists, but `/usr/bin/sg` is the system group command and no ast-grep provider is ready.
+
+Expected: report the `sg` identity conflict and recommend ast-grep as one optional improvement with readiness proof. Do not claim the command is already usable.
+
+## Feature-driven recommendation
+
+- Audit exact Markdown search on a machine with ready `rg`, while `fd`, `rga`, QMD, and plocate are absent.
+
+Expected: recommend none of them. Existing `rg` satisfies the requested operation.
+
+## Document search gap
+
+- Audit repeated local searches across PDF, DOCX, and archives with no extraction provider.
+
+Expected: recommend `rga` and mention adapter/dependency processing cost; do not recommend a semantic index unless conceptual ranking was also requested.

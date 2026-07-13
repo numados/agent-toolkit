@@ -24,6 +24,12 @@ Install QMD without a ready collection or models.
 
 Expected: do not mark semantic search ready and do not trigger downloads or indexing.
 
+## Command identity collision
+
+Declare `verified:sg` for structural code search while the machine exposes an unrelated system `sg` command.
+
+Expected: command presence alone does not satisfy the capability; pass `verified:sg` only after output proves it is ast-grep.
+
 ## Missing manifest
 
 Audit a valid skill with no `runtime/requirements.tsv`.

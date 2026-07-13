@@ -38,7 +38,7 @@ Classify the query, then use the cheapest precise operation:
 4. **Related-note query**: inspect outgoing links and backlinks one hop from the best candidates.
 5. **Conceptual query with weak lexical matches**: use optional semantic or hybrid search, then verify results against the source Markdown.
 
-Use `scripts/vault-search.sh` when ripgrep is available; otherwise use a verified harness or MCP filesystem-search provider. Read [search strategy](references/search-strategy.md) for backend routing, query expansion, graph traversal, and token-bounded retrieval.
+Use `$numados-local-search` to select lexical or semantic providers when it is installed. Use `scripts/vault-search.sh` for the selected ripgrep route; otherwise use a verified harness or MCP filesystem-search provider. Read [search strategy](references/search-strategy.md) for Obsidian-specific query expansion, graph traversal, and token-bounded retrieval.
 
 Never dump the whole vault into context. Search paths or candidate files first, inspect short snippets second, and read only the best few notes. Report vault-relative paths and headings or line numbers with any synthesized answer. A failed search is not proof that the information is absent; report the query and scope used.
 
