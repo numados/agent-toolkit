@@ -1,11 +1,11 @@
 ---
 name: numados-skill-doctor
-description: Audit an Agent Skill against the current machine and harness, verify required and optional CLI, MCP, filesystem-search, and indexed-search capabilities, and produce a short readiness checklist with installation or configuration recommendations. Use before running a skill on a new machine, after harness or tool changes, when a dependency fails, or when comparing available search providers.
+description: Audit an Agent Skill against the current machine and active harness, verify required and optional CLI, MCP, filesystem-search, indexed-search, and harness safety capabilities, and produce a short readiness checklist. Use before running a skill on a new machine, after harness or tool changes, or when a dependency or safety restriction fails.
 ---
 
 # numados Skill Doctor
 
-Determine whether a skill can perform its advertised workflow in the current target scope. Diagnose only: never install packages, enable MCP servers, create indexes, download models, or change configuration without a separate explicit request.
+Determine whether a skill can perform its advertised workflow in the current target scope. Diagnose only: never install packages, enable MCP servers, create indexes, download models, change harness configuration, or modify Git application settings without a separate explicit request.
 
 ## Inputs
 
@@ -20,9 +20,10 @@ Obtain:
 1. Read the target `SKILL.md` and `runtime/requirements.tsv` when present. If the manifest is absent, inspect referenced scripts and mark requirements as `undeclared`; do not infer readiness from PATH alone.
 2. Inventory agent-visible harness and MCP providers before probing commands. Count a provider only when its exact operation, target-root access, output bounds, and side effects are known.
 3. Run `scripts/inspect-runtime.sh --skill <dir> [--target <root>]`. Pass each verified harness, MCP, or stateful CLI provider with `--provide <namespace:name>`.
-4. Compare the detected providers with the requested operations. Missing optional features do not block unrelated core operations.
-5. For search workflows, state the actual route for filename, lexical content, structured/graph, semantic/indexed, and history queries. Read [capability assessment](references/capability-assessment.md) when ranking search providers or recommending one.
-6. Recommend the smallest change that closes a real gap. Prefer an already-applicable harness or MCP capability over installing a duplicate CLI. For search gaps, read [search tool recommendations](references/search-tool-recommendations.md) and name only tools relevant to the requested query classes.
+4. Determine the one harness executing the doctor (`pi`, `codex`, or `claude`). Run `scripts/inspect-safety.sh --harness <active-harness>`; never use an all-harness audit and never inspect Git application hooks as a substitute. If the active harness cannot be identified, report safety as unknown instead of guessing or auditing all harnesses.
+5. Compare the detected providers with the requested operations. Missing optional features do not block unrelated core operations.
+6. For search workflows, state the actual route for filename, lexical content, structured/graph, semantic/indexed, and history queries. Read [capability assessment](references/capability-assessment.md) when ranking search providers or recommending one.
+7. Recommend the smallest change that closes a real gap. Prefer an already-applicable harness or MCP capability over installing a duplicate CLI. For search gaps, read [search tool recommendations](references/search-tool-recommendations.md) and name only tools relevant to the requested query classes.
 
 ## Numados development bundle audit
 
@@ -46,6 +47,10 @@ test execution, and a resolved deterministic Obsidian write root. It does not
 install, configure, index, or mutate anything. A missing QMD/semantic provider
 is an optional gap because exact task recovery starts from the index and latest
 event and can use bounded lexical retrieval.
+
+Run the active-harness safety probe separately for the harness that will execute
+the workflow. It checks only that harness's native boundary; it does not
+configure or inspect a global Git hook.
 
 If a harness or MCP capability is exposed but its target access is not proven,
 do not pass it as `--provide`; report it as unknown or unavailable. Re-run the
@@ -86,6 +91,14 @@ Actions
 - Optional: <at most two justified improvements>
 ```
 
+Include this additional section when the skill can execute tools:
+
+```text
+Safety boundary (active harness only)
+- [x] <harness> — <native restriction and tested command forms>
+- [ ] <harness> — <missing or unverified boundary; exact limitation>
+```
+
 Keep each capability to one line. Include paths or versions only when they prove provider origin or explain a conflict. Mark unknown facts as unknown. Omit the tool-improvement section when no requested operation benefits. Do not emit generic inventories or installation commands that were not verified for the current operating system.
 
 ## Safe recommendations
@@ -93,12 +106,14 @@ Keep each capability to one line. Include paths or versions only when they prove
 - Do not install an optional provider unless the requested workflow benefits materially.
 - Do not emit a generic tool shopping list; tie each recommendation to a missing or inefficient operation.
 - Explain storage, model download, indexing, daemon, GUI, network, and maintenance costs before recommending them.
+- Do not recommend or modify a global Git hook, `core.hooksPath`, Git alias, or other Git-application restriction; the no-push boundary belongs to the active AI harness.
 - Ask for confirmation before any installation or configuration change.
 - Re-run the audit after an approved setup change and report what changed.
 
 ## Resources
 
 - `scripts/inspect-runtime.sh`: dependency-free Bash probe for declared command and caller-verified providers.
+- `scripts/inspect-safety.sh`: read-only probe for the active harness's native no-remote-Git-write boundary.
 - `scripts/inspect-development-workflow.sh`: bundle audit for the Numados task workflow and its Obsidian-backed event log.
 - [Capability assessment](references/capability-assessment.md): provider applicability, search-efficiency, and recommendation rules.
 - [Search tool recommendations](references/search-tool-recommendations.md): feature-driven CLI, index, MCP, and subagent options.

@@ -1,2 +1,3 @@
 # capability	need	when	providers	purpose
 runtime.shell	required	running the deterministic doctor probe	cmd:bash	Inspect declared providers without external packages
+runtime.node	required	parsing active harness safety configuration	cmd:node	Verify JSON settings and safety hooks without exposing values

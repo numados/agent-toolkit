@@ -12,6 +12,9 @@ This repository will hold four distinct kinds of context:
 - `adapters/` and `mcp/`: integration boundaries and non-secret definitions;
   substantial harness-specific implementations live in their own repositories.
 
+Execution boundaries are defined by [`contracts/execution-safety.md`](contracts/execution-safety.md)
+and projected into each harness through [`adapters/execution-safety.md`](adapters/execution-safety.md).
+
 The portable core stays independent of a particular client. Harness-specific paths, metadata, plugins, and MCP schemas belong in adapters.
 
 The Pi-specific runtime is maintained in the separate `pi-agent-toolkit`
@@ -63,6 +66,10 @@ numados-brainstorm -> user decision gate -> numados-planning -> user approval ga
 ```
 
 The implementation skill delegates final code review to `numados-code-review`, which validates candidates through `numados-verify-finding`. It does not assume a specific forge, ticket tracker, or branch convention; task state is routed through the configured Obsidian skill.
+
+`numados-skill-doctor` checks the safety boundary only for the harness that is
+currently executing it. The native boundary is an AI-harness concern; the
+toolkit does not install or modify global Git hooks, aliases, or `core.hooksPath`.
 
 ## Validation
 

@@ -4,6 +4,7 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "$0")/.." && pwd -P)"
 doctor="$repo_root/skills/numados-skill-doctor/scripts/inspect-runtime.sh"
 workflow_doctor="$repo_root/skills/numados-skill-doctor/scripts/inspect-development-workflow.sh"
+safety_doctor="$repo_root/skills/numados-skill-doctor/scripts/inspect-safety.sh"
 obsidian_skill="$repo_root/skills/numados-obsidian-knowledge"
 local_search_skill="$repo_root/skills/numados-local-search"
 temporary_root="$(mktemp -d)"
@@ -40,7 +41,7 @@ link_command() {
 }
 
 mkdir -p "$temporary_root/vault/tasks" "$temporary_root/project" "$temporary_root/bin-ready" "$temporary_root/bin-no-rg"
-for command_name in bash dirname uname; do
+for command_name in bash dirname uname node; do
   link_command "$command_name" "$temporary_root/bin-ready"
   link_command "$command_name" "$temporary_root/bin-no-rg"
 done
@@ -72,6 +73,31 @@ output="$(PATH="$temporary_root/bin-no-rg" "$doctor" \
   --skill "$obsidian_skill" \
   --target "$temporary_root/vault")"
 assert_contains "$output" 'status: blocked' 'missing required provider'
+
+mkdir -p "$temporary_root/safety-home/.codex/execpolicy"
+printf '%s\n' \
+  'prefix_rule(' \
+  '  pattern = ["git", "push"],' \
+  '  decision = "forbidden",' \
+  '  justification = "test",' \
+  ')' > "$temporary_root/safety-home/.codex/execpolicy/numados-safety.rules"
+printf '%s\n' \
+  '[execpolicy]' \
+  'user_rules = ["~/.codex/execpolicy/numados-safety.rules"]' > "$temporary_root/safety-home/.codex/config.toml"
+output="$(HOME="$temporary_root/safety-home" CODEX_HOME="$temporary_root/safety-home/.codex" PATH="$temporary_root/bin-no-rg" "$safety_doctor" --harness codex)"
+assert_contains "$output" 'Codex config references the Numados execpolicy rule' 'active harness safety scope'
+assert_contains "$output" 'Safety status: READY WITH GAPS' 'native safety availability gap'
+assert_not_contains "$output" 'Claude' 'single harness safety audit'
+assert_not_contains "$output" 'Pi' 'single harness safety audit'
+if "$safety_doctor" >/dev/null 2>&1; then
+  printf '%s\n' 'FAIL safety doctor accepted an unspecified harness' >&2
+  exit 1
+fi
+if "$safety_doctor" --harness all >/dev/null 2>&1; then
+  printf '%s\n' 'FAIL safety doctor accepted an all-harness audit' >&2
+  exit 1
+fi
+checks=$((checks + 1))
 
 XDG_CONFIG_HOME="$temporary_root/config" \
   "$obsidian_skill/scripts/configure-vault.sh" \

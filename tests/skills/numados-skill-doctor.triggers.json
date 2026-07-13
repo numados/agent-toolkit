@@ -10,6 +10,9 @@
   {"query":"The skill dependency check fails after my harness update.","should_trigger":true},
   {"query":"Give me a short readiness checklist for all capabilities declared by this skill.","should_trigger":true},
   {"query":"Which missing local search tools would materially improve this skill on my machine?","should_trigger":true},
+  {"query":"Check whether the current Codex harness has the no-push restriction active.","should_trigger":true},
+  {"query":"Verify the Claude Code safety boundary after a settings change.","should_trigger":true},
+  {"query":"Does the Pi harness still block remote Git writes?","should_trigger":true},
   {"query":"Search my Obsidian vault for Redis notes.","should_trigger":false},
   {"query":"Write a new Agent Skill for reviewing pull requests.","should_trigger":false},
   {"query":"Review whether this SKILL.md follows the Agent Skills writing standard.","should_trigger":false},
@@ -18,6 +21,7 @@
   {"query":"Diagnose why the application health endpoint returns 500.","should_trigger":false},
   {"query":"List every package installed on this machine.","should_trigger":false},
   {"query":"Benchmark rg against grep over this source repository.","should_trigger":false},
+  {"query":"Install a global Git pre-push hook for every repository.","should_trigger":false},
   {"query":"Search Azure DevOps code for this class name.","should_trigger":false},
   {"query":"Perform a general security audit of my workstation.","should_trigger":false}
 ]

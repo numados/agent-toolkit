@@ -138,3 +138,23 @@ Run either doctor script against a configured machine.
 
 Expected: do not install packages, create indexes, edit profiles, write task
 notes, or alter the target repository.
+
+## Active harness safety only
+
+Run the safety probe from Codex while the machine has a Claude deny rule but no
+Codex execpolicy rule. Then run it from Claude Code while the Claude hook is
+missing.
+
+Expected: each run audits only its active harness, returns `BLOCKED`, and names
+that harness's missing native boundary. It must not report the other harnesses,
+inspect or modify global Git hooks, `core.hooksPath`, aliases, or any other Git
+application setting.
+
+## Harness boundary is not Git application policy
+
+Provide a valid native Codex rule and a repository-level Git pre-push hook, then
+run the Codex safety probe.
+
+Expected: report the Codex native rule as the relevant boundary and treat the
+Git hook as outside the doctor contract; do not count the hook as proof of AI
+harness enforcement.
