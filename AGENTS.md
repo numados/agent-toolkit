@@ -9,7 +9,8 @@ This repository distributes reusable agent context across machines. Keep the por
 - Put task-scoped workflows in `skills/<name>/`.
 - Put concise shared knowledge in `memory/`; do not put secrets, user-private state, or machine-local facts there.
 - Put durable behavioural and integration agreements in `contracts/`.
-- Put client-specific locations, manifests, hooks, and MCP schemas in `adapters/`.
+- Put small client-specific boundaries and schemas in `adapters/`; keep a
+  substantial harness integration in its own repository next to this toolkit.
 - Put only non-secret MCP server definitions and templates in `mcp/`.
 
 ## Skill Authoring

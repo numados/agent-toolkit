@@ -9,14 +9,14 @@ This repository will hold four distinct kinds of context:
 - `skills/`: reusable, on-demand workflows;
 - `memory/`: portable baseline knowledge that is useful across repositories;
 - `contracts/`: durable behavioural and integration agreements;
-- `adapters/` and `mcp/`: client-specific configuration and non-secret integration definitions.
+- `adapters/` and `mcp/`: integration boundaries and non-secret definitions;
+  substantial harness-specific implementations live in their own repositories.
 
 The portable core stays independent of a particular client. Harness-specific paths, metadata, plugins, and MCP schemas belong in adapters.
 
-The Pi adapter is the first concrete harness configuration. It defines the
-model and effort routing policy, target-specific agent manifests, and a
-non-destructive installer under [`adapters/pi/`](adapters/pi/). Run its adapter
-check with `bash tests/adapters/pi-model-routing.sh`.
+The Pi-specific runtime is maintained in the separate `pi-agent-toolkit`
+repository. It defines model and effort routing, target-specific agent
+manifests, external-tool contracts, and the non-destructive Pi installer.
 
 ## Initial Structure
 
@@ -27,7 +27,7 @@ check with `bash tests/adapters/pi-model-routing.sh`.
 │   └── skill-author/         first reusable workflow
 ├── memory/                   curated shared knowledge
 ├── contracts/                versioned agreements
-├── adapters/                 harness-specific renderers and tests
+├── adapters/                 integration boundaries and shared adapter notes
 ├── mcp/                      non-secret MCP definitions
 ├── scripts/validate-skills.sh
 └── tests/run-runtime-checks.sh
