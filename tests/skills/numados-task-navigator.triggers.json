@@ -1,0 +1,11 @@
+[
+  {"query":"What is done, what remains, and what is next for this task?","should_trigger":true},
+  {"query":"Use $numados-task-navigator to explain why phase P2 was added.","should_trigger":true},
+  {"query":"What does review remark R-3 mean and is it resolved?","should_trigger":true},
+  {"query":"Explain what this implementation changed and why from the task artifacts.","should_trigger":true},
+  {"query":"Why does this changed method behave differently? Check the linked source and task history.","should_trigger":true},
+  {"query":"Research this task and prepare context for planning.","should_trigger":false},
+  {"query":"Implement the approved plan phase by phase.","should_trigger":false},
+  {"query":"Update the plan with a new implementation phase.","should_trigger":false},
+  {"query":"Write a new Obsidian note with this knowledge.","should_trigger":false}
+]

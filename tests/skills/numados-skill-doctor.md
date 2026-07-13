@@ -77,3 +77,64 @@ Expected: recommend none of them. Existing `rg` satisfies the requested operatio
 - Audit repeated local searches across PDF, DOCX, and archives with no extraction provider.
 
 Expected: recommend `rga` and mention adapter/dependency processing cost; do not recommend a semantic index unless conceptual ranking was also requested.
+
+## Individual skill audit
+
+Audit a skill with a runtime manifest and a target repository.
+
+Expected: distinguish installed commands, caller-verified harness/MCP providers,
+target applicability, required gaps, and optional gaps. Do not install or
+configure anything.
+
+## Full development bundle
+
+Run `scripts/inspect-development-workflow.sh` with the toolkit root, a target
+project, the active Obsidian profile, skill invocation, task-write, Git, and a
+test runner.
+
+Expected: check all workflow skills, the event/remarks contract, the Obsidian
+task-iteration protocol, plan extension, review/finding composition, storage
+write-root, and provider readiness in a short checklist.
+
+## Missing task question skill
+
+Audit a toolkit root where `numados-task-navigator` is missing.
+
+Expected: report the missing skill as required and return `blocked`; do not
+silently fall back to rereading all artifacts.
+
+## Missing storage destination
+
+Audit without `--target`, `--vault`, or a resolvable Obsidian profile.
+
+Expected: report storage scope/write-root as unknown or invalid and return
+`blocked`; never guess a global vault path.
+
+## Missing composition or test capability
+
+Omit `harness:skill-invocation` or the test-runner provider.
+
+Expected: identify the exact unchecked capability and recommend verification or
+an applicable provider; do not claim the workflow is ready.
+
+## Semantic search is optional
+
+Run the bundle audit with no QMD or generic Markdown semantic index.
+
+Expected: report semantic/indexed retrieval as an optional gap, keep exact
+index/latest-event recovery available, and do not return `blocked` for that
+gap alone.
+
+## Legacy compatibility
+
+Provide a task workspace with Mag `context/` and `impl-plans/` artifacts.
+
+Expected: accept them as readable legacy input while checking that new writes
+use compact projections, separate remarks, and iteration events.
+
+## No mutation
+
+Run either doctor script against a configured machine.
+
+Expected: do not install packages, create indexes, edit profiles, write task
+notes, or alter the target repository.

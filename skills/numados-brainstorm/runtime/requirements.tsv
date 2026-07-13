@@ -1,0 +1,9 @@
+# capability	need	when	providers	purpose
+skill.obsidian-knowledge	required	reading and writing the task workspace is in scope	harness:skill-invocation	Resolve the Obsidian vault and perform bounded verified task-artifact I/O
+storage.task-write	required	research must persist a compact handoff and iteration event	harness:skill-invocation	Write and re-read only the task index, research projection, and one event
+filesystem.filename	required	local repository or artifact discovery	cmd:rg|cmd:fd|cmd:fdfind|cmd:find|harness:filesystem-search|mcp:filesystem-search	Locate bounded task, source, and test candidates
+filesystem.lexical	required	local evidence search	cmd:rg|harness:filesystem-search|mcp:filesystem-search	Find exact terms and bounded source evidence
+code.navigation	optional	cross-file behavior or contract tracing	harness:code-navigation|mcp:code-navigation|harness:semantic-search	Trace callers, consumers, and relationships without broad reads
+source.remote-read	optional	remote review, issue, repository, or current documentation is in scope	harness:remote-read|mcp:remote-read|harness:vcs-review|mcp:vcs-review|harness:web-search	Read source material through an already available provider
+documentation.current	optional	version-sensitive API, framework, CLI, or protocol behavior is in scope	harness:documentation|mcp:documentation|harness:web-search	Verify current authoritative behavior instead of guessing
+history.git	optional	recent history or provenance materially affects the task	verified:git|harness:git	Inspect bounded local history as evidence

@@ -9,6 +9,7 @@
   {"query":"Write the commit message and include the work-item identifier if the repo expects it.","should_trigger":true},
   {"query":"Summarize the staged migration as a repository-aligned commit message.","should_trigger":true},
   {"query":"Check whether these changes should be split before writing commit messages.","should_trigger":true},
+  {"query":"Derive repository-aligned commit text for this authorized implementation phase without committing.","should_trigger":true},
   {"query":"Commit the staged files now.","should_trigger":false},
   {"query":"Push my current branch.","should_trigger":false},
   {"query":"Review the last ten commits for defects.","should_trigger":false},

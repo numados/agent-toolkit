@@ -1,0 +1,4 @@
+interface:
+  display_name: "numados: Brainstorm"
+  short_description: "Research task context and decisions"
+  default_prompt: "Use $numados-brainstorm to research this task, record verified context, decisions, and open questions, then prepare it for planning."

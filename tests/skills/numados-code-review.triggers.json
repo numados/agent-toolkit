@@ -9,6 +9,7 @@
   {"query":"Use $numados-code-review on PR 73.","should_trigger":true},
   {"query":"Review this contract change and check affected consumers already in scope.","should_trigger":true},
   {"query":"Tell me whether this patch is safe to merge; verify every issue first.","should_trigger":true},
+  {"query":"Run the final read-only review for the approved implementation workflow and verify every candidate.","should_trigger":true},
   {"query":"Explain what this pull request changed and why.","should_trigger":false},
   {"query":"Validate whether this single existing review comment is a false alarm.","should_trigger":false},
   {"query":"Implement the requested C# endpoint.","should_trigger":false},

@@ -49,6 +49,11 @@ qmd_collection="$(numados_context_value NUMADOS_OBSIDIAN_QMD_COLLECTION)"
 link_style="$(numados_context_value NUMADOS_OBSIDIAN_LINK_STYLE)"
 
 validate_relative_dir write_root "$write_root" || exit 4
+if [ -n "$write_root" ]; then
+  printf 'write_root: %s\n' "$write_root"
+else
+  printf '%s\n' 'write_root: (not configured; explicit destination required)'
+fi
 
 if [ -n "$search_roots" ]; then
   IFS=',' read -r -a root_list <<< "$search_roots"

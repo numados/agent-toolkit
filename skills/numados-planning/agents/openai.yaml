@@ -1,0 +1,4 @@
+interface:
+  display_name: "numados: Planning"
+  short_description: "Turn verified context into phases"
+  default_prompt: "Use $numados-planning to turn the approved research into a repository-aligned implementation plan with atomic phases and verification."

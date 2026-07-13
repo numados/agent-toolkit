@@ -1,6 +1,6 @@
 ---
 name: numados-code-review
-description: Perform high-signal reviews of pull requests, merge requests, commits, or local diffs, then validate every candidate issue with numados-verify-finding before reporting it. Use when the user explicitly requests a code review of a supplied review URL or identifier, commit range, changed branch, local diff, or pasted patch. Resolve the source provider from the URL or repository instead of assuming a specific forge.
+description: Perform high-signal reviews of pull requests, merge requests, commits, or local diffs, then validate every candidate issue with numados-verify-finding before reporting it. Use when the user explicitly requests a code review or when an approved implementation workflow reaches its final review gate for a supplied review URL or identifier, commit range, changed branch, local diff, or pasted patch. Resolve the source provider from the URL or repository instead of assuming a specific forge.
 ---
 
 # Numados Code Review

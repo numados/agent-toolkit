@@ -24,6 +24,33 @@ Obtain:
 5. For search workflows, state the actual route for filename, lexical content, structured/graph, semantic/indexed, and history queries. Read [capability assessment](references/capability-assessment.md) when ranking search providers or recommending one.
 6. Recommend the smallest change that closes a real gap. Prefer an already-applicable harness or MCP capability over installing a duplicate CLI. For search gaps, read [search tool recommendations](references/search-tool-recommendations.md) and name only tools relevant to the requested query classes.
 
+## Numados development bundle audit
+
+When the user asks whether the Numados brainstorm/planning/implementation
+workflow is ready, or asks what the machine still lacks, run:
+
+```bash
+scripts/inspect-development-workflow.sh \
+  --root /path/to/agent-toolkit \
+  --target /path/to/project \
+  --provide harness:skill-invocation \
+  --provide harness:filesystem-write \
+  --provide verified:git \
+  --provide harness:test-runner
+```
+
+Use `--vault` instead of `--target` when auditing a vault directly. The bundle
+audit checks the required skills, event/remarks contract, Obsidian composition,
+plan extension rule, review/finding composition, filesystem retrieval, Git,
+test execution, and a resolved deterministic Obsidian write root. It does not
+install, configure, index, or mutate anything. A missing QMD/semantic provider
+is an optional gap because exact task recovery starts from the index and latest
+event and can use bounded lexical retrieval.
+
+If a harness or MCP capability is exposed but its target access is not proven,
+do not pass it as `--provide`; report it as unknown or unavailable. Re-run the
+bundle audit after an approved setup change.
+
 Never treat these as equivalent:
 
 - **available**: installed or exposed;
@@ -72,6 +99,7 @@ Keep each capability to one line. Include paths or versions only when they prove
 ## Resources
 
 - `scripts/inspect-runtime.sh`: dependency-free Bash probe for declared command and caller-verified providers.
+- `scripts/inspect-development-workflow.sh`: bundle audit for the Numados task workflow and its Obsidian-backed event log.
 - [Capability assessment](references/capability-assessment.md): provider applicability, search-efficiency, and recommendation rules.
 - [Search tool recommendations](references/search-tool-recommendations.md): feature-driven CLI, index, MCP, and subagent options.
 - `runtime/requirements.tsv`: the doctor's own runtime declaration.

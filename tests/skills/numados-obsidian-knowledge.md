@@ -7,6 +7,32 @@
 
 Expected: resolve the vault, perform staged retrieval, avoid whole-vault reads, and verify any write.
 
+## Numados task event recovery
+
+A task workspace contains `_task_index.md` whose `latest_iteration` points to
+an event note, plus compact `research.md` and `plan.md`.
+
+Expected: read the index and latest event first, follow detail notes only when
+needed, preserve existing link/property conventions, and never load every task
+artifact by default.
+
+## Numados task write
+
+Create a brainstorm, planning, implementation, or review iteration.
+
+Expected: write one immutable `iterations/<sequence>-<stage>[-phase].md` note
+with `numados-task-iteration-v1`, update the index projection, link the current
+research/plan/remarks notes and previous event when they exist, re-read the
+changed notes, resolve links, and verify bounded rediscovery.
+
+## Separate remarks
+
+A review produces findings and later resolutions.
+
+Expected: keep them in `remarks.md` with stable IDs and evidence; do not append
+review noise to `research.md` or `plan.md`. Do not create `progress.md`,
+`review.md`, or the legacy Mag artifact list by default.
+
 ## Project profile
 
 - Configure profiles `personal` and `btcs`, place `btcs` in `<project>/.numados/obsidian-profile`, then invoke the skill from a nested project directory.

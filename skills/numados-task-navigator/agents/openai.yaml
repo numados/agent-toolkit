@@ -1,0 +1,4 @@
+interface:
+  display_name: "numados: Task Navigator"
+  short_description: "Answer questions from task state"
+  default_prompt: "Use $numados-task-navigator to answer this question from the task state, then verify details in linked artifacts and source."

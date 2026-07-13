@@ -1,0 +1,8 @@
+# capability	need	when	providers	purpose
+skill.obsidian-knowledge	required	reading task state is the first operation	harness:skill-invocation	Resolve the vault and read the index/latest event through the Obsidian workflow
+filesystem.filename	required	linked notes and source paths must be located	cmd:rg|cmd:fd|cmd:fdfind|cmd:find|harness:filesystem-search|mcp:filesystem-search	Locate bounded task, source, and artifact candidates
+filesystem.lexical	required	exact evidence or links need verification	cmd:rg|harness:filesystem-search|mcp:filesystem-search	Retrieve bounded snippets without dumping the workspace
+code.navigation	optional	answer crosses non-obvious symbols, callers, or repositories	harness:code-navigation|mcp:code-navigation|harness:semantic-search	Trace implementation relationships efficiently
+source.remote-read	optional	question includes a remote review, issue, repository, or URL	harness:remote-read|mcp:remote-read|harness:vcs-review|mcp:vcs-review|harness:web-search	Read provider-neutral external evidence
+documentation.current	optional	question depends on version-sensitive behavior	harness:documentation|mcp:documentation|harness:web-search	Verify current authoritative behavior
+history.git	optional	question asks why or when a change happened	verified:git|harness:git	Inspect bounded local history

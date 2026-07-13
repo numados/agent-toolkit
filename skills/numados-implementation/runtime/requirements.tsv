@@ -1,0 +1,10 @@
+# capability	need	when	providers	purpose
+skill.obsidian-knowledge	required	reading and writing task state is in scope	harness:skill-invocation	Recover the latest event and persist verified phase/review events
+storage.task-write	required	phase, review, and finding history must be durable	harness:skill-invocation	Write and re-read task index, iteration events, and separate remarks
+history.git	required	phase scope, diff, status, and authorized commits are involved	verified:git|harness:git	Track exact changes and safe phase boundaries
+filesystem.filename	required	planned files and repository patterns must be located	cmd:rg|cmd:fd|cmd:fdfind|cmd:find|harness:filesystem-search|mcp:filesystem-search	Locate bounded implementation and test paths
+filesystem.lexical	required	implementation and verification require source evidence	cmd:rg|harness:filesystem-search|mcp:filesystem-search	Search actual code and configuration within scope
+test.execution	required	phase or final acceptance checks are defined	harness:test-runner|mcp:test-runner|verified:make|verified:npm|verified:pnpm|verified:yarn|verified:dotnet|verified:cargo	Run the repository-selected verification workflow
+skill.code-review	required	final diff review is reached	harness:skill-invocation	Run the provider-neutral review workflow before completion
+code.navigation	optional	implementation crosses non-obvious symbols or repositories	harness:code-navigation|mcp:code-navigation|harness:semantic-search	Trace contracts and consumers without broad reads
+documentation.current	optional	version-sensitive APIs or configuration are touched	harness:documentation|mcp:documentation|harness:web-search	Verify exact external behavior before coding

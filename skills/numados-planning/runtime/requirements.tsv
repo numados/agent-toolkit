@@ -1,0 +1,10 @@
+# capability	need	when	providers	purpose
+skill.obsidian-knowledge	required	reading and writing the task workspace is in scope	harness:skill-invocation	Resolve the Obsidian vault and perform bounded verified task-artifact I/O
+storage.task-write	required	plan creation or extension must persist the current plan and event	harness:skill-invocation	Write and re-read the compact plan projection and one event
+filesystem.filename	required	repository and task-artifact mapping	cmd:rg|cmd:fd|cmd:fdfind|cmd:find|harness:filesystem-search|mcp:filesystem-search	Locate exact files and comparable implementations
+filesystem.lexical	required	pattern and contract verification	cmd:rg|harness:filesystem-search|mcp:filesystem-search	Find bounded evidence for plan tasks
+code.navigation	optional	cross-file call, consumer, or dependency mapping	harness:code-navigation|mcp:code-navigation|harness:semantic-search	Trace impact without unbounded reads
+source.remote-read	optional	remote requirements, review objects, or repositories are in scope	harness:remote-read|mcp:remote-read|harness:vcs-review|mcp:vcs-review	Read provider-neutral external evidence
+documentation.current	optional	version-sensitive implementation choice is in scope	harness:documentation|mcp:documentation|harness:web-search	Verify APIs, options, and constraints from current sources
+history.git	optional	commit boundaries or evolution materially affect the design	verified:git|harness:git	Inspect bounded history and repository conventions
+test.execution	optional	acceptance checks can be run during planning	harness:test-runner|mcp:test-runner	Confirm practical verification commands and baseline behavior

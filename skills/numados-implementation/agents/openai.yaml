@@ -1,0 +1,4 @@
+interface:
+  display_name: "numados: Implementation"
+  short_description: "Implement phases and close review loop"
+  default_prompt: "Use $numados-implementation to execute the approved plan, verify each phase, commit when authorized, and close the review loop."

@@ -1,0 +1,10 @@
+[
+  {"query":"Implement the approved plan phase by phase and verify every phase.","should_trigger":true},
+  {"query":"Execute the saved implementation plan, commit each authorized phase, and run the review/fix loop.","should_trigger":true},
+  {"query":"Apply the confirmed code-review fixes and re-review until there are no actionable findings.","should_trigger":true},
+  {"query":"Use $numados-implementation to finish this planned change.","should_trigger":true},
+  {"query":"Research the task and record context before planning.","should_trigger":false},
+  {"query":"Turn the approved research into a phased plan.","should_trigger":false},
+  {"query":"Review the current diff without changing files.","should_trigger":false},
+  {"query":"Write a conventional commit message only.","should_trigger":false}
+]

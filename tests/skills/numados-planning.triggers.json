@@ -1,0 +1,10 @@
+[
+  {"query":"Turn the verified task context into an implementation plan with atomic phases and test criteria.","should_trigger":true},
+  {"query":"Plan this change from the saved research and map the exact files to modify.","should_trigger":true},
+  {"query":"Split the implementation into clean, independently verifiable phases.","should_trigger":true},
+  {"query":"Use $numados-planning to prepare the approved research for implementation.","should_trigger":true},
+  {"query":"Research this unfamiliar bug and record evidence.","should_trigger":false},
+  {"query":"Implement the approved plan end to end.","should_trigger":false},
+  {"query":"Generate only a commit message for the staged diff.","should_trigger":false},
+  {"query":"Review this pull request and filter false alarms.","should_trigger":false}
+]

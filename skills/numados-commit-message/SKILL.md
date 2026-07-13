@@ -1,6 +1,6 @@
 ---
 name: numados-commit-message
-description: Generate repository-aligned commit-message text from the intended changes, repository instructions, recent history, branch metadata, and optional linked work-item context. Use when the user asks to write, improve, or validate a commit message. Never stage files, create a commit, push, or modify repository state.
+description: Generate repository-aligned commit-message text from the intended changes, repository instructions, recent history, branch metadata, and optional linked work-item context. Use when the user asks to write, improve, or validate a commit message, or when an authorized implementation phase needs message text. Never stage files, create a commit, push, or modify repository state.
 ---
 
 # Numados Commit Message

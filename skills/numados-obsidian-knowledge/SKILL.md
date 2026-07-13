@@ -64,6 +64,32 @@ When a new note is necessary:
 
 Prefer structured file tools or an anchored patch for edits. Use native Obsidian CLI for rename/move or property operations when preserving Obsidian's link semantics matters and the app is available. Read [writing safely](references/writing-safely.md) before creating, renaming, moving, or modifying properties.
 
+## Numados task iteration notes
+
+When invoked by `numados-brainstorm`, `numados-planning`,
+`numados-implementation`, or `numados-task-navigator`, use the bounded task protocol
+in [task iterations](references/task-iterations.md):
+
+1. Resolve the configured vault and task destination; never invent a path.
+2. Read `_task_index.md` first, then only the note named by
+   `latest_iteration`.
+3. Follow `research.md`, `plan.md`, `remarks.md`, source, or older iterations
+   only when the current operation needs their detail.
+4. Keep `research.md` and `plan.md` as compact current projections. Do not
+   create `progress.md`, `review.md`, or a Mag-style artifact list by default.
+5. Write one immutable `iterations/<sequence>-<stage>[-phase].md` note per
+   meaningful workflow iteration, not one note per command or tool call. Use
+   `format: numados-task-iteration-v1` and link the previous event and current
+   detail notes.
+6. Keep review findings and resolutions in a separate `remarks.md`; do not mix
+   them into the research or plan.
+7. After every write, re-read the changed notes, resolve each added internal
+   link, and run a bounded search that should discover the new state.
+
+Preserve the vault's existing frontmatter and link style when it is already
+established. The Numados task frontmatter names are a minimum interoperability
+contract, not permission to normalize unrelated notes.
+
 ## Verification
 
 After every write:
@@ -87,6 +113,7 @@ When the user asks what changed, why a note has its current content, or where ea
 - [Vault context](references/vault-context.md): portable configuration and backend selection.
 - [Search strategy](references/search-strategy.md): staged lexical, structured, graph, and semantic retrieval.
 - [Writing safely](references/writing-safely.md): generic note creation, updates, properties, and links.
+- [Task iterations](references/task-iterations.md): compact event-sourced workflow notes and recovery order.
 - `scripts/resolve-vault.sh`: resolve and validate one absolute vault path.
 - `scripts/configure-vault.sh`: create or merge-update a machine-local profile and optional project selector.
 - `scripts/vault-inventory.sh`: inspect size, format signals, detected search providers, and optional Git history.
