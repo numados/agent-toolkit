@@ -20,6 +20,7 @@ This repository distributes reusable agent context across machines. Keep the por
 - Keep the `name` lowercase, hyphenated, and equal to its directory name.
 - Add scripts only when they provide deterministic or repeated value.
 - Add `runtime/requirements.tsv` when a skill depends on machine, harness, CLI, MCP, or indexed capabilities.
+- For skills that produce source code, code comments, tests, or commit messages, enforce `contracts/change-artifact-hygiene.md` and add a process-metadata rejection evaluation.
 
 ## Safety
 

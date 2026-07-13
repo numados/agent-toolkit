@@ -1,0 +1,2 @@
+# capability	need	when	providers	purpose
+source.remote-read	optional	a supplied remote artifact or current external topic must be retrieved	harness:remote-read|mcp:remote-read|harness:web-search	Read authoritative material before explaining it

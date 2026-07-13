@@ -1,0 +1,4 @@
+interface:
+  display_name: "numados: C#"
+  short_description: "Write repository-aligned idiomatic C#"
+  default_prompt: "Use $numados-csharp to implement this C# change using the repository's existing patterns."

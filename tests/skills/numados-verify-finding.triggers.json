@@ -1,0 +1,22 @@
+[
+  {"query":"Validate these code-review findings before I post them.","should_trigger":true},
+  {"query":"Use $numados-verify-finding to separate true issues from false alarms.","should_trigger":true},
+  {"query":"Is this review comment actually correct against the PR diff?","should_trigger":true},
+  {"query":"Trace this suspected race and tell me whether it is real.","should_trigger":true},
+  {"query":"Check whether the pull request activates this pre-existing bug.","should_trigger":true},
+  {"query":"Verify the serializer claim in this finding using the actual configuration.","should_trigger":true},
+  {"query":"Classify each candidate as confirmed, false alarm, out of scope, or unknown.","should_trigger":true},
+  {"query":"Prove or refute this null-dereference finding.","should_trigger":true},
+  {"query":"Validate this security review hypothesis before acting on it.","should_trigger":true},
+  {"query":"Check the exact changed line for this proposed PR comment.","should_trigger":true},
+  {"query":"Review this pull request and find all bugs.","should_trigger":false},
+  {"query":"Post these already verified comments to the PR.","should_trigger":false},
+  {"query":"Fix the confirmed issue in the current branch.","should_trigger":false},
+  {"query":"Explain this finding in simpler language.","should_trigger":false},
+  {"query":"Generate a commit message for the fix.","should_trigger":false},
+  {"query":"Search for possible code smells in the repository.","should_trigger":false},
+  {"query":"Run the full test suite.","should_trigger":false},
+  {"query":"Compare the source and target branches.","should_trigger":false},
+  {"query":"Summarize existing PR comments.","should_trigger":false},
+  {"query":"Implement a regression test for this bug.","should_trigger":false}
+]

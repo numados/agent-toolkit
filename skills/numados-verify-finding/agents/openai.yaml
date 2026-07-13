@@ -1,0 +1,4 @@
+interface:
+  display_name: "numados: Verify Finding"
+  short_description: "Validate code-review findings before posting"
+  default_prompt: "Use $numados-verify-finding to verify these review findings before posting comments."

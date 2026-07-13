@@ -1,0 +1,22 @@
+[
+  {"query":"Implement this endpoint in the existing C# service.","should_trigger":true},
+  {"query":"Fix the null-handling bug in these .cs files.","should_trigger":true},
+  {"query":"Add focused tests for this .NET behavior.","should_trigger":true},
+  {"query":"Refactor this C# method without changing its public behavior.","should_trigger":true},
+  {"query":"Update the csproj and code to integrate this approved package.","should_trigger":true},
+  {"query":"Implement the EF Core mapping required by this migration.","should_trigger":true},
+  {"query":"Add cancellation support to this C# I/O path.","should_trigger":true},
+  {"query":"Use $numados-csharp to implement the current ticket.","should_trigger":true},
+  {"query":"Modify this .NET background worker and its regression tests.","should_trigger":true},
+  {"query":"Implement the C# side of this FFI contract change.","should_trigger":true},
+  {"query":"Explain how nullable reference types work.","should_trigger":false},
+  {"query":"Review this C# pull request for defects.","should_trigger":false},
+  {"query":"Generate a commit message for the C# changes.","should_trigger":false},
+  {"query":"Search for all implementations of this interface.","should_trigger":false},
+  {"query":"Compare C# and Rust error handling.","should_trigger":false},
+  {"query":"Diagnose why the deployed service returns 500 without changing code.","should_trigger":false},
+  {"query":"Audit the repository's NuGet dependencies.","should_trigger":false},
+  {"query":"Summarize this .NET architecture document.","should_trigger":false},
+  {"query":"Run the existing C# test suite and report results.","should_trigger":false},
+  {"query":"Install the latest .NET SDK.","should_trigger":false}
+]

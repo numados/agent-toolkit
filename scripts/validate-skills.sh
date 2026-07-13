@@ -38,7 +38,43 @@ for skill_file in "$skills_root"/*/SKILL.md; do
         status=1
     fi
 
-    runtime_file="$(dirname "$skill_file")/runtime/requirements.tsv"
+    skill_root="$(dirname "$skill_file")"
+    while IFS= read -r reference; do
+        [ -n "$reference" ] || continue
+        reference_path="${reference%%#*}"
+        if [ ! -e "$skill_root/$reference_path" ]; then
+            printf 'ERROR %s: missing bundled resource %s\n' "$skill_file" "$reference_path" >&2
+            status=1
+        fi
+    done < <(grep -oE '\]\((\./)?(references|scripts|assets)/[^)#[:space:]]+(#[^)]*)?\)' "$skill_file" \
+        | sed -e 's/^](//' -e 's/)$//' || true)
+
+    agent_file="$skill_root/agents/openai.yaml"
+    if [ -f "$agent_file" ]; then
+        short_description="$(sed -n 's/^  short_description: "\(.*\)"$/\1/p' "$agent_file")"
+        default_prompt="$(sed -n 's/^  default_prompt: "\(.*\)"$/\1/p' "$agent_file")"
+        if [ "${#short_description}" -lt 25 ] || [ "${#short_description}" -gt 64 ]; then
+            printf 'ERROR %s: short_description must be 25-64 characters\n' "$agent_file" >&2
+            status=1
+        fi
+        case "$default_prompt" in
+            *\$"$name"*) ;;
+            *) printf 'ERROR %s: default_prompt must mention $%s\n' "$agent_file" "$name" >&2; status=1;;
+        esac
+    fi
+
+    if [[ "$skill_dir" == numados-* ]]; then
+        if [ ! -f "tests/skills/$skill_dir.md" ]; then
+            printf 'ERROR %s: missing behavior evaluations\n' "$skill_dir" >&2
+            status=1
+        fi
+        if [ ! -f "tests/skills/$skill_dir.triggers.json" ]; then
+            printf 'ERROR %s: missing trigger evaluations\n' "$skill_dir" >&2
+            status=1
+        fi
+    fi
+
+    runtime_file="$skill_root/runtime/requirements.tsv"
     if [ -f "$runtime_file" ]; then
         expected_header=$'# capability\tneed\twhen\tproviders\tpurpose'
         actual_header="$(sed -n '1p' "$runtime_file")"

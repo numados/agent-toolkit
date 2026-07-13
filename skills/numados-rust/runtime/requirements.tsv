@@ -1,0 +1,4 @@
+# capability	need	when	providers	purpose
+language.rust	required	Rust changes must be compiled, tested, formatted, or linted	verified:cargo|harness:rust	Verify changes with the repository-selected Rust toolchain
+code.navigation	optional	definitions, traits, or call sites cross non-obvious boundaries	harness:code-navigation|mcp:code-navigation|harness:semantic-search	Navigate symbols without unbounded repository reads
+documentation.current	optional	toolchain, standard-library, or crate behavior is version-sensitive	harness:documentation|mcp:documentation	Consult authoritative version-matched documentation

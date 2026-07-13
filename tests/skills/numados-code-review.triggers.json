@@ -1,0 +1,22 @@
+[
+  {"query":"Review this pull request URL and report only issues that survive verification.","should_trigger":true},
+  {"query":"Do a code review of the current branch against main.","should_trigger":true},
+  {"query":"Review this Azure Repos PR: https://dev.azure.com/acme/payments/_git/api/pullrequest/42","should_trigger":true},
+  {"query":"Check this GitLab merge request for correctness and security regressions.","should_trigger":true},
+  {"query":"Review the pasted diff and filter false positives before answering.","should_trigger":true},
+  {"query":"Audit commit range abc123..def456 for actionable defects.","should_trigger":true},
+  {"query":"Perform a read-only review of these changed files.","should_trigger":true},
+  {"query":"Use $numados-code-review on PR 73.","should_trigger":true},
+  {"query":"Review this contract change and check affected consumers already in scope.","should_trigger":true},
+  {"query":"Tell me whether this patch is safe to merge; verify every issue first.","should_trigger":true},
+  {"query":"Explain what this pull request changed and why.","should_trigger":false},
+  {"query":"Validate whether this single existing review comment is a false alarm.","should_trigger":false},
+  {"query":"Implement the requested C# endpoint.","should_trigger":false},
+  {"query":"Generate a commit message for the staged diff.","should_trigger":false},
+  {"query":"Post these approved review comments to GitHub.","should_trigger":false},
+  {"query":"Search the repository for every use of this interface.","should_trigger":false},
+  {"query":"Summarize CI failures on this pull request.","should_trigger":false},
+  {"query":"Fix the two confirmed findings in the current branch.","should_trigger":false},
+  {"query":"Compare two architecture proposals.","should_trigger":false},
+  {"query":"Show the current git diff.","should_trigger":false}
+]

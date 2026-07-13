@@ -1,0 +1,6 @@
+# capability	need	when	providers	purpose
+skill.verify-finding	required	candidate findings exist	harness:skill-invocation	Run the installed numados-verify-finding workflow before reporting candidates
+vcs.review-read	required	remote review URL must be retrieved	harness:vcs-review|mcp:vcs-review|verified:gh|verified:az|verified:glab	Read review metadata and exact changed content through a forge-applicable provider
+history.git	optional	local commit range or checked-out review refs are supplied	harness:git|verified:git	Read an exact local diff and bounded history without remote assumptions
+code.navigation	optional	candidate verification crosses symbols or repositories	harness:code-navigation|mcp:code-navigation|harness:semantic-search	Trace relevant callers and consumers without broad reads
+test.execution	optional	a focused test can confirm or refute a material candidate	harness:test-runner|mcp:test-runner	Run proportionate read-only verification

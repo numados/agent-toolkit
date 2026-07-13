@@ -1,0 +1,4 @@
+# capability	need	when	providers	purpose
+language.dotnet	required	C# changes must be built, tested, formatted, or analyzed	verified:dotnet|harness:dotnet	Verify changes with the repository-selected .NET toolchain
+code.navigation	optional	definitions or references cross non-obvious boundaries	harness:code-navigation|mcp:code-navigation|harness:semantic-search	Navigate symbols without unbounded repository reads
+documentation.current	optional	SDK, framework, or package behavior is version-sensitive	harness:documentation|mcp:documentation	Consult authoritative version-matched documentation

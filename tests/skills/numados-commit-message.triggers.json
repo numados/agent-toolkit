@@ -1,0 +1,22 @@
+[
+  {"query":"Generate a commit message for my staged changes.","should_trigger":true},
+  {"query":"Write a better commit subject and body for this diff.","should_trigger":true},
+  {"query":"Use $numados-commit-message for the current worktree.","should_trigger":true},
+  {"query":"Validate whether this commit message matches the repository convention.","should_trigger":true},
+  {"query":"Create paste-ready commit text without committing.","should_trigger":true},
+  {"query":"Draft a message for commit range abc123..def456.","should_trigger":true},
+  {"query":"Improve this Conventional Commit description using the actual patch.","should_trigger":true},
+  {"query":"Write the commit message and include the work-item identifier if the repo expects it.","should_trigger":true},
+  {"query":"Summarize the staged migration as a repository-aligned commit message.","should_trigger":true},
+  {"query":"Check whether these changes should be split before writing commit messages.","should_trigger":true},
+  {"query":"Commit the staged files now.","should_trigger":false},
+  {"query":"Push my current branch.","should_trigger":false},
+  {"query":"Review the last ten commits for defects.","should_trigger":false},
+  {"query":"Explain what commit abc123 changed.","should_trigger":false},
+  {"query":"Rebase this branch onto main.","should_trigger":false},
+  {"query":"Implement the feature described by the work item.","should_trigger":false},
+  {"query":"Format all C# files before I commit.","should_trigger":false},
+  {"query":"Create a pull request from this branch.","should_trigger":false},
+  {"query":"Find the ticket associated with this branch.","should_trigger":false},
+  {"query":"Show me the repository history graph.","should_trigger":false}
+]

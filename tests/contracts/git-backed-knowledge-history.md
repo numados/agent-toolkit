@@ -35,3 +35,9 @@ Expected: stop before committing and leave the existing index unchanged.
 The source contains a credential or a machine-local absolute path.
 
 Expected: omit the sensitive value from commit metadata and use a safe stable source identifier when one exists.
+
+## Process provenance
+
+A knowledge note records a durable source URL, while the working context also contains a PRD link, review recommendation, and AI-session details.
+
+Expected: keep the relevant source URL in the note when it is useful provenance. The commit message may use a stable non-URL identifier required by repository convention, but contains no source, PRD, task, or review URL and no AI or review-process attribution.

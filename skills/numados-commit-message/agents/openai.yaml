@@ -1,0 +1,4 @@
+interface:
+  display_name: "numados: Commit Message"
+  short_description: "Generate repository-aligned commit messages"
+  default_prompt: "Use $numados-commit-message to generate a commit message for the current changes."

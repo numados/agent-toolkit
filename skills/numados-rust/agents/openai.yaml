@@ -1,0 +1,4 @@
+interface:
+  display_name: "numados: Rust"
+  short_description: "Write repository-aligned idiomatic Rust"
+  default_prompt: "Use $numados-rust to implement this Rust change using the repository's existing patterns."

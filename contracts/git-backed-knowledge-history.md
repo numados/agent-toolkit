@@ -8,7 +8,7 @@
 
 ## Purpose
 
-Make version history useful to both humans and agents without duplicating the Git diff in the commit message. A later reader should be able to discover a relevant commit by topic or stable reference, understand why knowledge changed, and then recover the exact files and content from Git.
+Make version history useful to both humans and agents without duplicating the Git diff in the commit message. A later reader should be able to discover a relevant commit by topic or stable identifier, understand why knowledge changed, and then recover the exact files and content from Git.
 
 ## Commit boundary
 
@@ -22,15 +22,15 @@ Make version history useful to both humans and agents without duplicating the Gi
 
 The subject must describe the semantic knowledge change, not merely say that files or notes were updated. Keep exact filenames out of the subject unless a filename is itself the stable concept users will search for.
 
-Include at least one stable retrieval term when one exists: a topic, system name, ticket, document ID, source, or related reference. Use the body only when the subject cannot explain the outcome and reason. Add compact Git trailers when they improve retrieval:
+Include at least one stable retrieval term when one exists: a topic, system name, ticket, document ID, source identifier, or related identifier. Use the body only when the subject cannot explain the outcome and reason. Add compact Git trailers when they improve retrieval:
 
 ```text
 Knowledge-Topic: <stable topic, identifier, or system name>
-Source-Ref: <URL, document ID, commit, issue, or other provenance>
-Related-Ref: <related stable identifier>
+Source-Id: <stable non-URL source, document, commit, or issue identifier>
+Related-Id: <related stable identifier>
 ```
 
-Each key may be repeated. Omit unknown or low-value metadata instead of inventing it. Never include secrets, credentials, private conversation text, or machine-specific absolute paths.
+Each key may be repeated. Omit unknown or low-value metadata instead of inventing it. Never include source URLs, PRD/review links, AI attribution, prompts, session details, secrets, credentials, private conversation text, or machine-specific absolute paths. When a source URL is durable knowledge provenance, store it in the knowledge content itself rather than the commit message.
 
 The commit message does not need to repeat every changed path. Git already records exact locations and content. Keep commits narrowly scoped so a later agent can recover them with:
 
@@ -45,7 +45,7 @@ git show -s --format=%B <commit> | git interpret-trailers --parse
 ## Retrieval procedure
 
 1. Search by a known path when available; this is more precise than message search.
-2. Otherwise search commit text for a stable topic, source, ticket, document ID, or related reference.
+2. Otherwise search commit text for a stable topic, source identifier, ticket, document ID, or related identifier.
 3. Read the selected commit's subject, body, and trailers.
 4. Obtain exact added, modified, renamed, and deleted paths from `git show --name-status`.
 5. Verify the claim against the actual diff or file snapshot before using it as knowledge evidence.
@@ -56,10 +56,12 @@ Trailer keys are additive and use Git's standard trailer syntax. Existing reposi
 
 ## Verification
 
-- A topic or stable reference finds the intended commit with bounded `git log --grep`.
+- A topic or stable identifier finds the intended commit with bounded `git log --grep`.
 - `git show --name-status` identifies where the change occurred without relying on prose.
 - The diff supports the semantic claim in the subject or body.
 - No unrelated path is included in the commit.
+- No source, PRD, task, or review URL appears in the message.
+- No AI or review-process attribution appears in the message.
 - No absolute machine path or sensitive value appears in the message.
 
 ## Upstream references

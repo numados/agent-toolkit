@@ -1,0 +1,23 @@
+[
+  {"query":"Use $numados-explain to make these PR changes understandable on the first read.","should_trigger":true},
+  {"query":"Use $numados-explain: this implementation flow still does not make sense to me.","should_trigger":true},
+  {"query":"$numados-explain give me a concise structured explanation of what changed and why.","should_trigger":true},
+  {"query":"Use $numados-explain to break down this review finding and its actual failure path.","should_trigger":true},
+  {"query":"$numados-explain walk me through this architecture without unnecessary background.","should_trigger":true},
+  {"query":"Use $numados-explain on this error and tell me what it means in practice.","should_trigger":true},
+  {"query":"$numados-explain I do not understand optimistic concurrency; use one concrete example.","should_trigger":true},
+  {"query":"Use $numados-explain to turn this technical document into a first-read explanation.","should_trigger":true},
+  {"query":"$numados-explain compare these approaches and explain the decision briefly.","should_trigger":true},
+  {"query":"Объясни через $numados-explain, что произошло в этих изменениях и почему.","should_trigger":true},
+  {"query":"Review this pull request and find bugs.","should_trigger":false},
+  {"query":"Implement the change described in this architecture document.","should_trigger":false},
+  {"query":"Validate whether this review finding is a false alarm.","should_trigger":false},
+  {"query":"Generate a commit message for these changes.","should_trigger":false},
+  {"query":"Search the repository for all handlers.","should_trigger":false},
+  {"query":"Fix the error shown in this stack trace.","should_trigger":false},
+  {"query":"Write comprehensive user documentation for this product.","should_trigger":false},
+  {"query":"Summarize this text in one sentence.","should_trigger":false},
+  {"query":"Create a diagram of this system.","should_trigger":false},
+  {"query":"Translate this explanation into Russian.","should_trigger":false},
+  {"query":"Explain this implementation flow clearly; I did not invoke the specialized skill.","should_trigger":false}
+]

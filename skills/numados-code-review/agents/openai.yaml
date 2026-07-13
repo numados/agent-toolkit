@@ -1,0 +1,4 @@
+interface:
+  display_name: "numados: Code Review"
+  short_description: "Review and verify only actionable code findings"
+  default_prompt: "Use $numados-code-review to review these changes, validate every candidate finding, and report only actionable issues."

@@ -1,0 +1,22 @@
+[
+  {"query":"Implement this handler in the existing Rust crate.","should_trigger":true},
+  {"query":"Fix the ownership bug in these .rs files.","should_trigger":true},
+  {"query":"Add focused Rust tests for this parser behavior.","should_trigger":true},
+  {"query":"Refactor this Rust module without changing its public API.","should_trigger":true},
+  {"query":"Update Cargo features and code for this approved integration.","should_trigger":true},
+  {"query":"Make this Tokio worker shut down correctly.","should_trigger":true},
+  {"query":"Implement the Rust side of this FFI change.","should_trigger":true},
+  {"query":"Use $numados-rust to implement the current task.","should_trigger":true},
+  {"query":"Add safe error propagation to this production input path.","should_trigger":true},
+  {"query":"Modify this workspace crate and its integration tests.","should_trigger":true},
+  {"query":"Explain Rust ownership to a C# developer.","should_trigger":false},
+  {"query":"Review this Rust pull request for defects.","should_trigger":false},
+  {"query":"Generate a commit message for the Rust changes.","should_trigger":false},
+  {"query":"Search for every implementation of this trait.","should_trigger":false},
+  {"query":"Compare Tokio and async-std.","should_trigger":false},
+  {"query":"Diagnose this production panic without changing code.","should_trigger":false},
+  {"query":"Audit Cargo dependencies and licenses.","should_trigger":false},
+  {"query":"Summarize the Rust API Guidelines.","should_trigger":false},
+  {"query":"Run cargo test and report failures.","should_trigger":false},
+  {"query":"Install the Rust toolchain.","should_trigger":false}
+]

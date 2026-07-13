@@ -1,0 +1,6 @@
+interface:
+  display_name: "numados: Explain"
+  short_description: "Explain complex material clearly on the first read"
+  default_prompt: "Use $numados-explain to explain this material accurately and concisely so it is clear on the first read."
+policy:
+  allow_implicit_invocation: false

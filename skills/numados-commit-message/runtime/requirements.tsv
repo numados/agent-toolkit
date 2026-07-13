@@ -1,0 +1,3 @@
+# capability	need	when	providers	purpose
+history.git	required	message is derived from a repository worktree	harness:git|verified:git	Read status, selected diff, branch metadata, and bounded commit history without mutation
+work-item.read	optional	a supplied issue or work-item link materially clarifies intent	harness:work-item-read|mcp:work-item-read|harness:vcs-review	Read provider-neutral work-item context
