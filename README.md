@@ -13,6 +13,11 @@ This repository will hold four distinct kinds of context:
 
 The portable core stays independent of a particular client. Harness-specific paths, metadata, plugins, and MCP schemas belong in adapters.
 
+The Pi adapter is the first concrete harness configuration. It defines the
+model and effort routing policy, target-specific agent manifests, and a
+non-destructive installer under [`adapters/pi/`](adapters/pi/). Run its adapter
+check with `bash tests/adapters/pi-model-routing.sh`.
+
 ## Initial Structure
 
 ```text
