@@ -1,0 +1,4 @@
+interface:
+  display_name: "numados: Obsidian Knowledge"
+  short_description: "Search and safely write Obsidian vaults"
+  default_prompt: "Use $numados-obsidian-knowledge to resolve the right vault, search it efficiently, and save verified information safely."
