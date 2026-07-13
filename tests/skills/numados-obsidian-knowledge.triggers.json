@@ -1,0 +1,22 @@
+[
+  {"query":"Search my Obsidian vault for connection pooling notes and cite the exact files.","should_trigger":true},
+  {"query":"Save this API research into my Obsidian knowledge store without creating a duplicate.","should_trigger":true},
+  {"query":"Find notes with status active and show their relevant backlinks.","should_trigger":true},
+  {"query":"Use a different Obsidian vault for this project than for my personal projects.","should_trigger":true},
+  {"query":"Why did this Obsidian note change, and what did the previous version say?","should_trigger":true},
+  {"query":"Rename this note while preserving Obsidian links.","should_trigger":true},
+  {"query":"Find conceptually related notes even if they use different terminology.","should_trigger":true},
+  {"query":"Configure my btcs vault profile on this machine.","should_trigger":true},
+  {"query":"Update the authoritative vault note with this new source and keep provenance.","should_trigger":true},
+  {"query":"Search only the architecture folder of my Obsidian storage for this exact error.","should_trigger":true},
+  {"query":"How much does Obsidian Sync cost today?","should_trigger":false},
+  {"query":"Build an Obsidian community plugin in TypeScript.","should_trigger":false},
+  {"query":"Install the Obsidian desktop application on Ubuntu.","should_trigger":false},
+  {"query":"Search this C# repository for every call to SendAsync.","should_trigger":false},
+  {"query":"Generate a Conventional Commit message for my current code diff.","should_trigger":false},
+  {"query":"Explain standard Markdown link syntax.","should_trigger":false},
+  {"query":"Move these records from Notion into PostgreSQL.","should_trigger":false},
+  {"query":"Recommend an Obsidian theme and calendar plugin.","should_trigger":false},
+  {"query":"Search our Azure DevOps wiki for the deployment runbook.","should_trigger":false},
+  {"query":"Design a generic document taxonomy without reading or changing a vault.","should_trigger":false}
+]

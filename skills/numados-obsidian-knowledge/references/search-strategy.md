@@ -57,7 +57,7 @@ Without it, search wikilink text as a candidate generator, but do not claim comp
 
 ### 6. Escalate to semantic search
 
-Use semantic search only when the user asks by concept, terminology may differ, or lexical passes produce weak results. If an approved QMD collection exists:
+Use semantic search only when the user asks by concept, terminology may differ, or lexical passes produce weak results. If an approved QMD collection exists, inspect `qmd status` first. Do not run `vsearch` or `query` until model availability is proven or the user approves any first-use download:
 
 ```bash
 qmd search "exact keywords" -c <collection> --json -n 10

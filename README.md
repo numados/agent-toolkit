@@ -24,17 +24,21 @@ The portable core stays independent of a particular client. Harness-specific pat
 ├── contracts/                versioned agreements
 ├── adapters/                 harness-specific renderers and tests
 ├── mcp/                      non-secret MCP definitions
-└── scripts/validate-skills.sh
+├── scripts/validate-skills.sh
+└── tests/run-runtime-checks.sh
 ```
 
-## First Skill
+## Core Skills
 
-`skill-author` creates, updates, and reviews skills in this repository. Use it before adding another skill so that the same activation, safety, portability, and evaluation rules are applied consistently.
+- `skill-author` creates, updates, and reviews reusable skills.
+- `numados-skill-doctor` audits whether a skill is ready for the current machine, harness, and target scope.
+- `numados-obsidian-knowledge` provides bounded, portable Obsidian vault operations.
 
 ## Validation
 
 ```bash
 bash scripts/validate-skills.sh
+bash tests/run-runtime-checks.sh
 ```
 
-The script validates the portable metadata contract for every `skills/*/SKILL.md`. It does not prove client discovery or execution; those checks will be added per supported harness in `adapters/`.
+The validator checks portable metadata and `runtime/requirements.tsv` declarations. Runtime smoke tests cover deterministic provider selection and failure paths; client discovery still belongs in supported-harness adapters.

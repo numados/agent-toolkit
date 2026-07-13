@@ -11,6 +11,8 @@ start_dir="$PWD"
 
 usage() {
   printf '%s\n' 'Usage: validate-vault-context.sh [--vault PATH] [--config FILE|--profile NAME] [--start-dir DIR]'
+  printf '%s\n' 'Validate resolved paths and configured providers without installing or mutating them.'
+  printf '%s\n' 'Example: validate-vault-context.sh --profile work'
 }
 
 while [ "$#" -gt 0 ]; do
@@ -32,10 +34,7 @@ validate_relative_dir() {
   local label="$1"
   local root="$2"
   [ -n "$root" ] || return 0
-
-  case "/$root/" in /*/../*|/*/./*) printf '%s must be a clean relative path: %s\n' "$label" "$root" >&2; return 1;; esac
-  case "$root" in /*) printf '%s must be vault-relative: %s\n' "$label" "$root" >&2; return 1;; esac
-  [ -d "$vault_path/$root" ] || { printf '%s does not exist: %s\n' "$label" "$root" >&2; return 1; }
+  numados_validate_vault_relative_dir "$vault_path" "$root" "$label" || return 1
   printf '%s: %s\n' "$label" "$root"
 }
 
@@ -49,22 +48,28 @@ backend="$(numados_context_value NUMADOS_OBSIDIAN_SEARCH_BACKEND)"
 qmd_collection="$(numados_context_value NUMADOS_OBSIDIAN_QMD_COLLECTION)"
 link_style="$(numados_context_value NUMADOS_OBSIDIAN_LINK_STYLE)"
 
-validate_relative_dir write_root "$write_root"
+validate_relative_dir write_root "$write_root" || exit 4
 
 if [ -n "$search_roots" ]; then
   IFS=',' read -r -a root_list <<< "$search_roots"
   for root in "${root_list[@]}"; do
-    validate_relative_dir search_root "$root"
+    validate_relative_dir search_root "$root" || exit 4
   done
 fi
 
 backend="${backend:-auto}"
 case "$backend" in
   auto|filesystem) ;;
-  obsidian) command -v obsidian >/dev/null 2>&1 || { printf '%s\n' 'Configured backend obsidian is unavailable.' >&2; exit 4; } ;;
+  obsidian)
+    command -v obsidian >/dev/null 2>&1 || { printf '%s\n' 'Configured backend obsidian is unavailable.' >&2; exit 4; }
+    printf '%s\n' 'obsidian_readiness: unverified (app and vault access were not probed)'
+    ;;
   qmd)
     command -v qmd >/dev/null 2>&1 || { printf '%s\n' 'Configured backend qmd is unavailable.' >&2; exit 4; }
     [ -n "$qmd_collection" ] || { printf '%s\n' 'NUMADOS_OBSIDIAN_QMD_COLLECTION is required for qmd.' >&2; exit 4; }
+    qmd collection show "$qmd_collection" >/dev/null 2>&1 || { printf 'Configured QMD collection is unavailable: %s\n' "$qmd_collection" >&2; exit 4; }
+    printf 'qmd_collection: %s\n' "$qmd_collection"
+    printf '%s\n' 'qmd_model_readiness: unverified (confirm before semantic search)'
     ;;
   *) printf 'Unsupported search backend: %s\n' "$backend" >&2; exit 4;;
 esac

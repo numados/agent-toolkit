@@ -23,6 +23,7 @@
 
 - No secrets, destructive default action, hidden network call, or unreviewed external dependency.
 - Tool assumptions and MCP requirements are explicit.
+- Runtime-dependent skills declare required and optional provider alternatives in `runtime/requirements.tsv`.
 - Client-specific fields and configuration stay in adapters.
 
 ## Evaluation

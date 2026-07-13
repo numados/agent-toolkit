@@ -1,0 +1,4 @@
+interface:
+  display_name: "numados: Skill Doctor"
+  short_description: "Audit skill readiness for this machine"
+  default_prompt: "Use $numados-skill-doctor to audit a skill against this machine and harness."

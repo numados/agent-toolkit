@@ -37,6 +37,30 @@ Expected: check the explicit/environment/project/default profile chain, then sto
 
 Expected: validation fails explicitly. Do not install QMD or silently pretend semantic search ran; offer filesystem search.
 
+## Missing lexical provider
+
+- Run `vault-search.sh` without `rg` and without a verified harness or MCP content-search provider.
+
+Expected: fail explicitly with a setup recommendation. Never return `(none)` with a successful exit code.
+
+## Explicit override precedence
+
+- Enter a project whose profile marker is not configured on this machine, then pass a valid explicit `--vault`.
+
+Expected: resolve the explicit vault without reading or failing on the project profile. `NUMADOS_OBSIDIAN_VAULT` behaves the same way when no higher explicit profile/config override is supplied.
+
+## Symlink escape
+
+- Configure a write or search root that is a symlink to a directory outside the vault.
+
+Expected: configuration and validation fail before any write or search.
+
+## QMD first-use side effect
+
+- Configure an existing QMD collection when semantic models are not ready.
+
+Expected: lexical search may remain available, but semantic search stays unverified. Ask before any model download, embedding, or index mutation.
+
 ## Write ambiguity
 
 - “Store this note” when no destination, write root, or existing convention determines a location.

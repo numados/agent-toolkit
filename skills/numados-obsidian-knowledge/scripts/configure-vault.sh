@@ -24,6 +24,8 @@ force=false
 
 usage() {
   printf '%s\n' 'Usage: configure-vault.sh --profile NAME [--vault ABSOLUTE_PATH] [--project DIR] [--default] [--update] [--write-root RELATIVE_DIR] [--search-roots CSV] [--backend auto|filesystem|obsidian|qmd] [--qmd-collection NAME] [--link-style preserve|wikilink|markdown] [--force]'
+  printf '%s\n' 'Create a machine-local profile, merge-update supplied fields, or bind a project selector.'
+  printf '%s\n' 'Example: configure-vault.sh --profile work --vault /absolute/vault --project /absolute/project'
 }
 
 write_file_atomically() {
@@ -38,10 +40,8 @@ write_file_atomically() {
 
 validate_relative_dir() {
   local root="$1"
-  [ -n "$root" ] || return 0
-  case "/$root/" in /*/../*|/*/./*) return 1;; esac
-  case "$root" in /*) return 1;; esac
-  [ -d "$vault_path/$root" ]
+  local label="$2"
+  numados_validate_vault_relative_dir "$vault_path" "$root" "$label"
 }
 
 validate_relative_dirs() {
@@ -50,7 +50,7 @@ validate_relative_dirs() {
   [ -n "$roots" ] || return 0
   IFS=',' read -r -a root_list <<< "$roots"
   for root in "${root_list[@]}"; do
-    validate_relative_dir "$root" || return 1
+    validate_relative_dir "$root" 'Search root' || return 1
   done
 }
 
@@ -109,8 +109,9 @@ link_style="${link_style:-preserve}"
 case "$vault_path" in /*) ;; *) printf 'Vault path must be absolute: %s\n' "$vault_path" >&2; exit 2;; esac
 [ -d "$vault_path" ] || { printf 'Vault directory does not exist: %s\n' "$vault_path" >&2; exit 3; }
 vault_path="$(cd "$vault_path" && pwd -P)"
-validate_relative_dir "$write_root" || { printf 'Write root must be an existing vault-relative directory: %s\n' "$write_root" >&2; exit 2; }
-validate_relative_dirs "$search_roots" || { printf 'Search roots must be existing vault-relative directories: %s\n' "$search_roots" >&2; exit 2; }
+case "$vault_path$qmd_collection" in *$'\n'*|*$'\r'*) printf '%s\n' 'Vault path and QMD collection must be single-line values.' >&2; exit 2;; esac
+validate_relative_dir "$write_root" 'Write root' || exit 2
+validate_relative_dirs "$search_roots" || exit 2
 case "$backend" in auto|filesystem|obsidian|qmd) ;; *) printf 'Unsupported backend: %s\n' "$backend" >&2; exit 2;; esac
 case "$link_style" in preserve|wikilink|markdown) ;; *) printf 'Unsupported link style: %s\n' "$link_style" >&2; exit 2;; esac
 [ "$backend" != qmd ] || [ -n "$qmd_collection" ] || { printf '%s\n' '--qmd-collection is required for qmd.' >&2; exit 2; }

@@ -44,6 +44,29 @@ numados_profile_path() {
   printf '%s/profiles/%s.env' "$(numados_config_root)" "$profile"
 }
 
+numados_validate_vault_relative_dir() {
+  local vault_path="$1"
+  local relative_path="$2"
+  local label="$3"
+  local resolved_path
+
+  [ -n "$relative_path" ] || return 0
+  case "$relative_path" in
+    /*) printf '%s must be vault-relative: %s\n' "$label" "$relative_path" >&2; return 1;;
+    *$'\n'*|*$'\r'*) printf '%s must be a single-line path.\n' "$label" >&2; return 1;;
+  esac
+  case "/$relative_path/" in
+    /*/../*|/*/./*) printf '%s must be a clean relative path: %s\n' "$label" "$relative_path" >&2; return 1;;
+  esac
+  [ -d "$vault_path/$relative_path" ] || { printf '%s does not exist: %s\n' "$label" "$relative_path" >&2; return 1; }
+
+  resolved_path="$(cd "$vault_path/$relative_path" && pwd -P)" || return 1
+  case "$resolved_path/" in
+    "$vault_path/"*) ;;
+    *) printf '%s resolves outside the vault: %s\n' "$label" "$relative_path" >&2; return 1;;
+  esac
+}
+
 numados_find_project_profile() {
   local start_dir="$1"
   local directory
@@ -111,6 +134,10 @@ numados_resolve_context() {
   elif [ -n "$explicit_profile" ]; then
     profile="$explicit_profile"
     config_source="explicit-profile"
+  elif [ -n "$explicit_vault" ]; then
+    :
+  elif [ -n "${NUMADOS_OBSIDIAN_VAULT:-}" ]; then
+    :
   elif [ -n "${NUMADOS_OBSIDIAN_PROFILE:-}" ]; then
     profile="$NUMADOS_OBSIDIAN_PROFILE"
     config_source="environment-profile"
@@ -169,6 +196,10 @@ numados_resolve_context() {
     printf '%s\n' 'No vault configured. Pass --vault/--profile, set NUMADOS_OBSIDIAN_VAULT or NUMADOS_OBSIDIAN_PROFILE, add .numados/obsidian-profile, or configure a default profile.' >&2
     return 3
   fi
+
+  case "$NUMADOS_RESOLVED_VAULT" in
+    *$'\n'*|*$'\r'*) printf '%s\n' 'Vault path must be a single-line value.' >&2; return 4;;
+  esac
 
   case "$NUMADOS_RESOLVED_VAULT" in
     /*) ;;

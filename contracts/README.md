@@ -13,3 +13,4 @@ Each contract should identify its owner, scope, compatibility impact, and verifi
 Current contracts:
 
 - [Git-backed knowledge history](git-backed-knowledge-history.md): searchable, safe commit metadata for file-based knowledge stores.
+- [Skill runtime capabilities](skill-runtime-capabilities.md): portable provider declarations and machine-readiness semantics.

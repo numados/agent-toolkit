@@ -1,0 +1,22 @@
+[
+  {"query":"Will this skill work correctly on my current machine and harness?","should_trigger":true},
+  {"query":"Check whether the Obsidian skill has every tool it needs here.","should_trigger":true},
+  {"query":"Why is this skill saying rg is missing when Codex already has file search?","should_trigger":true},
+  {"query":"Audit this skill after I moved to a new laptop.","should_trigger":true},
+  {"query":"Compare the available CLI and MCP providers for this skill.","should_trigger":true},
+  {"query":"Show the exact filesystem search route this skill will use.","should_trigger":true},
+  {"query":"Does this filesystem MCP cover the vault path needed by the skill?","should_trigger":true},
+  {"query":"Would installing a semantic index materially improve this skill?","should_trigger":true},
+  {"query":"The skill dependency check fails after my harness update.","should_trigger":true},
+  {"query":"Give me a short readiness checklist for all capabilities declared by this skill.","should_trigger":true},
+  {"query":"Search my Obsidian vault for Redis notes.","should_trigger":false},
+  {"query":"Write a new Agent Skill for reviewing pull requests.","should_trigger":false},
+  {"query":"Review whether this SKILL.md follows the Agent Skills writing standard.","should_trigger":false},
+  {"query":"Install ripgrep on Ubuntu now.","should_trigger":false},
+  {"query":"Configure this MCP server with my credentials.","should_trigger":false},
+  {"query":"Diagnose why the application health endpoint returns 500.","should_trigger":false},
+  {"query":"List every package installed on this machine.","should_trigger":false},
+  {"query":"Benchmark rg against grep over this source repository.","should_trigger":false},
+  {"query":"Search Azure DevOps code for this class name.","should_trigger":false},
+  {"query":"Perform a general security audit of my workstation.","should_trigger":false}
+]

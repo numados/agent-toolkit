@@ -12,6 +12,8 @@ show_context=false
 
 usage() {
   printf '%s\n' 'Usage: resolve-vault.sh [--vault PATH] [--config FILE|--profile NAME] [--start-dir DIR] [--show-context]'
+  printf '%s\n' 'Resolve one existing vault without persisting configuration.'
+  printf '%s\n' 'Example: resolve-vault.sh --profile work --show-context'
 }
 
 while [ "$#" -gt 0 ]; do

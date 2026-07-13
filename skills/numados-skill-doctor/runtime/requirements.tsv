@@ -1,0 +1,2 @@
+# capability	need	when	providers	purpose
+runtime.shell	required	running the deterministic doctor probe	cmd:bash	Inspect declared providers without external packages

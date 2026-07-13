@@ -12,6 +12,8 @@ resolve_args=()
 
 usage() {
   printf '%s\n' 'Usage: vault-search.sh --query TEXT [--mode auto|path|text|regex] [--scope RELATIVE_DIR] [--limit N] [--context N] [--case-sensitive] [--vault PATH|--config FILE|--profile NAME] [--start-dir DIR]'
+  printf '%s\n' 'Search Markdown paths and content with bounded ripgrep output; requires rg.'
+  printf '%s\n' 'Example: vault-search.sh --profile work --query "rate limit" --limit 10'
 }
 
 is_positive_integer() {
@@ -69,11 +71,16 @@ done
 case "$mode" in auto|path|text|regex) ;; *) printf 'Unsupported mode: %s\n' "$mode" >&2; exit 2;; esac
 is_positive_integer "$limit" || { printf '%s\n' '--limit must be a positive integer.' >&2; exit 2; }
 [[ "$context" =~ ^[0-3]$ ]] || { printf '%s\n' '--context must be between 0 and 3.' >&2; exit 2; }
+command -v rg >/dev/null 2>&1 || {
+  printf '%s\n' 'ripgrep (rg) is unavailable. Use a verified harness/MCP filesystem-search provider or run numados-skill-doctor for setup recommendations.' >&2
+  exit 4
+}
 
 vault_path="$("$script_dir/resolve-vault.sh" "${resolve_args[@]}")"
 search_root="$vault_path"
 
 if [ -n "$scope" ]; then
+  case "$scope" in *$'\n'*|*$'\r'*) printf '%s\n' 'Scope must be a single-line path.' >&2; exit 2;; esac
   case "/$scope/" in
     /*/../*|/*/./*) printf 'Scope must be a clean vault-relative directory: %s\n' "$scope" >&2; exit 2;;
   esac
@@ -103,7 +110,7 @@ search_paths() {
   if [ "$mode" = regex ]; then
     match_args=()
   fi
-  rg --files "$search_root" -g '*.md' | to_relative_paths | rg "${case_args[@]}" "${match_args[@]}" -- "$query" | sed -n "1,${limit}p" || true
+  rg --files "$search_root" -g '*.md' | to_relative_paths | rg "${case_args[@]}" "${match_args[@]}" -- "$query" | sed -n "1,${limit}p;${limit}q" || true
 }
 
 search_content_files() {
@@ -111,7 +118,7 @@ search_content_files() {
   if [ "$mode" = regex ]; then
     match_args=()
   fi
-  rg -l "${case_args[@]}" "${match_args[@]}" -g '*.md' -- "$query" "$search_root" | to_relative_paths | sed -n "1,${limit}p" || true
+  rg -l "${case_args[@]}" "${match_args[@]}" -g '*.md' -- "$query" "$search_root" | to_relative_paths | sed -n "1,${limit}p;${limit}q" || true
 }
 
 show_snippets() {

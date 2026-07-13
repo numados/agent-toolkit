@@ -8,7 +8,7 @@ Separate portable project selection from machine-specific paths:
 project/.numados/obsidian-profile
     contains: btcs
 
-~/.config/numados/obsidian/profiles/btcs.env
+${XDG_CONFIG_HOME:-~/.config}/numados/obsidian/profiles/btcs.env
     contains: NUMADOS_OBSIDIAN_VAULT=/path/on/this/machine
 ```
 
@@ -51,8 +51,8 @@ Resolve deterministically in this order:
 2. Explicit `--config` or `--profile`.
 3. `NUMADOS_OBSIDIAN_VAULT` or `NUMADOS_OBSIDIAN_PROFILE` for the current process.
 4. Nearest `.numados/obsidian-profile` from the current working directory upward.
-5. Machine default in `~/.config/numados/obsidian/default-profile`.
-6. Legacy `~/.config/numados/obsidian-knowledge.env`.
+5. Machine default in `${XDG_CONFIG_HOME:-~/.config}/numados/obsidian/default-profile`.
+6. Legacy `${XDG_CONFIG_HOME:-~/.config}/numados/obsidian-knowledge.env`.
 7. Stop and ask for configuration.
 
 Inspect the decision without modifying anything:
@@ -97,7 +97,7 @@ Run `obsidian help` before relying on a command. At the time this skill was auth
 
 Treat QMD as optional. Use it when exact lexical search misses conceptually related notes or when repeated large-vault retrieval justifies maintaining an index. Prefer keyword search first, then vector or hybrid/reranked query. Verify every semantic result against the source Markdown because relevance is probabilistic.
 
-Do not install, index, or download models merely because QMD is absent. Ask before adding this dependency.
+Do not install, index, or download models merely because QMD is absent. `qmd vsearch` and `qmd query` may need first-use model downloads; verify readiness with `qmd status` and ask before any download or index mutation.
 
 ## Portability
 

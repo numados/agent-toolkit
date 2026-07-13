@@ -1,6 +1,6 @@
 ---
 name: numados-obsidian-knowledge
-description: Search, read, create, and safely edit data in an Obsidian Markdown vault using filesystem tools, Obsidian CLI, optional semantic search, and bounded version history when available. Use when an agent must locate information in an Obsidian vault, inspect links or properties, save new knowledge, update an existing note, recover note history, or configure portable access to an Obsidian storage directory.
+description: Use this skill to search, read, create, update, link, or recover history from notes in an Obsidian Markdown vault, and to configure portable machine or project routing to the correct vault. Preserve existing vault conventions and use bounded filesystem, native, or indexed retrieval only when available.
 ---
 
 # Numados Obsidian Knowledge
@@ -15,11 +15,9 @@ Obtain before acting:
 2. The user's search or write intent.
 3. For a write, either an explicit destination or enough existing vault convention to determine one safely.
 
-Resolve the vault with `scripts/resolve-vault.sh`. Never guess a default path. The resolver supports explicit overrides, environment overrides, the nearest project profile, and a machine-wide default profile.
+Resolve the vault with `scripts/resolve-vault.sh`; never guess a path. For setup, profile changes, or backend selection, read [vault context](references/vault-context.md) and use `scripts/configure-vault.sh`. Persist configuration only after an explicit setup request.
 
-For first-time setup, use `scripts/configure-vault.sh` with an explicit profile name and vault path. Associate a project directory with that profile when project-specific routing is wanted. For an existing profile, use `--update`; the script preserves every supported field that was not supplied. Use `--force` only to intentionally rebind a project marker that already selects another profile.
-
-Configure or edit profiles when the user explicitly asks for setup or supplies missing configuration in response to a setup question. Do not persist configuration merely because a one-off `--vault` override was used. Read [vault context](references/vault-context.md) before configuring profiles or choosing a search backend.
+When machine or harness readiness is unknown, changed, or a dependency fails, use `$numados-skill-doctor` with `runtime/requirements.tsv`. Do not install or enable a provider implicitly.
 
 ## Safety contract
 
@@ -40,7 +38,7 @@ Classify the query, then use the cheapest precise operation:
 4. **Related-note query**: inspect outgoing links and backlinks one hop from the best candidates.
 5. **Conceptual query with weak lexical matches**: use optional semantic or hybrid search, then verify results against the source Markdown.
 
-Use `scripts/vault-search.sh` for the portable filename/content fallback. Read [search strategy](references/search-strategy.md) for backend routing, query expansion, graph traversal, and token-bounded retrieval.
+Use `scripts/vault-search.sh` when ripgrep is available; otherwise use a verified harness or MCP filesystem-search provider. Read [search strategy](references/search-strategy.md) for backend routing, query expansion, graph traversal, and token-bounded retrieval.
 
 Never dump the whole vault into context. Search paths or candidate files first, inspect short snippets second, and read only the best few notes. Report vault-relative paths and headings or line numbers with any synthesized answer. A failed search is not proof that the information is absent; report the query and scope used.
 
@@ -80,13 +78,7 @@ Stop and ask before writing when the vault is unresolved, several notes could be
 
 ## Git-backed vaults
 
-Treat Git as an optional storage capability, not a requirement.
-
-- Do not stage or commit merely because the vault is inside a Git worktree.
-- When the user explicitly requests a commit, complete note verification first, then hand the exact changed vault-relative paths to the active repository or user commit workflow.
-- Stage only paths changed for the current request. Stop if the index already contains unrelated changes.
-- Commit-message structure and policy are outside this skill; follow the active higher-priority commit instructions.
-- Do not push unless the user explicitly requests it.
+Treat Git as optional. Commit only after an explicit request and successful note verification; pass only this operation's exact paths to the active commit workflow. Stop on unrelated staged changes and never push implicitly. Commit-message policy remains outside this skill.
 
 When the user asks what changed, why a note has its current content, or where earlier material went, inspect bounded Git history after locating the relevant note path. Treat commit metadata as navigation evidence and verify conclusions against the corresponding Markdown diff.
 
@@ -97,6 +89,7 @@ When the user asks what changed, why a note has its current content, or where ea
 - [Writing safely](references/writing-safely.md): generic note creation, updates, properties, and links.
 - `scripts/resolve-vault.sh`: resolve and validate one absolute vault path.
 - `scripts/configure-vault.sh`: create or merge-update a machine-local profile and optional project selector.
-- `scripts/vault-inventory.sh`: inspect size, format signals, available search tools, and optional Git history.
+- `scripts/vault-inventory.sh`: inspect size, format signals, detected search providers, and optional Git history.
 - `scripts/vault-search.sh`: bounded read-only filesystem search.
 - `scripts/validate-vault-context.sh`: validate local path and backend configuration.
+- `runtime/requirements.tsv`: machine-readable capabilities for `$numados-skill-doctor`.

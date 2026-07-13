@@ -19,6 +19,7 @@ This repository distributes reusable agent context across machines. Keep the por
 - Make each skill's `description` state both capability and trigger conditions.
 - Keep the `name` lowercase, hyphenated, and equal to its directory name.
 - Add scripts only when they provide deterministic or repeated value.
+- Add `runtime/requirements.tsv` when a skill depends on machine, harness, CLI, MCP, or indexed capabilities.
 
 ## Safety
 
@@ -29,6 +30,6 @@ This repository distributes reusable agent context across machines. Keep the por
 
 ## Verification
 
-- Run `bash scripts/validate-skills.sh` after changing skill metadata.
+- Run `bash scripts/validate-skills.sh` after changing skill metadata or runtime requirements.
 - Add activation, non-activation, failure-path, and target-harness tests for every published skill.
 - Do not commit unless explicitly requested.
