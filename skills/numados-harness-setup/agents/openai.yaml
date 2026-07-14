@@ -1,0 +1,4 @@
+interface:
+  display_name: "numados: Harness Setup"
+  short_description: "Install and verify Numados harness state"
+  default_prompt: "Use $numados-harness-setup to discover the active harness, preview setup changes, apply only after confirmation, and verify or roll back safely."

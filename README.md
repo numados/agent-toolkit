@@ -14,6 +14,7 @@ This repository will hold four distinct kinds of context:
 
 Execution boundaries are defined by [`contracts/execution-safety.md`](contracts/execution-safety.md)
 and projected into each harness through [`adapters/execution-safety.md`](adapters/execution-safety.md).
+Skill and instruction conflicts follow [`contracts/context-precedence.md`](contracts/context-precedence.md): project/company context takes precedence over Numados base context, with adapter-visible provenance.
 
 The portable core stays independent of a particular client. Harness-specific paths, metadata, plugins, and MCP schemas belong in adapters.
 
@@ -53,6 +54,7 @@ manifests, external-tool contracts, and the non-destructive Pi installer.
 - `numados-planning` turns approved context into repository-aligned phases and verification criteria.
 - `numados-implementation` executes approved phases, records iteration events, and closes the verified review loop.
 - `numados-task-navigator` answers questions about an active or completed task from its current state and linked evidence.
+- `numados-harness-setup` discovers the active harness, previews setup changes, applies them only after confirmation, and verifies or rolls back native installation state.
 
 ## Development workflow
 

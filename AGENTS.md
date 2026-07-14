@@ -29,6 +29,7 @@ This repository distributes reusable agent context across machines. Keep the por
 - Never commit secrets, personal credentials, or machine-specific paths.
 - Grant the narrowest required tool access and require confirmation for external side effects.
 - Enforce [`contracts/execution-safety.md`](contracts/execution-safety.md) for every skill, adapter, delegated agent, and runtime integration; never rely on instructions alone for a hard block.
+- Enforce [`contracts/context-precedence.md`](contracts/context-precedence.md): project/company context takes precedence over Numados base context, and adapters must expose provenance and conflicts.
 - Keep `git push` and equivalent remote writes blocked at the harness tool boundary; a Git hook is only defense in depth.
 - Do not overwrite or delete user-managed harness configuration.
 

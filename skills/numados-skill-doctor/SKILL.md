@@ -24,6 +24,7 @@ Obtain:
 5. Compare the detected providers with the requested operations. Missing optional features do not block unrelated core operations.
 6. For search workflows, state the actual route for filename, lexical content, structured/graph, semantic/indexed, and history queries. Read [capability assessment](references/capability-assessment.md) when ranking search providers or recommending one.
 7. Recommend the smallest change that closes a real gap. Prefer an already-applicable harness or MCP capability over installing a duplicate CLI. For search gaps, read [search tool recommendations](references/search-tool-recommendations.md) and name only tools relevant to the requested query classes.
+8. When multiple skill or instruction sources apply, resolve and report their scope and provenance using `contracts/context-precedence.md`. Never infer precedence from load order; mark the result `UNKNOWN PRECEDENCE` when the active harness cannot prove the effective source.
 
 ## Numados development bundle audit
 
@@ -69,6 +70,10 @@ Return only a compact checklist:
 ```text
 Skill: <name>
 Status: READY | READY WITH OPTIONAL GAPS | BLOCKED | UNDECLARED
+
+Context precedence (when multiple sources apply)
+- [x] <effective project/company or Numados source and provenance>
+- [ ] <conflict or unknown scope; exact limitation>
 
 Required
 - [x] <capability> — <selected provider and origin>

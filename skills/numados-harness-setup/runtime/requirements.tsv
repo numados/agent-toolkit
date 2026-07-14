@@ -1,0 +1,8 @@
+# capability	need	when	providers	purpose
+runtime.shell	required	discovery and adapter orchestration	cmd:bash|harness:shell	Run bounded setup and verification operations
+filesystem.read	required	inspect identified instructions, settings, and skills	cmd:rg|harness:filesystem-read|mcp:filesystem-read	Read only proven target roots
+filesystem.write	required	apply or rollback after confirmation	harness:filesystem-write|mcp:filesystem-write	Write only adapter-declared targets
+harness.adapter	required	preview, apply, verify, and rollback	harness:adapter|mcp:harness-adapter	Use native harness paths and syntax
+harness.diagnostics	required	prove active harness and native discovery	harness:diagnostics|mcp:harness-diagnostics	Inspect effective configuration without guessing
+environment.inspect	required	check declarations without exposing values	harness:environment-read	Report safe variable presence only
+remote.read	optional	obtain current official harness documentation when local docs are insufficient	harness:remote-read|mcp:remote-read	Verify version-sensitive native behavior

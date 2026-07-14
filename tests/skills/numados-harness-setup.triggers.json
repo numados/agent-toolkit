@@ -1,0 +1,8 @@
+[
+  {"query":"Set up Numados for the harness I am currently running.","should_trigger":true},
+  {"query":"Discover where this harness reads AGENTS or CLAUDE and preview the setup.","should_trigger":true},
+  {"query":"Use $numados-harness-setup to install and verify Numados.","should_trigger":true},
+  {"query":"Research this task before planning implementation.","should_trigger":false},
+  {"query":"Create the implementation plan.","should_trigger":false},
+  {"query":"Implement the approved plan.","should_trigger":false}
+]
