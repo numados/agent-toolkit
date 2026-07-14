@@ -21,6 +21,22 @@ target harness. It owns native syntax and must preserve unmanaged fields.
 Generic skill installers are allowed only for skill payloads; they are not
 configuration adapters. An unavailable adapter is a hard `BLOCKED` result.
 
+## Skill-owned configuration
+
+When an installed Numados skill declares machine/project parameters, setup
+must read that skill's configuration reference and delegate to its bundled
+configurator. Show the logical profile, target project, parameter names,
+destination files, backup behavior, and verification command in the setup
+plan. Do not duplicate the parser or write profile files directly.
+
+For `numados-knowledge-curator`, delegate vault/profile selection and
+`NUMADOS_OBSIDIAN_KNOWLEDGE_ROOT` to `numados-obsidian-knowledge` and its
+`scripts/configure-vault.sh`. Ask for the vault and a vault-relative existing
+knowledge folder, plus whether the profile is project-selected or the machine
+default. Apply only after confirmation, then run
+`scripts/validate-vault-context.sh` and the curator doctor audit. Never infer
+the knowledge root from `NUMADOS_OBSIDIAN_WRITE_ROOT`.
+
 Apply must be idempotent, atomic where supported, backup before mutation, and
 limited to declared targets. It may create a concise managed block in the
 effective instruction file containing the minimum precedence rule and a

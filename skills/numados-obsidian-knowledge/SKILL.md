@@ -15,6 +15,10 @@ Obtain before acting:
 2. The user's search or write intent.
 3. For a write, either an explicit destination or enough existing vault convention to determine one safely.
 
+For reusable cross-task engineering knowledge, resolve
+`NUMADOS_OBSIDIAN_KNOWLEDGE_ROOT`; do not mix it with task artifacts or infer it
+from the general write root.
+
 Resolve the vault with `scripts/resolve-vault.sh`; never guess a path. For setup, profile changes, or backend selection, read [vault context](references/vault-context.md) and use `scripts/configure-vault.sh`. Persist configuration only after an explicit setup request.
 
 When machine or harness readiness is unknown, changed, or a dependency fails, use `$numados-skill-doctor` with `runtime/requirements.tsv`. Do not install or enable a provider implicitly.

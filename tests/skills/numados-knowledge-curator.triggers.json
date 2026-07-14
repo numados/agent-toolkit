@@ -1,0 +1,11 @@
+[
+  {"query":"$numados-knowledge-curator","should_trigger":true},
+  {"query":"Save the reusable repository knowledge we learned during this task.","should_trigger":true},
+  {"query":"Curate this architecture rationale into my Obsidian knowledge base.","should_trigger":true},
+  {"query":"Use $numados-knowledge-curator to preserve valuable knowledge from the completed implementation.","should_trigger":true},
+  {"query":"Update the durable glossary and repository navigation notes with these verified facts.","should_trigger":true},
+  {"query":"Create the implementation plan for this task.","should_trigger":false},
+  {"query":"Log the current implementation phase in the task event file.","should_trigger":false},
+  {"query":"Search my vault for information about this repository.","should_trigger":false},
+  {"query":"Explain this architecture without writing anything.","should_trigger":false}
+]

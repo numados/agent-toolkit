@@ -8,12 +8,14 @@ profile=""
 vault_path=""
 project_dir=""
 write_root=""
+knowledge_root=""
 search_roots=""
 backend=""
 qmd_collection=""
 link_style=""
 vault_set=false
 write_root_set=false
+knowledge_root_set=false
 search_roots_set=false
 backend_set=false
 qmd_collection_set=false
@@ -23,7 +25,7 @@ update=false
 force=false
 
 usage() {
-  printf '%s\n' 'Usage: configure-vault.sh --profile NAME [--vault ABSOLUTE_PATH] [--project DIR] [--default] [--update] [--write-root RELATIVE_DIR] [--search-roots CSV] [--backend auto|filesystem|obsidian|qmd] [--qmd-collection NAME] [--link-style preserve|wikilink|markdown] [--force]'
+  printf '%s\n' 'Usage: configure-vault.sh --profile NAME [--vault ABSOLUTE_PATH] [--project DIR] [--default] [--update] [--write-root RELATIVE_DIR] [--knowledge-root RELATIVE_DIR] [--search-roots CSV] [--backend auto|filesystem|obsidian|qmd] [--qmd-collection NAME] [--link-style preserve|wikilink|markdown] [--force]'
   printf '%s\n' 'Create a machine-local profile, merge-update supplied fields, or bind a project selector.'
   printf '%s\n' 'Example: configure-vault.sh --profile work --vault /absolute/vault --project /absolute/project'
 }
@@ -60,6 +62,7 @@ while [ "$#" -gt 0 ]; do
     --vault) [ "$#" -ge 2 ] || { usage >&2; exit 2; }; vault_path="$2"; vault_set=true; shift 2;;
     --project) [ "$#" -ge 2 ] || { usage >&2; exit 2; }; project_dir="$2"; shift 2;;
     --write-root) [ "$#" -ge 2 ] || { usage >&2; exit 2; }; write_root="$2"; write_root_set=true; shift 2;;
+    --knowledge-root) [ "$#" -ge 2 ] || { usage >&2; exit 2; }; knowledge_root="$2"; knowledge_root_set=true; shift 2;;
     --search-roots) [ "$#" -ge 2 ] || { usage >&2; exit 2; }; search_roots="$2"; search_roots_set=true; shift 2;;
     --backend) [ "$#" -ge 2 ] || { usage >&2; exit 2; }; backend="$2"; backend_set=true; shift 2;;
     --qmd-collection) [ "$#" -ge 2 ] || { usage >&2; exit 2; }; qmd_collection="$2"; qmd_collection_set=true; shift 2;;
@@ -82,7 +85,7 @@ profile_exists=false
 [ ! -f "$profile_file" ] || profile_exists=true
 settings_changed=false
 
-if [ "$vault_set" = true ] || [ "$write_root_set" = true ] || [ "$search_roots_set" = true ] || [ "$backend_set" = true ] || [ "$qmd_collection_set" = true ] || [ "$link_style_set" = true ]; then
+if [ "$vault_set" = true ] || [ "$write_root_set" = true ] || [ "$knowledge_root_set" = true ] || [ "$search_roots_set" = true ] || [ "$backend_set" = true ] || [ "$qmd_collection_set" = true ] || [ "$link_style_set" = true ]; then
   settings_changed=true
 fi
 
@@ -94,6 +97,7 @@ if [ "$profile_exists" = true ]; then
 
   [ "$vault_set" = true ] || vault_path="$(numados_read_config_value NUMADOS_OBSIDIAN_VAULT "$profile_file")"
   [ "$write_root_set" = true ] || write_root="$(numados_read_config_value NUMADOS_OBSIDIAN_WRITE_ROOT "$profile_file")"
+  [ "$knowledge_root_set" = true ] || knowledge_root="$(numados_read_config_value NUMADOS_OBSIDIAN_KNOWLEDGE_ROOT "$profile_file")"
   [ "$search_roots_set" = true ] || search_roots="$(numados_read_config_value NUMADOS_OBSIDIAN_SEARCH_ROOTS "$profile_file")"
   [ "$backend_set" = true ] || backend="$(numados_read_config_value NUMADOS_OBSIDIAN_SEARCH_BACKEND "$profile_file")"
   [ "$qmd_collection_set" = true ] || qmd_collection="$(numados_read_config_value NUMADOS_OBSIDIAN_QMD_COLLECTION "$profile_file")"
@@ -111,6 +115,7 @@ case "$vault_path" in /*) ;; *) printf 'Vault path must be absolute: %s\n' "$vau
 vault_path="$(cd "$vault_path" && pwd -P)"
 case "$vault_path$qmd_collection" in *$'\n'*|*$'\r'*) printf '%s\n' 'Vault path and QMD collection must be single-line values.' >&2; exit 2;; esac
 validate_relative_dir "$write_root" 'Write root' || exit 2
+validate_relative_dir "$knowledge_root" 'Knowledge root' || exit 2
 validate_relative_dirs "$search_roots" || exit 2
 case "$backend" in auto|filesystem|obsidian|qmd) ;; *) printf 'Unsupported backend: %s\n' "$backend" >&2; exit 2;; esac
 case "$link_style" in preserve|wikilink|markdown) ;; *) printf 'Unsupported link style: %s\n' "$link_style" >&2; exit 2;; esac
@@ -136,6 +141,7 @@ operation="unchanged"
 if [ "$profile_exists" = false ] || [ "$settings_changed" = true ]; then
   profile_content="NUMADOS_OBSIDIAN_VAULT=$vault_path
 NUMADOS_OBSIDIAN_WRITE_ROOT=$write_root
+NUMADOS_OBSIDIAN_KNOWLEDGE_ROOT=$knowledge_root
 NUMADOS_OBSIDIAN_SEARCH_ROOTS=$search_roots
 NUMADOS_OBSIDIAN_SEARCH_BACKEND=$backend
 NUMADOS_OBSIDIAN_QMD_COLLECTION=$qmd_collection

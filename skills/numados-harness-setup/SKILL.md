@@ -22,6 +22,10 @@ workflow, not a replacement for `numados-brainstorm`, `numados-planning`, or
   harness-specific adapter owns native settings, environment declarations,
   instruction projections, backups, atomic writes, and config parsing. If no
   adapter is available, stop instead of editing guessed files.
+- Skill-owned parameters are configured through that skill's documented
+  configurator, not written as guessed harness environment entries. Include
+  delegated changes in the same preview, confirmation, verification, and
+  rollback plan.
 - Never print or copy secret values, tokens, credentials, or auth state. Inspect
   only safe names/presence and preserve user-managed configuration.
 - Project/company context and managed policy take precedence over Numados base
@@ -33,7 +37,8 @@ workflow, not a replacement for `numados-brainstorm`, `numados-planning`, or
 1. **Discover**: identify the active harness and version; determine project,
    user, and managed scopes; locate the effective `AGENTS.md`, `CLAUDE.md`,
    native config, skills, settings, environment declarations, and adapter.
-   Record paths, source ownership, and safe presence/version facts only.
+   Record paths, source ownership, safe presence/version facts, and installed
+   skills whose required profile parameters are unresolved.
 2. **Plan**: show exact targets and intended operations (`add`, `update`,
    `preserve`, `shadow`, or `skip`), including managed blocks, settings
    overlays, environment variable names, precedence conflicts, backups, and

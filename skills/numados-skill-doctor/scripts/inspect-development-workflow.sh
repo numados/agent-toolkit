@@ -239,7 +239,7 @@ elif [ -n "$target" ]; then
   if storage_output="$($context_validator --start-dir "$target" 2>&1)"; then storage_ok=true; fi
 fi
 
-if [ "$storage_ok" = true ] && printf '%s\n' "$storage_output" | grep -Fq 'write_root:' && ! printf '%s\n' "$storage_output" | grep -Fq 'explicit destination required'; then
+if [ "$storage_ok" = true ] && printf '%s\n' "$storage_output" | grep -Eq '^write_root: .+' && ! printf '%s\n' "$storage_output" | grep -Fq 'write_root: (not configured; explicit destination required)'; then
   check_required 'storage.obsidian' 'resolved vault/profile and deterministic write_root' pass
 elif [ -z "$vault" ] && [ -z "$target" ]; then
   check_required 'storage.obsidian' 'target/vault scope is unknown; provide --target or --vault so profile and write_root can be checked' fail

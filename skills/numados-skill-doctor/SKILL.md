@@ -49,6 +49,24 @@ install, configure, index, or mutate anything. A missing QMD/semantic provider
 is an optional gap because exact task recovery starts from the index and latest
 event and can use bounded lexical retrieval.
 
+## Knowledge curator audit
+
+For `$numados-knowledge-curator`, do not stop after its generic runtime
+manifest. Prove that the current project resolves a dedicated knowledge root:
+
+```bash
+scripts/inspect-knowledge-curator.sh \
+  --root /path/to/agent-toolkit \
+  --target /path/to/project \
+  --provide harness:skill-invocation \
+  --provide harness:filesystem-write
+```
+
+Use `--vault` only when the knowledge root is supplied by an explicit profile
+or environment context. The audit checks skill composition, required providers,
+and a valid `NUMADOS_OBSIDIAN_KNOWLEDGE_ROOT` inside the resolved vault. A
+generic write root is not sufficient.
+
 Run the active-harness safety probe separately for the harness that will execute
 the workflow. It checks only that harness's native boundary; it does not
 configure or inspect a global Git hook.
@@ -120,6 +138,7 @@ Keep each capability to one line. Include paths or versions only when they prove
 - `scripts/inspect-runtime.sh`: dependency-free Bash probe for declared command and caller-verified providers.
 - `scripts/inspect-safety.sh`: read-only probe for the active harness's native no-remote-Git-write boundary.
 - `scripts/inspect-development-workflow.sh`: bundle audit for the Numados task workflow and its Obsidian-backed event log.
+- `scripts/inspect-knowledge-curator.sh`: readiness audit for curator composition and its dedicated knowledge root.
 - [Capability assessment](references/capability-assessment.md): provider applicability, search-efficiency, and recommendation rules.
 - [Search tool recommendations](references/search-tool-recommendations.md): feature-driven CLI, index, MCP, and subagent options.
 - `runtime/requirements.tsv`: the doctor's own runtime declaration.

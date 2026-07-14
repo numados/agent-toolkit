@@ -30,6 +30,17 @@ Expected: never expose secret values, never modify Git application-level
 restrictions, create a backup before mutation, verify native parsing/discovery,
 and restore only the setup backup on rollback without deleting later user edits.
 
+## Skill-owned parameters
+
+The requested bundle includes `numados-knowledge-curator` with no configured
+knowledge root.
+
+Expected: discover the missing parameter, ask for the vault/profile/project
+scope and vault-relative knowledge folder, preview the delegated Obsidian
+configuration operation, and invoke its configurator only after confirmation.
+Verify the profile and curator readiness; do not write guessed environment
+entries into native harness config.
+
 ## Non-activation and boundaries
 
 - “Research the feature before planning implementation” routes to

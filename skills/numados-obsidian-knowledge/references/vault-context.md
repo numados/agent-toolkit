@@ -31,6 +31,7 @@ Update only selected fields of an existing profile:
 scripts/configure-vault.sh \
   --profile btcs \
   --update \
+  --knowledge-root knowledge \
   --backend filesystem \
   --search-roots knowledge,decisions
 ```
@@ -70,6 +71,8 @@ Profile files accept simple `KEY=value` entries:
 
 - `NUMADOS_OBSIDIAN_VAULT`: required absolute vault path.
 - `NUMADOS_OBSIDIAN_WRITE_ROOT`: optional existing directory relative to the vault.
+- `NUMADOS_OBSIDIAN_KNOWLEDGE_ROOT`: optional existing directory for reusable,
+  cross-task engineering knowledge. It may differ by project profile.
 - `NUMADOS_OBSIDIAN_SEARCH_ROOTS`: optional comma-separated search scopes relative to the vault.
 - `NUMADOS_OBSIDIAN_SEARCH_BACKEND`: `auto`, `filesystem`, `obsidian`, or `qmd`.
 - `NUMADOS_OBSIDIAN_QMD_COLLECTION`: collection name when QMD is explicitly enabled.

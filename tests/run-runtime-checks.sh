@@ -4,6 +4,7 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "$0")/.." && pwd -P)"
 doctor="$repo_root/skills/numados-skill-doctor/scripts/inspect-runtime.sh"
 workflow_doctor="$repo_root/skills/numados-skill-doctor/scripts/inspect-development-workflow.sh"
+curator_doctor="$repo_root/skills/numados-skill-doctor/scripts/inspect-knowledge-curator.sh"
 safety_doctor="$repo_root/skills/numados-skill-doctor/scripts/inspect-safety.sh"
 obsidian_skill="$repo_root/skills/numados-obsidian-knowledge"
 local_search_skill="$repo_root/skills/numados-local-search"
@@ -40,7 +41,7 @@ link_command() {
   ln -s "$(command -v "$name")" "$destination/$name"
 }
 
-mkdir -p "$temporary_root/vault/tasks" "$temporary_root/project" "$temporary_root/bin-ready" "$temporary_root/bin-no-rg"
+mkdir -p "$temporary_root/vault/tasks" "$temporary_root/vault/knowledge" "$temporary_root/project" "$temporary_root/bin-ready" "$temporary_root/bin-no-rg"
 for command_name in bash dirname uname node; do
   link_command "$command_name" "$temporary_root/bin-ready"
   link_command "$command_name" "$temporary_root/bin-no-rg"
@@ -104,7 +105,12 @@ XDG_CONFIG_HOME="$temporary_root/config" \
   --profile workflow \
   --vault "$temporary_root/vault" \
   --project "$temporary_root/project" \
-  --write-root tasks >/dev/null
+  --write-root tasks \
+  --knowledge-root knowledge >/dev/null
+output="$(XDG_CONFIG_HOME="$temporary_root/config" \
+  "$obsidian_skill/scripts/validate-vault-context.sh" \
+  --start-dir "$temporary_root/project")"
+assert_contains "$output" 'knowledge_root: knowledge' 'dedicated knowledge root'
 output="$(XDG_CONFIG_HOME="$temporary_root/config" "$workflow_doctor" \
   --root "$repo_root" \
   --target "$temporary_root/project" \
@@ -117,6 +123,14 @@ assert_contains "$output" 'Status: ready' 'workflow bundle readiness'
 assert_contains "$output" '[x] required storage.obsidian' 'workflow storage readiness'
 assert_contains "$output" '[x] required protocol.plan-extension' 'workflow plan extension'
 assert_not_contains "$output" 'Status: blocked' 'optional semantic gap does not block workflow'
+
+output="$(XDG_CONFIG_HOME="$temporary_root/config" "$curator_doctor" \
+  --root "$repo_root" \
+  --target "$temporary_root/project" \
+  --provide harness:skill-invocation \
+  --provide harness:filesystem-write)"
+assert_contains "$output" 'Status: READY' 'knowledge curator readiness'
+assert_contains "$output" 'knowledge root resolves inside the vault: knowledge' 'knowledge curator root'
 
 mkdir -p "$temporary_root/malformed/runtime"
 printf '%s\n' '---' 'name: malformed' 'description: test' '---' > "$temporary_root/malformed/SKILL.md"

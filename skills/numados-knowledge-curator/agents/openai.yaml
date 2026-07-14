@@ -1,0 +1,4 @@
+interface:
+  display_name: "numados: Knowledge Curator"
+  short_description: "Grow durable linked engineering knowledge"
+  default_prompt: "Use $numados-knowledge-curator to extract verified reusable knowledge from this work and curate it into the configured Obsidian knowledge store."

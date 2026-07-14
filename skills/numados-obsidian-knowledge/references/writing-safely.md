@@ -12,6 +12,10 @@ Do not invent a universal folder taxonomy. Select the destination from:
 
 Ask when these sources disagree or none applies.
 
+For reusable cross-task knowledge, prefer the configured
+`NUMADOS_OBSIDIAN_KNOWLEDGE_ROOT`. Do not place ordinary task artifacts there,
+and do not use the general write root as an implicit knowledge root.
+
 ## Properties
 
 Properties are YAML frontmatter at the top of a note. Preserve existing property names and types across the vault. Keep values atomic and machine-queryable; put paragraphs and rationale in the body.
