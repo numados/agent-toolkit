@@ -49,6 +49,18 @@ for skill_file in "$skills_root"/*/SKILL.md; do
     done < <(grep -oE '\]\((\./)?(references|scripts|assets)/[^)#[:space:]]+(#[^)]*)?\)' "$skill_file" \
         | sed -e 's/^](//' -e 's/)$//' || true)
 
+    references_dir="$skill_root/references"
+    if [ -d "$references_dir" ]; then
+        for reference_file in "$references_dir"/*; do
+            [ -f "$reference_file" ] || continue
+            reference_name="references/$(basename "$reference_file")"
+            if ! grep -qF "$reference_name" "$skill_file"; then
+                printf 'ERROR %s: orphan resource %s is never referenced from SKILL.md\n' "$skill_file" "$reference_name" >&2
+                status=1
+            fi
+        done
+    fi
+
     agent_file="$skill_root/agents/openai.yaml"
     if [ -f "$agent_file" ]; then
         short_description="$(sed -n 's/^  short_description: "\(.*\)"$/\1/p' "$agent_file")"
@@ -63,13 +75,30 @@ for skill_file in "$skills_root"/*/SKILL.md; do
         esac
     fi
 
-    if [[ "$skill_dir" == numados-* ]]; then
-        if [ ! -f "tests/skills/$skill_dir.md" ]; then
-            printf 'ERROR %s: missing behavior evaluations\n' "$skill_dir" >&2
-            status=1
-        fi
-        if [ ! -f "tests/skills/$skill_dir.triggers.json" ]; then
-            printf 'ERROR %s: missing trigger evaluations\n' "$skill_dir" >&2
+    if [ ! -f "tests/skills/$skill_dir.md" ]; then
+        printf 'ERROR %s: missing behavior evaluations\n' "$skill_dir" >&2
+        status=1
+    fi
+    triggers_file="tests/skills/$skill_dir.triggers.json"
+    if [ ! -f "$triggers_file" ]; then
+        printf 'ERROR %s: missing trigger evaluations\n' "$skill_dir" >&2
+        status=1
+    elif command -v python3 >/dev/null 2>&1; then
+        triggers_error="$(python3 -c '
+import json, sys
+try:
+    with open(sys.argv[1]) as handle:
+        data = json.load(handle)
+    assert isinstance(data, list) and data, "must be a non-empty JSON array"
+    for index, entry in enumerate(data):
+        assert isinstance(entry, dict), f"entry {index}: must be an object"
+        assert isinstance(entry.get("query"), str) and entry["query"].strip(), f"entry {index}: query must be a non-empty string"
+        assert isinstance(entry.get("should_trigger"), bool), f"entry {index}: should_trigger must be a boolean"
+except Exception as error:
+    print(error)
+' "$triggers_file")"
+        if [ -n "$triggers_error" ]; then
+            printf 'ERROR %s: %s\n' "$triggers_file" "$triggers_error" >&2
             status=1
         fi
     fi
