@@ -75,18 +75,15 @@ output="$(PATH="$temporary_root/bin-no-rg" "$doctor" \
   --target "$temporary_root/vault")"
 assert_contains "$output" 'status: blocked' 'missing required provider'
 
-mkdir -p "$temporary_root/safety-home/.codex/execpolicy"
+mkdir -p "$temporary_root/safety-home/.codex/rules"
 printf '%s\n' \
   'prefix_rule(' \
   '  pattern = ["git", "push"],' \
   '  decision = "forbidden",' \
   '  justification = "test",' \
-  ')' > "$temporary_root/safety-home/.codex/execpolicy/numados-safety.rules"
-printf '%s\n' \
-  '[execpolicy]' \
-  'user_rules = ["~/.codex/execpolicy/numados-safety.rules"]' > "$temporary_root/safety-home/.codex/config.toml"
+  ')' > "$temporary_root/safety-home/.codex/rules/numados-safety.rules"
 output="$(HOME="$temporary_root/safety-home" CODEX_HOME="$temporary_root/safety-home/.codex" PATH="$temporary_root/bin-no-rg" "$safety_doctor" --harness codex)"
-assert_contains "$output" 'Codex config references the Numados execpolicy rule' 'active harness safety scope'
+assert_contains "$output" 'Codex native user rule present' 'active harness safety scope'
 assert_contains "$output" 'Safety status: READY WITH GAPS' 'native safety availability gap'
 assert_not_contains "$output" 'Claude' 'single harness safety audit'
 assert_not_contains "$output" 'Pi' 'single harness safety audit'

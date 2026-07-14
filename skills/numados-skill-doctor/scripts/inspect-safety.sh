@@ -96,34 +96,12 @@ NODE
 	warn "Pi's block is bypassed by an explicit --no-extensions invocation"
 }
 
-codex_config_contains_rule() {
-	local config="$codex_home/config.toml"
-	local reference="~/.codex/execpolicy/numados-safety.rules"
-	[ -f "$config" ] || return 1
-	node - "$config" "$reference" <<'NODE'
-const fs = require("node:fs");
-const [configPath, reference] = process.argv.slice(2);
-const lines = fs.readFileSync(configPath, "utf8").split(/\r?\n/);
-let inExecpolicy = false;
-let found = false;
-for (const line of lines) {
-  const section = line.match(/^\s*\[([^\]]+)\]/);
-  if (section) {
-    inExecpolicy = section[1] === "execpolicy";
-    continue;
-  }
-  if (inExecpolicy && !/^\s*#/.test(line) && line.includes(reference)) found = true;
-}
-process.exit(found ? 0 : 1);
-NODE
-}
-
 codex_forbidden() {
 	local label="$1"
 	shift
 	local output
 	local status=0
-	output="$(codex execpolicy check --rules "$codex_home/execpolicy/numados-safety.rules" --pretty "$@" 2>&1)" || status=$?
+	output="$(codex execpolicy check --rules "$codex_home/rules/numados-safety.rules" --pretty "$@" 2>&1)" || status=$?
 	if printf '%s\n' "$output" | grep -Eq '"decision"[[:space:]]*:[[:space:]]*"forbidden"'; then
 		ok "Codex native policy blocks $label"
 	else
@@ -131,25 +109,49 @@ codex_forbidden() {
 	fi
 }
 
+codex_prompt() {
+	local label="$1"
+	shift
+	local output
+	local status=0
+	output="$(codex execpolicy check --rules "$codex_home/rules/numados-safety.rules" --pretty "$@" 2>&1)" || status=$?
+	if printf '%s\n' "$output" | grep -Eq '"decision"[[:space:]]*:[[:space:]]*"prompt"'; then
+		ok "Codex native policy requires approval for $label"
+	else
+		fail "Codex native policy does not require approval for $label (exit $status)"
+	fi
+}
+
 check_codex() {
 	if ! command -v codex >/dev/null 2>&1 && [ ! -e "$codex_home" ]; then unavailable "Codex CLI"; return; fi
-	local rule="$codex_home/execpolicy/numados-safety.rules"
+	local rule="$codex_home/rules/numados-safety.rules"
 	if [ ! -f "$rule" ]; then
 		fail "Codex safety rule missing: $rule"
 		return
 	fi
-	if codex_config_contains_rule; then
-		ok "Codex config references the Numados execpolicy rule"
-	else
-		fail "Codex config does not load the Numados execpolicy rule"
-	fi
+	ok "Codex native user rule present: $rule"
 	if ! command -v codex >/dev/null 2>&1; then
 		warn "Codex CLI is unavailable; native rule evaluation was not run"
 		return
 	fi
+	local config="$codex_home/config.toml"
+	if grep -Eq '^approval_policy[[:space:]]*=[[:space:]]*\{[[:space:]]*granular[[:space:]]*=' "$config" &&
+		grep -Eq '^[[:space:]]*rules[[:space:]]*=[[:space:]]*true[[:space:]]*,?[[:space:]]*$' "$config" &&
+		grep -Eq '^approvals_reviewer[[:space:]]*=[[:space:]]*"user"[[:space:]]*$' "$config"; then
+		ok "Codex PR approvals are interactive and routed to the user"
+	else
+		fail "Codex must enable granular rules approval with approvals_reviewer=user"
+	fi
 	codex_forbidden "git push" git push origin main
 	codex_forbidden "git push refspec" git push origin HEAD:main
 	codex_forbidden "git send-pack" git send-pack origin refs/heads/main
+	codex_prompt "GitHub PR comment" gh pr comment 123 --body test
+	codex_prompt "GitHub PR edit" gh pr edit 123 --body test
+	codex_prompt "GitHub PR review" gh pr review 123 --approve
+	codex_prompt "GitHub API mutation" gh api repos/example/project/pulls/123/comments --method POST
+	codex_prompt "Azure DevOps PR update" az repos pr update --id 123 --description test
+	codex_prompt "Azure DevOps PR vote" az repos pr set-vote --id 123 --vote approve
+	codex_prompt "Azure DevOps API mutation" az devops invoke --area git --resource pullrequests
 	local safe_output
 	local safe_status=0
 	safe_output="$(codex execpolicy check --rules "$rule" --pretty git status --short 2>&1)" || safe_status=$?
