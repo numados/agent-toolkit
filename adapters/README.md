@@ -12,6 +12,12 @@ An adapter owns only:
 - MCP schema rendering;
 - installation, discovery, update, and uninstall tests.
 
+One sanctioned exception: each skill bundle carries a co-located
+`agents/openai.yaml` interface file so the bundle stays installable without a
+separate adapter checkout. It is target-specific metadata, not portable skill
+content; `scripts/validate-skills.sh` enforces its shape, and no other
+client-specific file may live inside a skill bundle.
+
 Apply [`execution-safety.md`](execution-safety.md) to every adapter. Keep the
 portable contract in `contracts/`; adapters should contain only the concise
 instruction projection and the harness-native enforcement needed for their

@@ -22,19 +22,22 @@ The Pi-specific runtime is maintained in the separate `pi-agent-toolkit`
 repository. It defines model and effort routing, target-specific agent
 manifests, external-tool contracts, and the non-destructive Pi installer.
 
-## Initial Structure
+## Structure
 
 ```text
 .
 ├── AGENTS.md
-├── skills/
-│   └── skill-author/         first reusable workflow
+├── skills/                   reusable workflows (see Core Skills below)
+│   └── <skill>/              SKILL.md, references/, agents/, runtime/, scripts/
 ├── memory/                   curated shared knowledge
 ├── contracts/                versioned agreements
 ├── adapters/                 integration boundaries and shared adapter notes
 ├── mcp/                      non-secret MCP definitions
 ├── scripts/validate-skills.sh
-└── tests/run-runtime-checks.sh
+└── tests/
+    ├── run-runtime-checks.sh
+    ├── contracts/            scenario evaluations mirroring contracts/
+    └── skills/               per-skill trigger and scenario evaluations
 ```
 
 ## Core Skills
@@ -83,4 +86,4 @@ bash scripts/validate-skills.sh
 bash tests/run-runtime-checks.sh
 ```
 
-The validator checks portable metadata, bundled-resource links, UI prompts, evaluation-file presence, and `runtime/requirements.tsv` declarations. Runtime smoke tests cover deterministic provider selection and failure paths; client discovery still belongs in supported-harness adapters.
+The validator checks portable metadata, bundled-resource links, orphaned reference files, `agents/openai.yaml` interface constraints, evaluation-file presence, trigger-file JSON structure, and `runtime/requirements.tsv` declarations. Runtime smoke tests cover deterministic provider selection and failure paths; client discovery still belongs in supported-harness adapters.
