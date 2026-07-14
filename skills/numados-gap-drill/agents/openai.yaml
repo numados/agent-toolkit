@@ -1,0 +1,4 @@
+interface:
+  display_name: "numados: Gap Drill"
+  short_description: "Close task gaps with verified evidence"
+  default_prompt: "Use $numados-gap-drill to close the highest-impact task gaps from verified sources before implementation."

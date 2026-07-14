@@ -39,7 +39,7 @@ Each meaningful iteration gets one new note under `iterations/`:
 format: numados-task-iteration-v1
 task_id: <stable task id>
 iteration: "0001"
-stage: brainstorm | planning | implementation | review
+stage: brainstorm | gap-drill | planning | implementation | review
 status: active | ready | blocked | done
 previous: iterations/0000-<stage>.md
 created: YYYY-MM-DD

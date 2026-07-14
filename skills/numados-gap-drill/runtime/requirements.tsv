@@ -1,0 +1,11 @@
+# capability	need	when	providers	purpose
+skill.obsidian-knowledge	required	reading or writing task state is in scope	harness:skill-invocation|mcp:skill-invocation	Resolve the configured vault and perform bounded task-artifact I/O
+storage.task-write	required	a gap result must be recoverable by the next workflow stage	harness:filesystem-write|mcp:obsidian	Update research, the task index, and one verified gap-drill event
+filesystem.filename	required	linked notes, repositories, and source candidates must be located	cmd:rg|cmd:fd|cmd:fdfind|cmd:find|harness:filesystem-search|mcp:filesystem-search	Discover bounded candidate paths within explicit roots
+filesystem.lexical	required	exact claims, symbols, and note content need verification	cmd:rg|harness:filesystem-search|mcp:filesystem-search	Retrieve bounded textual evidence without dumping a workspace
+code.navigation	optional	a gap crosses callers, consumers, or repository boundaries	harness:code-navigation|mcp:code-navigation|harness:semantic-search	Trace relevant relationships efficiently
+source.remote-read	optional	the gap includes a URL, remote repository, issue, review, or portal artifact	harness:remote-read|mcp:remote-read|harness:vcs-review|mcp:vcs-review|harness:web-search	Read an applicable remote source without hardcoding a provider
+documentation.current	optional	version-sensitive API, protocol, language, or tool behavior matters	harness:documentation|mcp:documentation|harness:web-search	Verify current authoritative behavior instead of relying on memory
+history.git	optional	provenance or prior implementation decisions can discriminate options	verified:git|harness:git	Inspect bounded local history as evidence
+filesystem.semantic	optional	terminology differs or configured knowledge retrieval needs conceptual matching	harness:semantic-search|mcp:semantic-search|verified:qmd	Rank conceptual candidates, then verify them against source Markdown
+execution.subagent	optional	independent opinions materially improve a high-impact or ambiguous gap	harness:subagent-search|harness:subagent|mcp:subagent	Run bounded scout/challenger branches with the active model policy

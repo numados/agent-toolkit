@@ -1,9 +1,10 @@
 # Development Workflow Artifacts
 
 **Purpose:** Define the small, durable handoff shared by the Numados brainstorm,
-planning, implementation, review, and task-question skills.
+gap-drill, planning, implementation, review, and task-question skills.
 **Status:** Normative
-**Sources:** `skills/numados-brainstorm`, `skills/numados-planning`,
+**Sources:** `skills/numados-brainstorm`, `skills/numados-gap-drill`,
+`skills/numados-planning`,
 `skills/numados-implementation`, `skills/numados-task-navigator`,
 `skills/numados-obsidian-knowledge`
 
@@ -148,7 +149,7 @@ Use this frontmatter:
 format: numados-task-iteration-v1
 task_id: <same task id as _task_index.md>
 iteration: "0003"
-stage: brainstorm | planning | implementation | review
+stage: brainstorm | gap-drill | planning | implementation | review
 status: active | ready | blocked | done
 previous: iterations/0002-planning.md
 created: 2026-07-13
@@ -251,6 +252,11 @@ have changed.
 - `brainstorm` may update only the compact research projection, task index, and
   one brainstorm iteration event. It must not modify product source, tests,
   configuration, or commits.
+- `gap-drill` may read local and remote evidence and update only the compact
+  research projection, task index, and one gap-drill iteration event. It must
+  not edit `plan.md`, product source, tests, configuration, commits, or remote
+  state. If its conclusion changes the approved plan, it hands off to
+  `$numados-planning` for a recorded extension or correction.
 - `planning` requires enough verified research to make a design decision. It
   may update the current plan, index, and one planning iteration event.
 - `implementation` requires an approved plan and a understood working-tree

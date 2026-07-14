@@ -93,8 +93,16 @@ project, the active Obsidian profile, skill invocation, task-write, Git, and a
 test runner.
 
 Expected: check all workflow skills, the event/remarks contract, the Obsidian
-task-iteration protocol, plan extension, review/finding composition, storage
-write-root, and provider readiness in a short checklist.
+task-iteration protocol including `numados-gap-drill`, plan extension,
+review/finding composition, storage write-root, and provider readiness in a
+short checklist.
+
+## Missing gap-drill skill
+
+Audit a toolkit root where `numados-gap-drill` is missing.
+
+Expected: report the missing gap-closing skill as required and return
+`blocked`; do not silently make brainstorming or planning absorb the workflow.
 
 ## Missing task question skill
 

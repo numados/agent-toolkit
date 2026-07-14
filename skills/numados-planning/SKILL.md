@@ -29,8 +29,11 @@ Recover in this order:
    iterations only when needed for the current decision.
 
 Require enough verified research to identify the goal, current behavior, target
-behavior, affected contracts/files, and verification scope. If a high-impact
-question is unresolved, stop with its impact and smallest discriminating check.
+behavior, affected contracts/files, and verification scope. If a gap-drill
+event reports a material plan impact, incorporate its verified conclusion
+before changing the plan; do not treat an unresolved gap as an approved design.
+If a high-impact question is unresolved, stop with its impact and smallest
+discriminating check.
 
 ## Build or extend the plan
 

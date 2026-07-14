@@ -49,6 +49,7 @@ manifests, external-tool contracts, and the non-destructive Pi installer.
 - `numados-local-search` routes local retrieval to bounded lexical, structural, semantic, document, indexed, or history providers.
 - `numados-obsidian-knowledge` provides bounded, portable Obsidian vault operations.
 - `numados-brainstorm` researches a task and records evidence-grounded context before planning.
+- `numados-gap-drill` closes decision-relevant gaps with bounded evidence and a minimal user decision loop.
 - `numados-planning` turns approved context into repository-aligned phases and verification criteria.
 - `numados-implementation` executes approved phases, records iteration events, and closes the verified review loop.
 - `numados-task-navigator` answers questions about an active or completed task from its current state and linked evidence.
@@ -60,7 +61,8 @@ The workflow skills share [`contracts/development-workflow-artifacts.md`](contra
 The normal handoff is:
 
 ```text
-numados-brainstorm -> user decision gate -> numados-planning -> user approval gate -> numados-implementation
+numados-brainstorm -> numados-gap-drill (when gaps remain) -> user decision gate -> numados-planning
+       -> numados-gap-drill (when plan gaps remain) -> user approval gate -> numados-implementation
        \
         -> numados-task-navigator (questions at any stage)
 ```

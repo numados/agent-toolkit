@@ -1,0 +1,10 @@
+[
+  {"query":"Drill the remaining gaps in the plan before implementation.","should_trigger":true},
+  {"query":"Resolve the open architecture questions from the latest brainstorm using the repository and current docs.","should_trigger":true},
+  {"query":"Use $numados-gap-drill to close the unknowns and ask me only when evidence cannot decide.","should_trigger":true},
+  {"query":"Stress-test this design against prior Obsidian tasks and the linked remote artifact.","should_trigger":true},
+  {"query":"Create an implementation plan from the verified research.","should_trigger":false},
+  {"query":"Implement the approved plan phase by phase.","should_trigger":false},
+  {"query":"Review this diff for actionable defects.","should_trigger":false},
+  {"query":"Explain what this pull request changed.","should_trigger":false}
+]

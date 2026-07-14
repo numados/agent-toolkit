@@ -66,7 +66,7 @@ Prefer structured file tools or an anchored patch for edits. Use native Obsidian
 
 ## Numados task iteration notes
 
-When invoked by `numados-brainstorm`, `numados-planning`,
+When invoked by `numados-brainstorm`, `numados-gap-drill`, `numados-planning`,
 `numados-implementation`, or `numados-task-navigator`, use the bounded task protocol
 in [task iterations](references/task-iterations.md):
 

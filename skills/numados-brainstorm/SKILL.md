@@ -90,7 +90,9 @@ and bounded rediscovery checks.
 Before handing off, confirm that every success condition is represented,
 current and target behavior are separate, decisions have evidence, open
 questions have next checks, and no product file changed. If a material choice
-needs user approval, present the smallest decision and stop.
+needs user approval, present the smallest decision and stop. If an open
+question needs bounded cross-source investigation before a decision, hand off
+to `$numados-gap-drill` rather than expanding this research pass.
 
 Return:
 

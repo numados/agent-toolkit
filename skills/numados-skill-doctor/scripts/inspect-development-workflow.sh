@@ -97,6 +97,7 @@ check_optional() {
 
 required_skills=(
   numados-brainstorm
+  numados-gap-drill
   numados-planning
   numados-implementation
   numados-task-navigator
@@ -122,7 +123,7 @@ else
   check_required 'protocol.contract' 'contract is missing or does not define the event/remarks protocol' fail
 fi
 
-for skill in numados-brainstorm numados-planning numados-implementation numados-task-navigator; do
+for skill in numados-brainstorm numados-gap-drill numados-planning numados-implementation numados-task-navigator; do
   skill_file="$root/skills/$skill/SKILL.md"
   if [ -f "$skill_file" ] && contains 'numados-obsidian-knowledge' "$skill_file" && contains 'latest_iteration' "$skill_file"; then
     check_required "protocol.$skill" 'starts from Obsidian task state and latest iteration' pass
@@ -131,7 +132,7 @@ for skill in numados-brainstorm numados-planning numados-implementation numados-
   fi
 done
 
-for skill in numados-brainstorm numados-planning numados-implementation; do
+for skill in numados-brainstorm numados-gap-drill numados-planning numados-implementation; do
   manifest="$root/skills/$skill/runtime/requirements.tsv"
   if [ -f "$manifest" ] && contains $'skill.obsidian-knowledge\trequired' "$manifest" && contains $'storage.task-write\trequired' "$manifest"; then
     check_required "manifest.$skill" 'requires Obsidian composition and task writes' pass
