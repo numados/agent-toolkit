@@ -8,7 +8,7 @@
   {"query":"$numados-explain I do not understand optimistic concurrency; use one concrete example.","should_trigger":true},
   {"query":"Use $numados-explain to turn this technical document into a first-read explanation.","should_trigger":true},
   {"query":"$numados-explain compare these approaches and explain the decision briefly.","should_trigger":true},
-  {"query":"Объясни через $numados-explain, что произошло в этих изменениях и почему.","should_trigger":true},
+  {"query":"Explain through $numados-explain what happened in these changes and why, even when the request is phrased in another language.","should_trigger":true},
   {"query":"Review this pull request and find bugs.","should_trigger":false},
   {"query":"Implement the change described in this architecture document.","should_trigger":false},
   {"query":"Validate whether this review finding is a false alarm.","should_trigger":false},

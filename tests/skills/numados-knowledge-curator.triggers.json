@@ -9,5 +9,8 @@
   {"query":"Create the implementation plan for this task.","should_trigger":false},
   {"query":"Log the current implementation phase in the task event file.","should_trigger":false},
   {"query":"Search arbitrary personal notes across my whole vault.","should_trigger":false},
-  {"query":"Explain this architecture without writing anything.","should_trigger":false}
+  {"query":"Explain this architecture without writing anything.","should_trigger":false},
+  {"query":"Save this API research into my Obsidian knowledge store without creating a duplicate.","should_trigger":false},
+  {"query":"Configure my work vault profile on this machine.","should_trigger":false},
+  {"query":"Rename this note while preserving Obsidian links.","should_trigger":false}
 ]

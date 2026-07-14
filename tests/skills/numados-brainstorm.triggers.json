@@ -6,5 +6,7 @@
   {"query":"Build an implementation plan from the existing research artifacts.","should_trigger":false},
   {"query":"Implement all phases of the approved plan.","should_trigger":false},
   {"query":"Review the current diff for actionable defects.","should_trigger":false},
-  {"query":"Explain what this pull request changed.","should_trigger":false}
+  {"query":"Explain what this pull request changed.","should_trigger":false},
+  {"query":"Drill the remaining gaps in the plan before implementation.","should_trigger":false},
+  {"query":"Resolve the open architecture questions from the latest brainstorm using the repository and current docs.","should_trigger":false}
 ]

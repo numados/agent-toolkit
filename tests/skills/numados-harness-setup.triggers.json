@@ -2,7 +2,13 @@
   {"query":"Set up Numados for the harness I am currently running.","should_trigger":true},
   {"query":"Discover where this harness reads AGENTS or CLAUDE and preview the setup.","should_trigger":true},
   {"query":"Use $numados-harness-setup to install and verify Numados.","should_trigger":true},
+  {"query":"Install Numados skills into this project scope and prove the harness discovers them.","should_trigger":true},
+  {"query":"Roll back the last Numados setup on this harness.","should_trigger":true},
   {"query":"Research this task before planning implementation.","should_trigger":false},
   {"query":"Create the implementation plan.","should_trigger":false},
-  {"query":"Implement the approved plan.","should_trigger":false}
+  {"query":"Implement the approved plan.","should_trigger":false},
+  {"query":"Configure this third-party MCP server for my IDE.","should_trigger":false},
+  {"query":"Install ripgrep on this machine.","should_trigger":false},
+  {"query":"Audit whether this skill's dependencies exist on this machine.","should_trigger":false},
+  {"query":"Update my shell dotfiles.","should_trigger":false}
 ]

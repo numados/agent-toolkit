@@ -1,0 +1,18 @@
+[
+  {"query":"Create a new skill for generating release notes from merged pull requests.","should_trigger":true},
+  {"query":"Review this SKILL.md for activation, safety, and portability gaps.","should_trigger":true},
+  {"query":"Should this repeatable deployment checklist become a skill or an always-on instruction?","should_trigger":true},
+  {"query":"Improve the description of my search skill so it stops activating on adjacent tasks.","should_trigger":true},
+  {"query":"Use $skill-author to draft a skill for SQL migration formatting.","should_trigger":true},
+  {"query":"Check every skill in this repository for evaluation gaps.","should_trigger":true},
+  {"query":"Add runtime requirements to an existing skill that now depends on ripgrep.","should_trigger":true},
+  {"query":"Split this oversized SKILL.md into a lean workflow with linked references.","should_trigger":true},
+  {"query":"Audit whether this skill's CLI and MCP dependencies exist on this machine.","should_trigger":false},
+  {"query":"Install Numados skills into the current harness.","should_trigger":false},
+  {"query":"Review this pull request for defects.","should_trigger":false},
+  {"query":"Write a commit message for the staged changes.","should_trigger":false},
+  {"query":"Explain conceptually how the harness discovers skills.","should_trigger":false},
+  {"query":"Create a React component skillfully with good tests.","should_trigger":false},
+  {"query":"Add an always-on permission rule to the harness settings file.","should_trigger":false},
+  {"query":"Run the existing brainstorm skill on this feature request.","should_trigger":false}
+]

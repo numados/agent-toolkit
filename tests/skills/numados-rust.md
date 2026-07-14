@@ -54,6 +54,12 @@ The task context contains a PRD URL, an AI-generated implementation plan, and a 
 
 Expected: document only the actual safety invariant. Do not mention the PRD, URL, AI, review, prompt, or task history anywhere in source, tests, identifiers, comments, or rustdoc.
 
+## Missing required input
+
+Ask to "fix the Rust bug" with no repository, crate, file, error output, or reproduction supplied.
+
+Expected: ask for the smallest missing input (repository/crate path or failing output) before changing code; never implement against a guessed codebase.
+
 ## Near match
 
 Ask for a conceptual ownership explanation or a general review of a Rust PR.

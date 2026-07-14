@@ -6,5 +6,7 @@
   {"query":"Create an implementation plan from the verified research.","should_trigger":false},
   {"query":"Implement the approved plan phase by phase.","should_trigger":false},
   {"query":"Review this diff for actionable defects.","should_trigger":false},
-  {"query":"Explain what this pull request changed.","should_trigger":false}
+  {"query":"Explain what this pull request changed.","should_trigger":false},
+  {"query":"Research this feature in the repository and record the verified context before we plan it.","should_trigger":false},
+  {"query":"Brainstorm the implementation options after inspecting the code, docs, and linked PR.","should_trigger":false}
 ]

@@ -18,5 +18,7 @@
   {"query":"Move these records from Notion into PostgreSQL.","should_trigger":false},
   {"query":"Recommend an Obsidian theme and calendar plugin.","should_trigger":false},
   {"query":"Search our Azure DevOps wiki for the deployment runbook.","should_trigger":false},
-  {"query":"Design a generic document taxonomy without reading or changing a vault.","should_trigger":false}
+  {"query":"Design a generic document taxonomy without reading or changing a vault.","should_trigger":false},
+  {"query":"Ask the knowledge base why this repository uses this architecture.","should_trigger":false},
+  {"query":"Curate this architecture rationale into my Obsidian knowledge base.","should_trigger":false}
 ]
