@@ -6,9 +6,9 @@ Separate portable project selection from machine-specific paths:
 
 ```text
 project/.numados/obsidian-profile
-    contains: btcs
+    contains: work
 
-${XDG_CONFIG_HOME:-~/.config}/numados/obsidian/profiles/btcs.env
+${XDG_CONFIG_HOME:-~/.config}/numados/obsidian/profiles/work.env
     contains: NUMADOS_OBSIDIAN_VAULT=/path/on/this/machine
 ```
 
@@ -18,7 +18,7 @@ Create a profile and associate it with a project:
 
 ```bash
 scripts/configure-vault.sh \
-  --profile btcs \
+  --profile work \
   --vault /absolute/path/to/vault \
   --project /absolute/path/to/project
 ```
@@ -29,7 +29,7 @@ Update only selected fields of an existing profile:
 
 ```bash
 scripts/configure-vault.sh \
-  --profile btcs \
+  --profile work \
   --update \
   --knowledge-root knowledge \
   --backend filesystem \
@@ -41,7 +41,7 @@ Unspecified values, including the vault path and write root, are preserved. With
 Bind an existing profile without editing it:
 
 ```bash
-scripts/configure-vault.sh --profile btcs --project /path/to/project
+scripts/configure-vault.sh --profile work --project /path/to/project
 ```
 
 ## Resolution precedence

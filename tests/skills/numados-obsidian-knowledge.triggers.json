@@ -6,7 +6,7 @@
   {"query":"Why did this Obsidian note change, and what did the previous version say?","should_trigger":true},
   {"query":"Rename this note while preserving Obsidian links.","should_trigger":true},
   {"query":"Find conceptually related notes even if they use different terminology.","should_trigger":true},
-  {"query":"Configure my btcs vault profile on this machine.","should_trigger":true},
+  {"query":"Configure my work vault profile on this machine.","should_trigger":true},
   {"query":"Update the authoritative vault note with this new source and keep provenance.","should_trigger":true},
   {"query":"Search only the architecture folder of my Obsidian storage for this exact error.","should_trigger":true},
   {"query":"How much does Obsidian Sync cost today?","should_trigger":false},

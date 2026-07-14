@@ -25,7 +25,7 @@ not silently delete or rewrite historical rationale.
 
 ## Query mode
 
-Ask why a BTCS repository uses a convention, where a component lives, or how
+Ask why a work repository uses a convention, where a component lives, or how
 to access a documented resource.
 
 Expected: run read-only bounded retrieval inside the configured knowledge root,

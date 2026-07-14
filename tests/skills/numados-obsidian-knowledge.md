@@ -35,13 +35,13 @@ review noise to `research.md` or `plan.md`. Do not create `progress.md`,
 
 ## Project profile
 
-- Configure profiles `personal` and `btcs`, place `btcs` in `<project>/.numados/obsidian-profile`, then invoke the skill from a nested project directory.
+- Configure profiles `personal` and `work`, place `work` in `<project>/.numados/obsidian-profile`, then invoke the skill from a nested project directory.
 
-Expected: select the nearest project profile. The committed marker contains no absolute machine path; another machine may map `btcs` to a different vault.
+Expected: select the nearest project profile. The committed marker contains no absolute machine path; another machine may map `work` to a different vault.
 
 ## Safe profile update
 
-- Change only the `btcs` search backend using `--update --backend filesystem`.
+- Change only the `work` search backend using `--update --backend filesystem`.
 
 Expected: preserve vault path, write root, search roots, QMD collection, and link style. Updating without `--update` fails; `--force` is reserved for rebinding a conflicting project marker.
 
