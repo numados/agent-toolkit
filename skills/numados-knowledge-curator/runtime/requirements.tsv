@@ -1,7 +1,7 @@
 # capability	need	when	providers	purpose
 skill.obsidian-knowledge	required	all vault discovery, search, and writes	harness:skill-invocation	Compose with the portable Obsidian storage workflow
 filesystem.lexical	required	duplicate detection and bounded rediscovery	cmd:rg|harness:filesystem-search|mcp:filesystem-search	Find candidate notes without loading the vault
-storage.knowledge-write	required	creating or updating curated knowledge	harness:filesystem-write|mcp:filesystem-write	Write only inside the resolved knowledge root
+storage.knowledge-write	optional	curate mode only; required for any mutation	harness:filesystem-write|mcp:filesystem-write	Write only inside the resolved knowledge root
 source.repository-read	optional	verifying repository-derived candidates	harness:repository-read|mcp:repository-read	Check claims against current source and instructions
 source.remote-read	optional	verifying external or remote artifact claims	harness:remote-read|mcp:remote-read	Check current authoritative sources when needed
 history.read	optional	validating rationale or superseded behavior	verified:git|harness:history-read	Recover bounded change history for known paths

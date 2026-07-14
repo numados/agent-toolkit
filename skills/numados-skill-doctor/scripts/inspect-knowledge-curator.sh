@@ -4,10 +4,11 @@ set -euo pipefail
 root=""
 target=""
 vault=""
+mode="curate"
 provided=()
 
 usage() {
-  printf '%s\n' 'Usage: inspect-knowledge-curator.sh --root DIR (--target DIR|--vault DIR) [--provide PROVIDER]'
+  printf '%s\n' 'Usage: inspect-knowledge-curator.sh --root DIR (--target DIR|--vault DIR) [--mode query|curate] [--provide PROVIDER]'
 }
 
 while [ "$#" -gt 0 ]; do
@@ -15,6 +16,7 @@ while [ "$#" -gt 0 ]; do
     --root) [ "$#" -ge 2 ] || { usage >&2; exit 2; }; root="$2"; shift 2;;
     --target) [ "$#" -ge 2 ] || { usage >&2; exit 2; }; target="$2"; shift 2;;
     --vault) [ "$#" -ge 2 ] || { usage >&2; exit 2; }; vault="$2"; shift 2;;
+    --mode) [ "$#" -ge 2 ] || { usage >&2; exit 2; }; mode="$2"; shift 2;;
     --provide) [ "$#" -ge 2 ] || { usage >&2; exit 2; }; provided+=(--provide "$2"); shift 2;;
     --help|-h) usage; exit 0;;
     *) usage >&2; exit 2;;
@@ -22,6 +24,7 @@ while [ "$#" -gt 0 ]; do
 done
 
 [ -n "$root" ] || { printf '%s\n' '--root is required.' >&2; exit 2; }
+[ "$mode" = query ] || [ "$mode" = curate ] || { printf 'Unsupported mode: %s\n' "$mode" >&2; exit 2; }
 [ -d "$root" ] || { printf 'Toolkit root does not exist: %s\n' "$root" >&2; exit 2; }
 [ -z "$target" ] || [ -z "$vault" ] || { printf '%s\n' '--target and --vault are mutually exclusive.' >&2; exit 2; }
 [ -n "$target" ] || [ -n "$vault" ] || { printf '%s\n' '--target or --vault is required.' >&2; exit 2; }
@@ -43,6 +46,7 @@ check() {
 }
 
 printf '%s\n' 'Skill: numados-knowledge-curator'
+printf 'Mode: %s\n' "$mode"
 if [ -f "$curator/SKILL.md" ] && [ -f "$curator/runtime/requirements.tsv" ] && [ -f "$obsidian/SKILL.md" ]; then
   check pass 'composition — curator and Obsidian skill are installed'
 else
@@ -53,10 +57,19 @@ runtime_output=""
 if [ -x "$runtime" ] && [ -d "$curator" ]; then
   runtime_output="$($runtime --skill "$curator" --target "$scope" "${provided[@]}" 2>&1 || true)"
 fi
-if printf '%s\n' "$runtime_output" | grep -Fq 'status: ready'; then
+if printf '%s\n' "$runtime_output" | grep -Eq '^status: ready(-with-optional-gaps)?$'; then
   check pass 'runtime — required providers are ready for the target'
 else
   check fail 'runtime — required provider is missing or not target-applicable'
+fi
+if [ "$mode" = curate ]; then
+  if printf '%s\n' "$runtime_output" | grep -Fq '[x] optional storage.knowledge-write'; then
+    check pass 'mutation — knowledge-root write provider is ready'
+  else
+    check fail 'mutation — curate mode requires a target-applicable knowledge-root write provider'
+  fi
+else
+  check pass 'mutation — query mode is read-only'
 fi
 
 context_output=""

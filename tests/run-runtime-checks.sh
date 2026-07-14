@@ -132,6 +132,25 @@ output="$(XDG_CONFIG_HOME="$temporary_root/config" "$curator_doctor" \
 assert_contains "$output" 'Status: READY' 'knowledge curator readiness'
 assert_contains "$output" 'knowledge root resolves inside the vault: knowledge' 'knowledge curator root'
 
+output="$(XDG_CONFIG_HOME="$temporary_root/config" "$curator_doctor" \
+  --root "$repo_root" \
+  --target "$temporary_root/project" \
+  --mode query \
+  --provide harness:skill-invocation)"
+assert_contains "$output" 'mutation — query mode is read-only' 'knowledge query without write provider'
+assert_contains "$output" 'Status: READY' 'knowledge query readiness'
+
+if output="$(XDG_CONFIG_HOME="$temporary_root/config" "$curator_doctor" \
+  --root "$repo_root" \
+  --target "$temporary_root/project" \
+  --mode curate \
+  --provide harness:skill-invocation 2>&1)"; then
+  printf '%s\n' 'FAIL knowledge curator accepted curate mode without a write provider' >&2
+  exit 1
+fi
+assert_contains "$output" 'curate mode requires a target-applicable knowledge-root write provider' 'knowledge curate write gate'
+assert_contains "$output" 'Status: BLOCKED' 'knowledge curate blocked without write provider'
+
 mkdir -p "$temporary_root/malformed/runtime"
 printf '%s\n' '---' 'name: malformed' 'description: test' '---' > "$temporary_root/malformed/SKILL.md"
 printf '%s\n' 'wrong header' > "$temporary_root/malformed/runtime/requirements.tsv"

@@ -23,6 +23,23 @@ Expected: update the authority when appropriate, surface the conflict, and
 preview any merge/supersede/retire operation before explicit confirmation. Do
 not silently delete or rewrite historical rationale.
 
+## Query mode
+
+Ask why a BTCS repository uses a convention, where a component lives, or how
+to access a documented resource.
+
+Expected: run read-only bounded retrieval inside the configured knowledge root,
+follow only useful direct links, answer concisely with vault-relative note and
+heading citations, and report freshness. Verify drift-prone claims against
+current authoritative sources when necessary. Do not write a note merely
+because the query exposed a gap.
+
+No knowledge note matches the question.
+
+Expected: return `NOT FOUND` with searched scope, query variants, and provider
+classes. Search task artifacts only when explicitly requested or linked as
+provenance; do not treat no match as proof that the fact is false.
+
 ## Retrieval and graph quality
 
 Expected: preserve local properties/link style, add only resolved links that
@@ -45,5 +62,5 @@ source, command, or model output.
 - “Log implementation phase 3” routes to `numados-implementation`.
 - “Search my vault for prior tasks” routes to `numados-obsidian-knowledge` or
   `numados-task-navigator`.
-- “Explain this architecture” routes to `numados-explain` unless persistence is
-  explicitly requested.
+- “Explain this architecture” routes to `numados-explain` unless the user asks
+  to answer from the durable knowledge base.

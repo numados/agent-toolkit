@@ -58,14 +58,17 @@ manifest. Prove that the current project resolves a dedicated knowledge root:
 scripts/inspect-knowledge-curator.sh \
   --root /path/to/agent-toolkit \
   --target /path/to/project \
+  --mode curate \
   --provide harness:skill-invocation \
   --provide harness:filesystem-write
 ```
 
 Use `--vault` only when the knowledge root is supplied by an explicit profile
 or environment context. The audit checks skill composition, required providers,
-and a valid `NUMADOS_OBSIDIAN_KNOWLEDGE_ROOT` inside the resolved vault. A
-generic write root is not sufficient.
+and a valid `NUMADOS_OBSIDIAN_KNOWLEDGE_ROOT` inside the resolved vault. Use
+`--mode query` to prove read-only documentation lookup without requiring a
+write provider; `--mode curate` additionally requires bounded knowledge-root
+writes. A generic write root is not sufficient.
 
 Run the active-harness safety probe separately for the harness that will execute
 the workflow. It checks only that harness's native boundary; it does not
