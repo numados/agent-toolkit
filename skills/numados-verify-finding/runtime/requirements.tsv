@@ -2,3 +2,4 @@
 code.evidence-read	required	finding must be checked against a diff and relevant source	harness:code-read|mcp:code-read|verified:git	Read exact changed and unchanged code needed to validate the claim
 work-item.read	optional	expected behavior depends on a linked requirement or work item	harness:work-item-read|mcp:work-item-read|harness:vcs-review	Read provider-neutral contract context
 test.execution	optional	a focused test or reproduction discriminates the verdict	harness:test-runner|mcp:test-runner	Confirm or refute the candidate proportionately
+docs.current-read	optional	an assumption depends on version-sensitive framework or library behavior	harness:web-read|mcp:docs-read	Check the actual documented behavior instead of generic ecosystem memory

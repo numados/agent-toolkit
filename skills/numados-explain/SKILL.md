@@ -37,7 +37,7 @@ Omit any stage that does not improve understanding.
 
 ## First-read structure
 
-1. Start with `Суть` or an equivalent one-to-three-sentence answer. State the conclusion before background.
+1. Start with a one-to-three-sentence essence of the answer, in the conversation's language. State the conclusion before background.
 2. Build one causal chain in execution order. Name the actor, action, state change, and consequence; do not make the reader infer missing links.
 3. Introduce each necessary term once, in plain language, at first use.
 4. Use one concrete example only when it removes abstraction. Keep values minimal and clearly sourced or hypothetical.

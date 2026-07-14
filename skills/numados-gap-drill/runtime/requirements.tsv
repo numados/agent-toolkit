@@ -1,6 +1,6 @@
 # capability	need	when	providers	purpose
-skill.obsidian-knowledge	required	reading or writing task state is in scope	harness:skill-invocation|mcp:skill-invocation	Resolve the configured vault and perform bounded task-artifact I/O
-storage.task-write	required	a gap result must be recoverable by the next workflow stage	harness:filesystem-write|mcp:obsidian	Update research, the task index, and one verified gap-drill event
+skill.obsidian-knowledge	required	reading or writing task state is in scope	harness:skill-invocation	Resolve the configured vault and perform bounded task-artifact I/O
+storage.task-write	required	a gap result must be recoverable by the next workflow stage	harness:skill-invocation	Update research, the task index, and one verified gap-drill event through the Obsidian skill
 filesystem.filename	required	linked notes, repositories, and source candidates must be located	cmd:rg|cmd:fd|cmd:fdfind|cmd:find|harness:filesystem-search|mcp:filesystem-search	Discover bounded candidate paths within explicit roots
 filesystem.lexical	required	exact claims, symbols, and note content need verification	cmd:rg|harness:filesystem-search|mcp:filesystem-search	Retrieve bounded textual evidence without dumping a workspace
 code.navigation	optional	a gap crosses callers, consumers, or repository boundaries	harness:code-navigation|mcp:code-navigation|harness:semantic-search	Trace relevant relationships efficiently

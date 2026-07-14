@@ -33,7 +33,9 @@ behavior, affected contracts/files, and verification scope. If a gap-drill
 event reports a material plan impact, incorporate its verified conclusion
 before changing the plan; do not treat an unresolved gap as an approved design.
 If a high-impact question is unresolved, stop with its impact and smallest
-discriminating check.
+discriminating check. If the research base itself is missing or too thin to
+plan from, stop and recommend `$numados-brainstorm` instead of inventing
+requirements.
 
 ## Build or extend the plan
 
@@ -42,6 +44,9 @@ source, configuration, dependencies, and current documentation. Map the file
 and contract surface before choosing a design. Inspect comparable code and
 tests; preserve existing patterns and use best practices only for genuinely
 new boundaries or a proven compatibility need.
+
+Follow [phase design](references/phase-design.md) for the file map, phase
+right-sizing, extension rules, acceptance, and commit boundaries.
 
 The current `plan.md` contains only the executable design:
 

@@ -6,5 +6,6 @@ filesystem.filename	required	planned files and repository patterns must be locat
 filesystem.lexical	required	implementation and verification require source evidence	cmd:rg|harness:filesystem-search|mcp:filesystem-search	Search actual code and configuration within scope
 test.execution	required	phase or final acceptance checks are defined	harness:test-runner|mcp:test-runner|verified:make|verified:npm|verified:pnpm|verified:yarn|verified:dotnet|verified:cargo	Run the repository-selected verification workflow
 skill.code-review	required	final diff review is reached	harness:skill-invocation	Run the provider-neutral review workflow before completion
+skill.commit-message	required	an authorized phase commit needs message text	harness:skill-invocation	Generate repository-aligned commit text without mutation
 code.navigation	optional	implementation crosses non-obvious symbols or repositories	harness:code-navigation|mcp:code-navigation|harness:semantic-search	Trace contracts and consumers without broad reads
 documentation.current	optional	version-sensitive APIs or configuration are touched	harness:documentation|mcp:documentation|harness:web-search	Verify exact external behavior before coding

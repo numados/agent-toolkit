@@ -1,7 +1,7 @@
 # capability	need	when	providers	purpose
 runtime.shell	required	bundled scripts	cmd:bash	Run deterministic profile and search helpers
 filesystem.lexical	required	filename or content search	cmd:rg|harness:filesystem-search|mcp:filesystem-search	Find candidate Markdown paths and bounded snippets
-task-log.write	required	Numados workflow skills need to persist and verify task state	harness:filesystem-write|mcp:obsidian	Write one bounded task iteration and update its current-state projection
+task-log.write	optional	Numados workflow skills need to persist and verify task state	harness:filesystem-write|mcp:obsidian	Write one bounded task iteration and update its current-state projection; read-only search and read flows do not need it
 obsidian.native	optional	properties, backlinks, or link-aware mutations	verified:obsidian|mcp:obsidian	Use Obsidian-native semantics
 filesystem.semantic	optional	conceptual queries with weak lexical matches	verified:qmd|mcp:qmd|harness:semantic-search	Use a maintained semantic or hybrid index
 history.git	optional	history lookup or an explicit commit request	verified:git|harness:git	Inspect or record bounded vault history

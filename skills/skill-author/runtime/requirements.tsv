@@ -1,0 +1,3 @@
+# capability	need	when	providers	purpose
+validation.metadata	optional	editing skill metadata or runtime requirements inside the toolkit repository	cmd:bash	Run scripts/validate-skills.sh to verify frontmatter, links, tests, and manifests
+storage.skill-files	required	creating or updating a skill bundle	harness:filesystem-write	Write SKILL.md, references, and runtime manifests in the target skills directory

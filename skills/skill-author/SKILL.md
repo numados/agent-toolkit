@@ -20,8 +20,8 @@ Create task-scoped skills that work as portable core content and expose target-s
 4. Define the skill contract: inputs, preconditions, procedure, output format, verification, and safe stop conditions.
 5. Keep the main workflow in `SKILL.md`. Move detailed policies, variants, and examples into directly linked files in `references/`.
 6. Add scripts only for deterministic or repetitive work. Document their inputs, outputs, dependencies, permissions, and failure behaviour.
-7. When the skill depends on machine, harness, CLI, MCP, or indexed capabilities, add `runtime/requirements.tsv` using the shared runtime-capability contract. Do not declare providers that are merely preferred rather than needed for an operation.
-8. Run `bash scripts/validate-skills.sh` from the repository root after editing metadata or runtime requirements.
+7. When the skill depends on machine, harness, CLI, MCP, or indexed capabilities, add `runtime/requirements.tsv` using the shared runtime-capability contract (`contracts/skill-runtime-capabilities.md` in the toolkit repository). Do not declare providers that are merely preferred rather than needed for an operation.
+8. When working inside the toolkit repository, run `bash scripts/validate-skills.sh` from the repository root after editing metadata or runtime requirements. When authoring in another repository, apply the same checks manually: frontmatter name equals directory, links resolve, and any `runtime/requirements.tsv` follows the contract grammar.
 9. Evaluate positive activation, near-match/non-activation, missing-input, and failure-path prompts before publishing.
 
 ## Constraints

@@ -1,6 +1,6 @@
 ---
 name: numados-brainstorm
-description: Research and structure a development task before planning by inspecting the real code, documentation, history, and remote artifacts; classify evidence, record decisions and open questions, and persist a compact Obsidian handoff. Use when a feature, bug fix, refactor, or integration needs verified context before implementation.
+description: Research and structure a development task before planning by inspecting the real code, documentation, history, and remote artifacts; classify evidence, record decisions and open questions, and persist a compact Obsidian handoff. Use when a feature, bug fix, refactor, or integration needs verified context before implementation and no task research record exists yet; route already-recorded open questions or gaps in an existing task record to numados-gap-drill.
 ---
 
 # Numados Brainstorm
@@ -25,8 +25,9 @@ it is available at `contracts/development-workflow-artifacts.md`.
 1. Pass the user's goal, supplied identifiers, URLs, files, repositories, and
    any explicit task destination to the Obsidian skill.
 2. Read `_task_index.md` first. If it exists, read only its
-   `latest_iteration` next. Follow `research.md` or legacy Mag notes only when
-   the current question needs their detail.
+   `latest_iteration` next. Follow `research.md` or legacy Mag notes (artifacts
+   of the predecessor "Mag" workflow) only when the current question needs
+   their detail.
 3. If no task index exists, resolve one safe destination and derive a stable
    task slug only when no identifier is available. Ask one smallest question if
    the destination or task identity is ambiguous.
@@ -37,6 +38,8 @@ it is available at `contracts/development-workflow-artifacts.md`.
 
 Define a bounded search before spending tokens: roots, remote objects, file
 types, version/time scope, excluded sensitive areas, and a candidate limit.
+When a task spans several repositories, remote systems, or unfamiliar
+terminology, follow [the research method](references/research-method.md).
 Choose the narrowest verified provider:
 
 - use `$numados-local-search` for local filename, lexical, structural,

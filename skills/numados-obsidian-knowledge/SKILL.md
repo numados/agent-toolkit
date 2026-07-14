@@ -1,6 +1,6 @@
 ---
 name: numados-obsidian-knowledge
-description: Use this skill to search, read, create, update, link, or recover history from notes in an Obsidian Markdown vault, and to configure portable machine or project routing to the correct vault. Preserve existing vault conventions and use bounded filesystem, native, or indexed retrieval only when available.
+description: Use this skill to search, read, create, update, link, or recover history from notes in an Obsidian Markdown vault, and to configure portable machine or project routing to the correct vault. Preserve existing vault conventions and use bounded filesystem, native, or indexed retrieval only when available. This skill owns storage operations; route knowledge-base questions and durable engineering-knowledge curation policy to numados-knowledge-curator.
 ---
 
 # Numados Obsidian Knowledge
@@ -62,6 +62,8 @@ When a new note is necessary:
 
 1. Choose the explicit destination, configured write root, or a location proven by neighboring notes. Ask if these disagree.
 2. Match nearby Markdown, properties, filenames, and internal-link style.
+   Write note content in English by default; use another language only when
+   the target note or an explicit user request already establishes it.
 3. Keep properties small, atomic, and queryable; put explanation in the body.
 4. Add only links that improve future retrieval and whose targets can be resolved.
 5. Preserve provenance when content comes from a file, URL, conversation, or inference.

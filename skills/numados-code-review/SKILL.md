@@ -42,6 +42,10 @@ Treat a missing test as a finding only when a meaningful changed behavior is lef
 - `High`: expected usage breaks a contract, produces wrong results, or creates substantial reliability/performance risk.
 - `Medium`: confirmed but bounded defect with limited blast radius or an accessible workaround.
 
+Map verifier verdicts to severity: `Confirmed Blocker` is always `Blocker`;
+classify a `Confirmed Issue` as `High` or `Medium` using the verified impact
+and reach recorded in its evidence, not the candidate's original guess.
+
 Do not report low-value nits.
 
 ## Output
@@ -53,6 +57,7 @@ Lead with findings, ordered by severity. For each finding use:
 Impact: Observable failure and affected scope.
 Evidence: Minimal verified chain from changed code to failure.
 Fix: Smallest safe direction or regression test.
+Comment: The verifier's paste-ready sentences, kept verbatim.
 ```
 
 Then add only:

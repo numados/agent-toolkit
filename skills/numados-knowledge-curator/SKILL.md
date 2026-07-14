@@ -1,6 +1,6 @@
 ---
 name: numados-knowledge-curator
-description: Query, explain, extract, verify, organize, update, supersede, or retire durable engineering knowledge in a configured Obsidian knowledge store. Use when answering repository, system, architecture, convention, glossary, navigation, resource-access, or rationale questions from the knowledge base, or when reusable knowledge should be preserved from completed work.
+description: Query, explain, extract, verify, organize, update, supersede, or retire durable engineering knowledge in a configured Obsidian knowledge store. Use when answering repository, system, architecture, convention, glossary, navigation, resource-access, or rationale questions from the knowledge base, or when reusable knowledge should be preserved from completed work. Do not use for raw note storage, vault search mechanics, or vault configuration; route those operations to numados-obsidian-knowledge.
 ---
 
 # Numados Knowledge Curator

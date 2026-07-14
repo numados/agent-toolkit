@@ -1,6 +1,6 @@
 ---
 name: numados-gap-drill
-description: Close decision-relevant gaps left by brainstorming or planning through bounded evidence gathering across Obsidian, repositories, authoritative documentation, remote artifacts, and open sources; use independent model opinions when useful, then ask the smallest high-impact question if evidence cannot decide. Use when a task has unresolved assumptions, conflicting evidence, an open planning question, or needs "drill the gaps" before implementation.
+description: Close decision-relevant gaps left by brainstorming or planning through bounded evidence gathering across Obsidian, repositories, authoritative documentation, remote artifacts, and open sources; use independent model opinions when useful, then ask the smallest high-impact question if evidence cannot decide. Use when an existing task record has unresolved assumptions, conflicting evidence, an open planning question, or needs "drill the gaps" before implementation; when no task research record exists yet, route initial task research to numados-brainstorm.
 ---
 
 # Numados Gap Drill
@@ -73,9 +73,10 @@ the same checks sequentially. Never treat model agreement as evidence.
   name the exact coverage gap and do not infer around it.
 
 If the result changes the approved plan's architecture, phases, acceptance,
-scope, or verification, do not edit `plan.md`; return `PLAN UPDATE REQUIRED`
-and hand off to `$numados-planning` for an evidence-based extension or
-correction. A resolved fact with no plan impact can go directly to the next
+scope, or verification, do not edit `plan.md`; set
+`Plan impact: PLAN UPDATE REQUIRED` in the return (the `Status` line keeps its
+own value) and hand off to `$numados-planning` for an evidence-based extension
+or correction. A resolved fact with no plan impact can go directly to the next
 workflow gate.
 
 ## Persist and return

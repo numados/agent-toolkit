@@ -17,7 +17,7 @@ Obtain:
 
 ## Audit workflow
 
-1. Read the target `SKILL.md` and `runtime/requirements.tsv` when present. If the manifest is absent, inspect referenced scripts and mark requirements as `undeclared`; do not infer readiness from PATH alone.
+1. Read the target `SKILL.md` and `runtime/requirements.tsv` when present. The manifest grammar, provider namespaces, and provider states are defined by `contracts/skill-runtime-capabilities.md` in the toolkit repository. If the manifest is absent, inspect referenced scripts and mark requirements as `undeclared`; do not infer readiness from PATH alone.
 2. Inventory agent-visible harness and MCP providers before probing commands. Count a provider only when its exact operation, target-root access, output bounds, and side effects are known.
 3. Run `scripts/inspect-runtime.sh --skill <dir> [--target <root>]`. Pass each verified harness, MCP, or stateful CLI provider with `--provide <namespace:name>`.
 4. Determine the one harness executing the doctor (`pi`, `codex`, or `claude`). Run `scripts/inspect-safety.sh --harness <active-harness>`; verify both the no-remote-Git-write boundary and explicit approval for PR mutations. Never use an all-harness audit and never inspect Git application hooks as a substitute. If the active harness cannot be identified, report safety as unknown instead of guessing or auditing all harnesses.
