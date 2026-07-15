@@ -62,6 +62,11 @@ The current `plan.md` contains only the executable design:
 Each phase must be a coherent, independently verifiable increment. Keep the
 number of phases small and meaningful.
 
+When phases introduce or change business behaviour, invoke `$numados-tdd` in
+planning mode to extend each phase with seams under test, a business-rule test
+list, and verification commands. Skip it only for phases with no behavioural
+surface (pure configuration, generated code) and record that decision.
+
 ### Evidence-based phase extension
 
 When implementation or a later investigation shows that the current plan is

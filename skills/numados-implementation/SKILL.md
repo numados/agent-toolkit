@@ -40,6 +40,9 @@ For each incomplete stable phase, in plan order:
 1. verify dependencies and restate the phase objective;
 2. inspect analogous code, tests, configuration, and current documentation;
 3. implement the complete phase without placeholders or speculative cleanup;
+   when the phase has a test-coverage section, invoke `$numados-tdd` in
+   implementation mode and add product behaviour only through its
+   RED-GREEN-REFACTOR cycle;
 4. run the exact acceptance checks and diagnose failures from their output;
 5. inspect the bounded diff, contracts, edge paths, compatibility, and tests;
 6. commit only when the user or active repository instructions authorize it;

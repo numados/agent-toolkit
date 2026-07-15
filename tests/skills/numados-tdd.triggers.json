@@ -1,0 +1,14 @@
+[
+  {"query":"Extend the plan with test coverage — identify seams and list business-rule scenarios for each phase.","should_trigger":true},
+  {"query":"Add TDD test planning to the current numados plan.","should_trigger":true},
+  {"query":"For each phase in the implementation, enforce red-green-refactor: write failing test first, then minimal code.","should_trigger":true},
+  {"query":"Use $numados-tdd during implementation to make sure every change goes through the TDD cycle.","should_trigger":true},
+  {"query":"This legacy InventoryReserver class has no tests — add business-rule tests for it through TDD.","should_trigger":true},
+  {"query":"Analyze the untested code and propose a test list before writing anything.","should_trigger":true},
+  {"query":"Turn the approved research into a phased implementation plan.","should_trigger":false},
+  {"query":"Implement the approved plan phase by phase.","should_trigger":false},
+  {"query":"Review this pull request and filter false alarms.","should_trigger":false},
+  {"query":"Generate only a commit message for the staged diff.","should_trigger":false},
+  {"query":"Write a C# service following repository conventions.","should_trigger":false},
+  {"query":"Research this unfamiliar bug and record evidence.","should_trigger":false}
+]

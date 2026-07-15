@@ -1,0 +1,4 @@
+# capability	need	when	providers	purpose
+test.execution	required	running tests during RED and GREEN verification	harness:test-execution|cmd:dotnet|cmd:npm	Verify test failure and success at each TDD cycle gate
+vcs.diff	required	inspecting bounded diffs before and after code changes	cmd:git	Inspect staged and unstaged changes during implementation
+code.navigation	optional	finding seams and public interfaces across file boundaries	harness:code-navigation	Navigate to public API definitions without reading every file

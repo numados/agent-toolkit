@@ -1,0 +1,4 @@
+interface:
+  display_name: "numados: TDD"
+  short_description: "Plan and enforce business-rule TDD"
+  default_prompt: "Use $numados-tdd to plan tests at business-rule seams and enforce the red-green-refactor cycle for the current task."
