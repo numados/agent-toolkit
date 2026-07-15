@@ -49,6 +49,25 @@ install, configure, index, or mutate anything. A missing QMD/semantic provider
 is an optional gap because exact task recovery starts from the index and latest
 event and can use bounded lexical retrieval.
 
+## Skill deployment audit
+
+When the user asks whether the toolkit skills are installed, discoverable, or
+symlinked correctly, run:
+
+```bash
+scripts/inspect-skill-links.sh --root /path/to/agent-toolkit
+```
+
+The probe verifies that every skill directory in the toolkit is present in each
+harness skills location as a symlink resolving to the toolkit source. Default
+locations cover all supported harnesses: `~/.claude/skills` (Claude Code) and
+`~/.agents/skills` (Codex CLI USER tier and pi global discovery — both follow
+symlinks). Pass `--link-dir` to audit a non-default location.
+
+Report each `MISSING`, `COPY` (real directory shadowing the toolkit source),
+`BROKEN`, or `STALE` entry as a required gap. The remedy is a symlink refresh
+through `$numados-harness-setup`; do not create links from the doctor.
+
 ## Knowledge curator audit
 
 For `$numados-knowledge-curator`, do not stop after its generic runtime
@@ -141,6 +160,7 @@ Keep each capability to one line. Include paths or versions only when they prove
 - `scripts/inspect-runtime.sh`: dependency-free Bash probe for declared command and caller-verified providers.
 - `scripts/inspect-safety.sh`: read-only probe for the active harness's native no-remote-Git-write boundary.
 - `scripts/inspect-development-workflow.sh`: bundle audit for the Numados task workflow and its Obsidian-backed event log.
+- `scripts/inspect-skill-links.sh`: symlink coverage audit for all toolkit skills across harness skills directories.
 - `scripts/inspect-knowledge-curator.sh`: readiness audit for curator composition and its dedicated knowledge root.
 - [Capability assessment](references/capability-assessment.md): provider applicability, search-efficiency, and recommendation rules.
 - [Search tool recommendations](references/search-tool-recommendations.md): feature-driven CLI, index, MCP, and subagent options.

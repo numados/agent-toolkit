@@ -70,6 +70,7 @@ Next: <exact confirmation, question, or action>
 ```
 
 Read [setup policy](references/setup-policy.md) for the adapter boundary,
+the canonical skill symlink layout (`~/.claude/skills` and `~/.agents/skills`),
 managed instruction projection, scope selection, and failure handling. The
 adapter operation contract (discover, plan, apply, verify, rollback) is
 defined in the toolkit repository at `adapters/harness-setup.md`, and runtime

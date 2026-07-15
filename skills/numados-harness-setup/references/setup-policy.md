@@ -21,6 +21,33 @@ target harness. It owns native syntax and must preserve unmanaged fields.
 Generic skill installers are allowed only for skill payloads; they are not
 configuration adapters. An unavailable adapter is a hard `BLOCKED` result.
 
+## Skill deployment layout
+
+Toolkit skills are deployed as **symlinks from the harness skills directory to
+the toolkit checkout** — never as copies. A copy silently diverges from the
+repository and shadows later updates; the doctor reports it as a `COPY` defect.
+
+Canonical link locations, each covering the harnesses that natively discover
+it:
+
+| Link directory | Consumed by |
+|----------------|-------------|
+| `~/.claude/skills/` | Claude Code (personal skills) |
+| `~/.agents/skills/` | Codex CLI (USER tier) and pi (global discovery); both follow symlinks |
+
+One link per skill directory, named after the skill, pointing to
+`<toolkit>/skills/<name>/`. Every skill in the toolkit gets a link in **both**
+locations — a partial deployment (new skill added to the repo but never
+linked) is the most common drift and is invisible until the skill fails to
+trigger.
+
+During apply, create missing links idempotently and replace a stale or copied
+entry only after showing it in the plan and backing it up. During verify, run
+the doctor's `scripts/inspect-skill-links.sh --root <toolkit>` and require a
+clean result. Do not deploy into harness-private legacy locations (e.g.
+`~/.codex/skills/`) — Codex discovers `~/.agents/skills`, and a duplicate link
+makes the same skill appear twice in its selector.
+
 ## Skill-owned configuration
 
 When an installed Numados skill declares machine/project parameters, setup
