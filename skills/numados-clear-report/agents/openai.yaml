@@ -1,0 +1,6 @@
+interface:
+  display_name: "numados: Clear Report"
+  short_description: "Create concise structured orientation reports"
+  default_prompt: "Use $numados-clear-report to produce a concise, structured orientation report grounded in the supplied material."
+policy:
+  allow_implicit_invocation: true

@@ -9,6 +9,10 @@
   {"query":"Use $numados-explain to turn this technical document into a first-read explanation.","should_trigger":true},
   {"query":"$numados-explain compare these approaches and explain the decision briefly.","should_trigger":true},
   {"query":"Explain through $numados-explain what happened in these changes and why, even when the request is phrased in another language.","should_trigger":true},
+  {"query":"Я не понимаю этот код. Разжуй по шагам, что происходит и почему.","should_trigger":true},
+  {"query":"Мне непонятна архитектура. Объясни простыми словами роли компонентов и поток данных.","should_trigger":true},
+  {"query":"Я не понимаю бизнес-требование: кто, когда и что должен получить? Разложи его по порядку.","should_trigger":true},
+  {"query":"После краткого отчёта всё ещё непонятно, почему это решение нужно. Объясни причинно.","should_trigger":true},
   {"query":"Review this pull request and find bugs.","should_trigger":false},
   {"query":"Implement the change described in this architecture document.","should_trigger":false},
   {"query":"Validate whether this review finding is a false alarm.","should_trigger":false},
@@ -19,5 +23,10 @@
   {"query":"Summarize this text in one sentence.","should_trigger":false},
   {"query":"Create a diagram of this system.","should_trigger":false},
   {"query":"Translate this explanation into Russian.","should_trigger":false},
-  {"query":"Explain this implementation flow clearly; I did not invoke the specialized skill.","should_trigger":false}
+  {"query":"Explain this implementation flow clearly; I did not invoke the specialized skill.","should_trigger":false},
+  {"query":"Что это за сервис? Дай короткий структурированный обзор без подробного объяснения.","should_trigger":false},
+  {"query":"Кратко перечисли, из чего состоит эта архитектура и зачем она нужна.","should_trigger":false},
+  {"query":"Найди в репозитории обработчик этого события.","should_trigger":false},
+  {"query":"Исправь ошибку в этом коде.","should_trigger":false},
+  {"query":"Проведи code review этого изменения.","should_trigger":false}
 ]

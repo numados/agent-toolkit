@@ -1,0 +1,16 @@
+[
+  {"query":"Что это за архитектурный документ? Дай короткий структурированный обзор без лишней воды.","should_trigger":true},
+  {"query":"Сделай clear report по этому коду: что он делает, из чего состоит и что важно.","should_trigger":true},
+  {"query":"Дай быструю ориентацию по этому PR: что изменилось и где границы изменения.","should_trigger":true},
+  {"query":"Кратко разложи эти бизнес-требования: цель, акторы, правила и критерии приёмки.","should_trigger":true},
+  {"query":"Что это за конфигурация и за что отвечают её основные части?", "should_trigger":true},
+  {"query":"Use $numados-clear-report to map this unfamiliar service without a deep dive.","should_trigger":true},
+  {"query":"Я не понимаю, почему этот код работает. Разжуй по шагам.","should_trigger":false},
+  {"query":"Объясни подробно поток данных между этими компонентами и почему он такой.","should_trigger":false},
+  {"query":"Найди баг в этом обработчике и предложи исправление.","should_trigger":false},
+  {"query":"Реализуй бизнес-требование из этого документа.","should_trigger":false},
+  {"query":"Проведи code review этого PR.","should_trigger":false},
+  {"query":"Найди в репозитории все места, где вызывается этот метод.","should_trigger":false},
+  {"query":"Что осталось сделать по этой задаче в Obsidian?", "should_trigger":false},
+  {"query":"Сократи этот текст до одного предложения.","should_trigger":false}
+]
