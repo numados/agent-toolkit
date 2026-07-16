@@ -1,4 +1,4 @@
-# pr-comment-report evaluations
+# numados-pr-comment-report evaluations
 
 ## Positive trigger
 

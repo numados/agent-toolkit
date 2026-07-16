@@ -1,5 +1,5 @@
 ---
-name: pr-comment-report
+name: numados-pr-comment-report
 description: Analyse pull-request review comments, verify each finding against the actual diff and repository behavior, classify True Alarm/False Alarm/Needs Evidence, and produce a concise copy-paste response report sorted by PR appearance order. Use when the user asks what to answer to PR comments, wants review-thread triage, or asks for responses to code-review discussions. Never post or modify PR comments.
 ---
 
