@@ -1,0 +1,6 @@
+interface:
+  display_name: "PR Comment Report"
+  short_description: "Verify PR findings and draft replies"
+  default_prompt: "Use $pr-comment-report to verify PR review comments and produce a concise copy-paste response report in PR appearance order. Do not post comments."
+policy:
+  allow_implicit_invocation: true

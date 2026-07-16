@@ -1,0 +1,6 @@
+# capability	need	when	providers	purpose
+vcs.review-read	required	direct forge retrieval is requested and no complete thread export is supplied	harness:vcs-review|mcp:vcs-review|verified:az|verified:gh|verified:glab	Read PR metadata, discussion threads, iterations, and provider ordering fields
+vcs.diff-read	required	finding verification is requested	harness:vcs-review|harness:git|verified:git|mcp:vcs-review	Read the exact changed files and diff for the reviewed PR
+code.navigation	required	claim verification crosses symbols or callers	harness:code-navigation|mcp:code-navigation|harness:semantic-search	Trace guards, state transitions, persistence, and consumers
+history.git	optional	later commits may contain a fix	harness:git|verified:git	Determine whether a finding was fixed after the original review
+test.execution	optional	a focused test can confirm or refute a material finding	harness:test-runner|mcp:test-runner	Run proportionate read-only verification

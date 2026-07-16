@@ -1,0 +1,9 @@
+[
+  {"query":"Review PR 132524 and prepare copy-paste replies to all review comments, sorted by appearance. Verify True and False Alarms.","should_trigger":true},
+  {"query":"What should I answer to these Azure DevOps PR discussions?", "should_trigger":true},
+  {"query":"Classify which PR comments are already fixed and draft concise responses.","should_trigger":true},
+  {"query":"Review this PR and find security vulnerabilities, but do not draft replies.","should_trigger":false},
+  {"query":"Post replies to all unresolved PR comments.","should_trigger":false},
+  {"query":"Implement the requested PR changes.","should_trigger":false},
+  {"query":"Explain this single code-review finding in detail.","should_trigger":false}
+]
