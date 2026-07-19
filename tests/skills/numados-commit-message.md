@@ -36,6 +36,24 @@ Recent history uses a custom subject format that conflicts with Conventional Com
 
 Expected: follow repository instructions/history. Use Conventional Commits only when no stronger convention exists.
 
+## Subject-only atomic outcome
+
+Select a diff with one atomic behavioral outcome that the subject communicates completely.
+
+Expected: a subject-only message is acceptable; do not add a body that merely repeats the subject.
+
+## Multiple behavioral outcomes require a body
+
+Select a coherent diff that both propagates a field through public outputs and rejects contradictory input.
+
+Expected: preserve the repository subject convention and add concise bullets for both durable outcomes. Do not omit the body merely because recent commits are subject-only.
+
+## Amend uses the complete future commit
+
+Start with an existing commit that changes event propagation, then stage a related validation fix and request an amended message.
+
+Expected: inspect the parent-to-index result and generate a message covering both outcomes, not only the staged validation delta.
+
 ## Atomicity
 
 The selected diff contains an API feature and an unrelated deployment rewrite.

@@ -37,11 +37,36 @@ For the fallback:
 ```text
 type(optional-scope): Optional-Identifier Imperative summary
 
-- Essential outcome or behavior change
-- Second essential item, only when useful
+- Essential durable behavior or contract outcome
+- Additional distinct outcome, when present
 ```
 
 Choose a scope that names the changed topic, not the repository. Use `!` or a breaking-change body only when the diff proves a compatibility break. Keep the subject concise, but follow a repository-specific length limit when one exists.
+
+## Body decision gate
+
+A subject-only message is acceptable only when the selected diff has one atomic
+outcome and the subject fully communicates that outcome without ambiguity.
+Repository history containing subject-only commits is evidence of style, not a
+reason to omit useful behavioral context.
+
+Include a concise body when any of these apply:
+
+- the diff has two or more meaningful behavioral, contract, data, or
+  operational outcomes;
+- the subject necessarily compresses distinct concerns such as propagation and
+  validation, persistence and migration, or configuration and fallback
+  behavior;
+- an amend combines the existing commit with staged follow-up changes;
+- a compatibility boundary or durable reason matters but does not fit cleanly
+  in the subject.
+
+Use one to three bullets. Each bullet must describe a durable outcome,
+invariant, or externally relevant effect—not filenames, implementation steps,
+test counts, or review history. Do not repeat the subject in the body.
+
+For an amend, generate the message from the complete future commit (parent to
+index), not only from the newly staged delta.
 
 Common fallback types: `feat`, `fix`, `test`, `docs`, `refactor`, `perf`, `build`, `ops`, `chore`, `style`.
 
@@ -61,4 +86,10 @@ A repository-required work-item identifier may remain when it directly identifie
 
 Return one paste-ready message in a fenced text block. Add prose only for a material ambiguity, an atomicity warning, or an assumption about unstaged scope. Do not execute Git mutations.
 
-Before returning, verify that every claim is supported by the selected diff and that the message explains intent rather than listing filenames.
+Before returning, verify that:
+
+- every claim is supported by the selected diff;
+- every meaningful outcome is represented by either the subject or body;
+- the message explains intent rather than listing filenames;
+- a required body was not omitted merely because recent history uses
+  subject-only commits.
