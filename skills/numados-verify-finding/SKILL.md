@@ -1,6 +1,6 @@
 ---
 name: numados-verify-finding
-description: Validate suspected code-review findings against the actual change, contract, data flow, guards, tests, and runtime assumptions; classify real issues, false alarms, out-of-scope problems, and missing evidence. Use when numados-code-review supplies candidate findings or when the user explicitly asks whether review feedback is valid before posting or acting on it.
+description: Validate suspected code-review findings or existing PR comments against the actual change, contract, data flow, guards, tests, and runtime assumptions. Classify each as True (Confirmed Blocker / Confirmed Issue), False alarm, Out of Scope, or Needs More Evidence. Use when numados-code-review supplies candidate findings, when the user asks whether review feedback is valid before posting or acting on it, or when existing PR discussion threads must be verified.
 ---
 
 # Numados Verify Finding
@@ -38,6 +38,20 @@ Stop once the verdict is established. Do not exhaustively investigate unrelated 
 
 Never turn missing evidence into `False Alarm`. Never turn an unactivated pre-existing bug into a PR finding.
 
+## True / False alarm classification
+
+Map every verified verdict to its alarm status for the summary table:
+
+| Verdict | True / False alarm | Meaning |
+|---|---|---|
+| `Confirmed Blocker` | **True** | Real defect; must be fixed. |
+| `Confirmed Issue` | **True** | Real defect; should be fixed. |
+| `False Alarm` | **False** | Claim is impossible under the verified contract or an existing guard prevents it. |
+| `Out of Scope` | *(not a finding)* | Pre-existing problem the reviewed change did not touch, activate, or worsen. |
+| `Needs More Evidence` | *(unresolved)* | One named fact prevents a sound verdict; do not present as True or False. |
+
+Only `Confirmed Blocker` and `Confirmed Issue` carry a **True** alarm status and should be posted or acted on.
+
 ## Actionability gate
 
 A candidate survives as a review finding only when all are true:
@@ -52,10 +66,52 @@ Code style, preference, speculative cleanup, and generic “add tests” advice 
 
 ## Output
 
-For multiple candidates, start with one compact table:
+### Mode A — Verify existing PR discussion threads
+
+Use when the input includes Azure DevOps (or other forge) discussion thread IDs from an existing pull request. Include Discussion ID and Comment ID columns.
+
+Open with a compact verification table sorted by Discussion ID:
 
 ```text
-| # | Verdict | Scope | Impact | Anchor |
+| Discussion ID | Comment ID | Classification | True / False alarm | Short finding | Action |
+|---:|---:|---|---|---|---|
+| 570277 | 1 | Confirmed Issue | True | Retry may lose standalone premium reversal | Post/fix |
+| 570278 | 1 | False Alarm | False | TBD finance/PO comment is required by ticket AC | Do not post |
+| 570279 | 1 | Out of Scope | — | Redundant UpdateData calls predate the PR | Do not post |
+```
+
+Column rules:
+- **Discussion ID** and **Comment ID** — optional; include only when the forge provides them. Omit the column when no candidate carries an ID.
+- **Classification** — one of `Confirmed Blocker`, `Confirmed Issue`, `False Alarm`, `Out of Scope`, `Needs More Evidence`.
+- **True / False alarm** — `True` for confirmed defects, `False` for false alarms, `—` for out-of-scope / needs-more-evidence.
+- **Short finding** — one-line summary of the claim.
+- **Action** — `Post/fix` for True findings, `Do not post` for False/Out of Scope, `Gather evidence` for Needs More Evidence.
+
+After the table, detail every confirmed finding:
+
+```text
+[Confirmed Issue] Short title — path/to/file.ext:line
+Contract: Expected behavior or invariant.
+Evidence: Trigger → changed behavior → missing/insufficient guard → consequence.
+Impact: Observable failure and affected scope.
+Fix: Smallest safe direction or regression test.
+
+Short PR comment:
+> Two or three paste-ready sentences for the Azure DevOps thread.
+```
+
+### Mode B — Verify regular candidate findings
+
+Use when reviewing raw candidates from `$numados-code-review` or a manual investigation that does not target existing PR threads. Discussion/Comment IDs are optional.
+
+Open with a compact verification table:
+
+```text
+| # | Classification | True / False alarm | Short finding | Anchor |
+|---:|---|---|---|---|
+| 1 | Confirmed Blocker | True | Empty retry set completes EOD after a failed recreation | RetryEodBookingsHandler.cs:156 |
+| 2 | False Alarm | False | CH gate suppresses street-hedge | ExecuteEodBookingsHandler.cs:326 |
+| 3 | Out of Scope | — | Old metadata lookup defect | RetryEodBookingsHandler.cs:146 |
 ```
 
 For every confirmed finding, return:
@@ -66,13 +122,29 @@ Contract: Expected behavior or invariant.
 Evidence: Trigger → changed behavior → missing/insufficient guard → consequence.
 Impact: Observable failure and affected scope.
 Fix: Smallest safe direction or regression test.
-Comment: Two or three paste-ready sentences anchored to the changed line.
+
+Short PR comment:
+> Two or three paste-ready sentences anchored to the changed line.
 ```
 
-For `Needs More Evidence`, name only the missing fact and the smallest way to obtain it. For `False Alarm` and `Out of Scope`, give one concise reason and no PR comment.
+### Common — Filtered and Coverage
+
+After all findings, append a Filtered and Coverage summary:
+
+```text
+## Filtered
+- False alarms: 3
+- Out of scope: 1
+- Needs more evidence: 1 (missing fact: <what>; obtain via <how>)
+
+## Coverage
+- Files inspected, test results, iterations reviewed, and any material limitation.
+```
+
+For `Needs More Evidence`, name only the missing fact and the smallest way to obtain it. For `False Alarm` and `Out of Scope`, give one concise reason in the table; no PR comment.
 
 Use a diagram only when concurrency, branching, or three or more interacting components are materially clearer visually. Do not force tables or diagrams for a single linear finding.
 
 ## Handoff to code review
 
-Return verdicts in a form `$numados-code-review` can filter directly. It should publish only confirmed, actionable findings and may summarize rejected candidate counts without repeating them.
+Return verdicts in a form `$numados-code-review` can filter directly. It should publish only confirmed, actionable findings and may summarize rejected candidate counts without repeating them. When verifying existing PR threads, the table maps every thread to a True/False decision the caller can use to accept, resolve, or dismiss each comment.
