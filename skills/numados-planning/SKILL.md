@@ -45,14 +45,41 @@ and contract surface before choosing a design. Inspect comparable code and
 tests; preserve existing patterns and use best practices only for genuinely
 new boundaries or a proven compatibility need.
 
-Follow [phase design](references/phase-design.md) for the file map, phase
-right-sizing, extension rules, acceptance, and commit boundaries.
+Follow [phase design](references/phase-design.md) for evidence-to-plan
+traceability, the complete change-surface census, failure-state design,
+provider-realistic verification, phase right-sizing, extension rules, and
+commit boundaries.
+
+Before assigning phases, prove plan readiness:
+
+- trace every authoritative requirement and explicit user decision to a
+  scenario, planned behavior, acceptance signal, and verification;
+- re-run exhaustive searches for every changed contract or symbol, including
+  implementers, test doubles, registration/lifetime/order, persistence and
+  operational consumers;
+- trace state and ownership across validation, durable/external effects,
+  post-effect work, cancellation, concurrency, restart, and recovery;
+- verify that the selected test seam and provider can exercise each claimed
+  behavior.
+
+Do not introduce a public API, administrative endpoint, worker, data contract,
+or service-to-service surface merely because it may be useful later. Require an
+approved requirement or verified current consumer. Keep pre-existing,
+unaffected defects outside the implementation scope unless the user explicitly
+adds them.
+
+Treat framework/provider behavior, migration shape, deployed defaults, data
+comparison semantics, and external contracts as facts only when the evidence
+can prove them. A plan may contain a named verification gate for a
+non-blocking uncertainty, but it must not prescribe an unverified fallback or
+manual recovery as if it were known-correct.
 
 The current `plan.md` contains only the executable design:
 
 - goal, architecture, and boundaries;
 - patterns to preserve and deliberate divergences;
-- file and contract map;
+- requirement traceability plus the complete file and contract map;
+- relevant state/failure outcomes and recovery ownership;
 - ordered phases with stable IDs, dependencies, exact paths/symbols,
   acceptance criteria, checks, risks, recovery, and resulting-change commit
   boundaries;
@@ -108,10 +135,26 @@ checks.
 
 ## Self-review and gate
 
-Trace every success condition to a phase and acceptance check. Verify names,
-paths, dependencies, phase order, current patterns, version constraints, and
-external APIs. Remove placeholders and vague tasks. Make every remaining
-inference or open question visible with its validation step.
+Trace every authoritative success condition to a phase and acceptance check;
+keep derived engineering safeguards distinguishable from product acceptance.
+Verify names, paths, every implementation/test double, dependencies,
+registration order and lifetimes, phase order, current patterns, version and
+provider constraints, persistence/index semantics, and external APIs.
+
+Challenge the plan at every irreversible boundary: what happens if the next
+step fails, cancellation arrives, a concurrent operation completes out of
+order, or the process restarts? Require a convergence/recovery owner and an
+observable health/logging outcome when correctness can become stale or
+ambiguous. For a handled persistence or external failure in a reused lifetime,
+require cleanup/reset behavior and a subsequent-operation test when applicable.
+
+Confirm that each automated check uses a provider and fixture capable of the
+feature under test; use representative integration verification for
+provider-specific query, migration, constraint, transaction, or error behavior.
+Remove placeholders, speculative fallbacks, and vague tasks. Make every
+remaining inference or open question visible with its validation step, and
+block approval when it can materially change the design or make verification
+invalid.
 
 Do not start implementation automatically. Ask for approval or revision unless
 the caller explicitly supplied approval for this plan/extension.

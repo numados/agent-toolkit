@@ -1,5 +1,21 @@
 # Phase Design
 
+## Evidence-to-plan traceability
+
+Start with authoritative requirements and explicit user decisions, not a
+derived task checklist:
+
+```markdown
+| Requirement source/id | Scenario and observable outcome | Phase | Acceptance | Verification |
+|---|---|---|---|---|
+| ... | ... | ... | ... | ... |
+```
+
+Preserve source identities and wording closely enough to audit the mapping.
+Mark extra failure, operability, security, and compatibility scenarios as
+derived engineering safeguards. Do not claim that a requirement count proves
+the existence of the same number of named tests.
+
 ## File map first
 
 List every create/modify/test/configuration file in `plan.md` before task
@@ -12,6 +28,66 @@ constructors, dependency direction, error handling, serialization,
 registration, test style, and documentation. Record the evidence and reason
 for choosing a pattern. If examples diverge, keep the question open until the
 repository or authoritative documentation resolves it.
+
+Before calling the map complete, use all-occurrence searches for every changed
+interface, base type, schema field, configuration key, message, or public
+contract. Include:
+
+- all implementations, overrides, adapters, generated projections, fakes,
+  mocks, fixtures, callers, and downstream consumers;
+- dependency registration, hosted/process start order, lifetime boundaries,
+  cancellation ownership, and disposal;
+- persistence mappings, migrations, history/audit storage, indexes,
+  constraints, null/case/comparison semantics, and concurrency behavior;
+- retry/reconciliation, health/readiness, logging, metrics, and operational
+  controls.
+
+Record coverage limits. A sample of nearby files supports a pattern choice but
+does not prove that every affected implementation was found.
+
+## State and failure design
+
+For each durable write, external acceptance, publication, cache refresh, or
+other irreversible/visible transition, state:
+
+```markdown
+| Point | Success state | Failure/cancellation state | Recovery owner | Traffic/health behavior | Verification |
+|---|---|---|---|---|---|
+| before effect | ... | ... | ... | ... | ... |
+| effect committed | ... | ... | ... | ... | ... |
+| post-effect work | ... | ... | ... | ... | ... |
+| concurrent/restart path | ... | ... | ... | ... | ... |
+```
+
+A plan is incomplete if committed state can diverge from in-memory, published,
+or downstream state without a convergence path or an explicit correctness
+gate. Define retry/idempotency, ordering/serialization scope, stale-state
+policy, cancellation ownership, and operator visibility as applicable.
+
+For reused contexts, sessions, connections, or units of work, define how a
+handled failure resets invalid local state. Include a test where a later valid
+operation succeeds in the same lifetime when that lifetime is material.
+
+## Provider-realistic verification
+
+Match every check to the behavior it can prove:
+
+- use fast isolated tests for pure business rules and deterministic
+  transformations;
+- use the configured provider/version for provider-specific queries,
+  migrations, transaction behavior, constraints, collations/comparers,
+  generated values, and real exception metadata;
+- inspect generated migrations or schema operations, then verify the resulting
+  current/history/audit/index shape against a representative instance when
+  those details affect correctness;
+- verify startup/registration ordering through the real composition path when
+  order or lifetime matters;
+- when translating a constraint or provider error, distinguish the intended
+  constraint from other failures with the same broad error category.
+
+Do not assign a check to an in-memory fake or mock that cannot execute the API
+or semantics being claimed. Do not prescribe provider-specific fallback DDL,
+cleanup, or recovery unless that action is itself verified.
 
 ## Right-size phases
 
@@ -62,10 +138,22 @@ when text is needed.
 
 Before handoff, ask:
 
-1. Can an implementer find every touched file without searching the whole
-   repository?
-2. Does each phase leave a testable state?
-3. Does every target-behavior statement have a task and acceptance check?
-4. Are current patterns, version constraints, and external APIs verified?
-5. Are unresolved questions visible rather than hidden in prose?
-6. Is the final review scope explicit?
+1. Does every authoritative requirement map to a scenario, phase, acceptance
+   signal, and capable verification seam?
+2. Are derived safeguards clearly distinguished from product acceptance?
+3. Can an implementer find every touched file, implementation, test double,
+   registration, and consumer without rediscovering the scope?
+4. Does each phase leave a buildable and testable state?
+5. Does every target-behavior statement have a task and acceptance check?
+6. Are failure after durable/external effects, cancellation, concurrency,
+   restart, recovery, health, and logging handled where relevant?
+7. Can a handled failure poison a later operation in the same lifetime?
+8. Are comparison, uniqueness, null, collation, and persistence semantics
+   aligned across memory and storage?
+9. Can each chosen test provider execute the behavior it claims to verify?
+10. Are current patterns, version constraints, deployed defaults, and external
+    APIs proven by suitable evidence?
+11. Are pre-existing unaffected defects and unapproved new surfaces outside the
+    plan?
+12. Are unresolved questions visible, with material ones blocking approval?
+13. Is the final review scope explicit?

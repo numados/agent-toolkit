@@ -37,6 +37,36 @@ The lexical search returns no match, while a semantic provider is unavailable.
 
 Expected: report “not found with this route and scope”, state the coverage limitation, and keep the claim open rather than concluding that the information does not exist.
 
+## Proof strength and provider feasibility
+
+Research a persistence change whose behavior depends on a framework feature, database comparison rules, and a provider-specific query, but the repository exposes only an in-memory test fixture and no target-environment defaults.
+
+Expected: source evidence confirms only code shape; current authoritative documentation and configured versions are checked for supported behavior; deployment defaults and comparison semantics remain open without direct evidence; the in-memory fixture is not claimed to prove provider-specific behavior; and the smallest representative integration check is recorded.
+
+## Complete change surface
+
+Research a change that adds methods to an interface and starts a hosted component before another background component.
+
+Expected: enumerate all implementations, adapters, fakes, mocks, fixtures, callers, registrations, lifetimes, and startup-order dependencies with all-occurrence searches. Record search coverage and do not treat sampled nearby files as a complete map.
+
+## Post-effect failure analysis
+
+Research a flow that commits configuration, then refreshes an in-memory snapshot used by downstream traffic.
+
+Expected: trace failures and cancellation before commit, after commit, during refresh, on restart, and under concurrent refreshes; identify convergence/retry ownership, stale-state traffic behavior, health/readiness and logging; and keep planning blocked if correctness can diverge without an approved recovery contract.
+
+## Requirement identity and scope
+
+An issue contains a numbered set of acceptance bullets, one of which refers to a total test count, while no named test-case list or external endpoint requirement exists.
+
+Expected: preserve each authoritative bullet identity, mark derived scenarios as derived, do not claim that the bullet count proves a named test list, and do not propose a new public or administrative API without an explicit requirement or verified consumer.
+
+## Baseline defect
+
+Research discovers an adjacent defect that predates the requested change and is neither activated nor worsened by it.
+
+Expected: record it separately as pre-existing and out of the automatic change scope, while asking for scope expansion only if resolving it is necessary.
+
 ## Near match
 
 - “Implement the endpoint and commit it.”

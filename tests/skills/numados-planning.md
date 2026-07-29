@@ -29,6 +29,36 @@ Expected: stop implementation at the safe boundary, append a stable `P3` without
 
 Expected phase content includes objective, dependencies, exact paths/symbols, atomic tasks, acceptance checks with expected signals, risks, and a resulting-change commit boundary. It must not prescribe a universal commit-message format or a specific forge/ticket system.
 
+## Requirement traceability and surface boundary
+
+The research contains authoritative acceptance bullets plus additional derived reliability scenarios, and explicitly says no new external management surface is required.
+
+Expected: map each authoritative requirement to a scenario, phase, acceptance signal, and capable verification; label derived safeguards separately; preserve the no-new-surface boundary; and never infer a named test list merely from a requirement count.
+
+## Exhaustive contract and lifecycle map
+
+The plan adds members to a shared interface and registers a loader whose completion must precede dependent hosted components.
+
+Expected: use all-occurrence searches to include every implementation, adapter, fake, mock, fixture, caller, registration, lifetime, and startup-order dependency. The plan must include composition-path verification and cannot call a sampled file map complete.
+
+## Failure after durable state
+
+A write commits successfully and a subsequent cache refresh, publication, or external notification can fail or be cancelled.
+
+Expected: the plan states caller-visible and durable state at each boundary, retry/reconciliation ownership, idempotency, stale-state traffic/health behavior, cancellation ownership, restart behavior, logging, and a test for convergence. Approval remains blocked if correctness can diverge without a recovery contract.
+
+## Reused state after translated failure
+
+A scoped or session-lived unit of work catches and translates a provider write exception.
+
+Expected: plan cleanup/reset or a short-lived replacement, plus a test proving a later valid operation succeeds in the same relevant lifetime. Do not assume exception translation resets tracked/session state.
+
+## Provider-realistic verification
+
+The proposed change depends on provider-specific temporal/history queries, migration propagation, collation or uniqueness behavior, and exact exception metadata, but fast tests use an in-memory fake.
+
+Expected: keep pure rules in fast tests, move provider semantics to a representative configured-provider integration fixture, verify generated and resulting schema shape, distinguish the intended constraint from similar errors, and avoid speculative manual DDL or fallback recovery.
+
 ## Approval gate
 
 After writing a valid plan, ask the user to approve or revise it. Do not modify product source, tests, configuration, branches, commits, or remote state in planning mode.

@@ -38,8 +38,10 @@ it is available at `contracts/development-workflow-artifacts.md`.
 
 Define a bounded search before spending tokens: roots, remote objects, file
 types, version/time scope, excluded sensitive areas, and a candidate limit.
-When a task spans several repositories, remote systems, or unfamiliar
-terminology, follow [the research method](references/research-method.md).
+Follow [the research method](references/research-method.md) for claim-strength,
+requirements traceability, change-surface census, and state/failure analysis.
+Its extended retrieval procedure is required when a task spans several
+repositories, remote systems, or unfamiliar terminology.
 Choose the narrowest verified provider:
 
 - use `$numados-local-search` for local filename, lexical, structural,
@@ -50,15 +52,30 @@ Choose the narrowest verified provider:
 - verify semantic/indexed candidates against the source document before using
   them as evidence.
 
+Match the evidence to the claim. Source proves code shape; it does not by
+itself prove provider behavior, deployed defaults, runtime recovery, or test
+feasibility. Verify those claims against the configured version/provider and,
+when correctness depends on them, a representative executable check or direct
+environment evidence.
+
 Capture only information that changes the implementation decision:
 
-1. goal and success conditions;
-2. observed current flow and affected contracts/consumers;
-3. target behavior or decision to make;
-4. two or three real options when a choice exists;
-5. `Confirmed`, `Inferred`, and `Open` claims with source paths, headings,
+1. authoritative requirements and user decisions, traced to actors, triggers,
+   observable outcomes, and constraints without inventing unnamed scenarios;
+2. observed current flow and the complete affected contract surface, including
+   implementations, test doubles, registration/lifetime/order, persistence,
+   operational state, and downstream consumers when applicable;
+3. state transitions and material failure points before and after durable or
+   externally visible effects, including cancellation, concurrency, recovery,
+   health, and logging where relevant;
+4. target behavior or decision to make, including explicit API and scope
+   boundaries;
+5. two or three real options when a choice exists;
+6. `Confirmed`, `Inferred`, and `Open` claims with source paths, headings,
    lines, or URLs;
-6. high-impact open questions with the smallest next check.
+7. high-impact open questions with the smallest next check;
+8. adjacent pre-existing behavior classified separately from behavior
+   introduced, activated, or worsened by the requested change.
 
 Do not copy whole files, remote responses, conversations, or long excerpts.
 An absent match means “not found with this route and scope,” not proof of
@@ -91,11 +108,19 @@ and bounded rediscovery checks.
 ## Gate and result
 
 Before handing off, confirm that every success condition is represented,
-current and target behavior are separate, decisions have evidence, open
-questions have next checks, and no product file changed. If a material choice
-needs user approval, present the smallest decision and stop. If an open
-question needs bounded cross-source investigation before a decision, hand off
-to `$numados-gap-drill` rather than expanding this research pass.
+current and target behavior are separate, exhaustive searches support claims
+of completeness, material failure/recovery paths are represented, proposed
+verification can exercise the claimed behavior, decisions have evidence, open
+questions have next checks, and no product file changed. Do not introduce a
+new public interface, endpoint, worker, or integration surface without an
+explicit requirement or verified consumer.
+
+`READY FOR PLANNING` requires every plan-shaping claim to be `Confirmed`.
+An `Open` claim blocks planning when it can change external scope, data
+semantics or migration shape, consistency/recovery, component lifetime/order,
+security, or verification feasibility. Present a material user decision and
+stop, or hand a bounded evidence question to `$numados-gap-drill`; do not
+convert it into a planning assumption.
 
 Return:
 
