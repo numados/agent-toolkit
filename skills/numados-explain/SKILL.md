@@ -123,4 +123,4 @@ Remove repetition and background that does not help answer those questions. If u
 
 ## Routing boundary
 
-Use `$numados-clear-report` when the user only wants a quick orientation such as what something is, what it contains, or how it fits. Do not turn a request to implement, diagnose, review, search, or navigate task history into an explanation; hand it to the corresponding specialist workflow. If both skills could apply, explicit lack of understanding or a request for how/why takes precedence over a report.
+Use `$numados-clear-report` when the user only wants a quick orientation such as what something is, what it contains, or how it fits, or when the deliverable is a written report of a finished conclusion for someone else to read — plain language for a non-expert reader does not by itself make the request an explanation. Do not turn a request to implement, diagnose, review, search, or navigate task history into an explanation; hand it to the corresponding specialist workflow. If both skills could apply, explicit lack of understanding or a request for how/why takes precedence over a report.
