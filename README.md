@@ -29,6 +29,7 @@ manifests, external-tool contracts, and the non-destructive Pi installer.
 ├── AGENTS.md
 ├── skills/                   reusable workflows (see Core Skills below)
 │   └── <skill>/              SKILL.md, references/, agents/, runtime/, scripts/
+├── instructions/             always-on user instructions; harnesses symlink to it
 ├── memory/                   curated shared knowledge
 ├── contracts/                versioned agreements
 ├── adapters/                 integration boundaries and shared adapter notes

@@ -8,6 +8,7 @@ This repository distributes reusable agent context across machines. Keep the por
 
 - Put task-scoped workflows in `skills/<name>/`.
 - Put concise shared knowledge in `memory/`; do not put secrets, user-private state, or machine-local facts there.
+- Put always-on, harness-agnostic user instructions in `instructions/`; the harnesses' native instruction paths symlink to that file instead of holding copies.
 - Put durable behavioural and integration agreements in `contracts/`.
 - Put small client-specific boundaries and schemas in `adapters/`; keep a
   substantial harness integration in its own repository next to this toolkit.
