@@ -14,8 +14,11 @@ A durable artifact must describe the software or knowledge state that maintainer
 
 - Keep identifiers, strings, comments, and documentation focused on product behavior, domain meaning, public contracts, non-obvious invariants, compatibility constraints, or maintainable implementation rationale.
 - Prefer code that explains itself. Add a comment only when the reason, constraint, or safety invariant cannot be expressed clearly in code.
+- A comment states intent; the code states implementation. Do not restate in prose what the line already says.
 - Do not mention an AI model, agent, prompt, conversation, session, PRD, task discussion, review recommendation, reviewer, implementation plan, or “as requested” history.
-- Do not add issue, PRD, review, or task URLs to source comments. A durable external standard or protocol reference is allowed only when the implementation directly depends on it and the repository accepts such references.
+- Do not put work-item identifiers in source comments — neither URLs nor bare IDs (`BIL-1234`, `[12345678]`, `#123`). Unlike a commit message, a comment has no place where a tracker reference belongs: it decays into an unresolvable label as trackers migrate. A durable external standard or protocol reference is allowed only when the implementation directly depends on it and the repository accepts such references.
+- Do not write a comment as a changelog entry (“added…”, “now includes…”, “removed the old loop”). Describe the current behavior; Git records the change.
+- Keep it to one line where one line suffices, in imperative mood matching the surrounding code’s language and tone.
 - Do not leave transient debugging notes, review replies, speculative TODOs, or copied planning text in production code or tests.
 
 ## Commit messages

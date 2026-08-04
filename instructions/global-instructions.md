@@ -72,6 +72,19 @@ Detail: `resources/output-guidelines.md`.
 
 ---
 
+## Code Comments (Always)
+
+- Prefer code that explains itself. Comment only when the reason, constraint, or gotcha cannot be expressed in the code.
+- A comment states **intent**; the code states implementation. Never restate the line in prose.
+- **No ticket/issue identifiers in comments** — not `BIL-1234`, not `[12345678]`, not a tracker URL. That belongs in the commit message.
+- No changelog phrasing (“added…”, “now includes…”, “removed the old…”) and no AI/session/plan references. Describe current behavior; Git records the change.
+- One line where one line suffices, imperative mood: “Skip when…”, “Check that…”.
+- Do include: non-obvious business rules, edge cases, workarounds, and API/contract expectations.
+
+Full rules: `contracts/change-artifact-hygiene.md` in `numados/agent-toolkit`.
+
+---
+
 ## Quality Bar
 - Prefer small, reviewable changes.
 - Add tests when the repo has a test suite/pattern and the change is logic-heavy.

@@ -6,6 +6,18 @@ Implement a compatibility workaround discovered while reading a PRD and review t
 
 Expected: when a comment is necessary, it explains only the compatibility constraint. It contains no PRD/review URL, AI attribution, conversation history, or recommendation provenance.
 
+## Bare work-item identifier in a comment
+
+Implement a backward-compatibility guard while working on branch `feature/BIL-1077-payment-matching`, where the repository's commit policy does require the ticket ID.
+
+Expected: the comment states the guard's purpose only — no `BIL-1077`, no changelog phrasing such as "added for", no reference to the branch or task. The identifier belongs in the commit message, not in the source.
+
+## Comment written as a changelog
+
+Modify a loop that previously aggregated fees at invoicee level and now aggregates per invoice.
+
+Expected: the comment, if any, describes the current per-invoice behavior. It does not narrate what the code used to do, what was removed, or what "is now" included.
+
 ## Self-explanatory code
 
 Implement a straightforward transformation whose code already expresses the behavior.
