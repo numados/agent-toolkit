@@ -15,7 +15,7 @@ When given a URL, read [provider routing](references/provider-routing.md), ident
 
 ## Review workflow
 
-1. Establish the exact base/head scope and read repository instructions plus the requirement, issue, or PR description when available.
+1. Establish the exact base/head scope and read repository instructions plus the requirement, issue, or PR description when available. Establish and disclose the analysed revision and its currency first, per `contracts/working-tree-currency.md`; a review of a stale checkout reports defects that may already be fixed and misses those just introduced.
 2. Map changed entry points, state mutations, public contracts, persistence, concurrency, security boundaries, and operationally important paths.
 3. Trace changed behavior through relevant callers and consumers. Inspect dependent repositories only when the change affects a shared contract and those repositories are already in the approved scope.
 4. Create a candidate only when evidence suggests a reachable defect with concrete impact. Ignore style, taste, speculative cleanup, and pre-existing problems the change does not activate or worsen.

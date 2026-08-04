@@ -29,8 +29,11 @@ Durable workflow notes are Obsidian-backed. Invoke
    when the plan or current question requires them.
 
 Require an approved current plan, a known source scope, and a safe working-tree
-baseline. Re-check plan assumptions against current source, configuration,
-dependencies, and authoritative documentation. If they drift, stop and invoke
+baseline. Establish and disclose the working revision and its currency per
+`contracts/working-tree-currency.md` before the first source change; do not
+refresh, pull, or reconcile a branch without an explicit request. Re-check plan
+assumptions against current source, configuration, dependencies, and
+authoritative documentation. If they drift, stop and invoke
 `$numados-planning` before making an unplanned source change.
 
 ## Execute phases

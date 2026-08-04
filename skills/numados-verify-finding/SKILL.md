@@ -13,6 +13,8 @@ Require the candidate claim plus its review scope: URL/diff/commit, file and lin
 
 Keep the operation read-only. Do not edit code or post a review comment. If the change, contract, or required source cannot be accessed, ask for the smallest missing artifact or return `Needs More Evidence` with that exact boundary.
 
+Verify against the revision the claim actually applies to, and establish its currency per `contracts/working-tree-currency.md`. A candidate refuted only because the local checkout predates the fix is `Needs More Evidence`, not `False Alarm`.
+
 ## Verification method
 
 For each candidate:

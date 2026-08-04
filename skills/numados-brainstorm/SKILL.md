@@ -32,7 +32,10 @@ it is available at `contracts/development-workflow-artifacts.md`.
    task slug only when no identifier is available. Ask one smallest question if
    the destination or task identity is ambiguous.
 4. Read repository instructions, branch/status, relevant history, and the
-   smallest source and documentation slices needed for the task.
+   smallest source and documentation slices needed for the task. Establish and
+   record the analysed revision and its currency per
+   `contracts/working-tree-currency.md`; research recorded against a stale
+   checkout becomes a durable handoff that misleads every later phase.
 
 ## Investigate
 

@@ -29,7 +29,11 @@ Recover in this order:
    iterations only when needed for the current decision.
 
 Require enough verified research to identify the goal, current behavior, target
-behavior, affected contracts/files, and verification scope. If a gap-drill
+behavior, affected contracts/files, and verification scope. Confirm that the
+research and the file boundaries were established on a current revision per
+`contracts/working-tree-currency.md`; plan phases built on a stale reading of
+the code produce file boundaries and acceptance criteria that do not match
+reality. If a gap-drill
 event reports a material plan impact, incorporate its verified conclusion
 before changing the plan; do not treat an unresolved gap as an approved design.
 If a high-impact question is unresolved, stop with its impact and smallest

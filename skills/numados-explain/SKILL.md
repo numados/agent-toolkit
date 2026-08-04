@@ -11,6 +11,8 @@ Explain the material accurately and accessibly, in the order the reader needs to
 
 Read the supplied material before explaining it. For a path or repository, inspect the relevant source. For a remote URL, infer its provider from the host/path and use an already available read-only provider. For a general topic whose current behavior matters, consult authoritative sources.
 
+For repository material, establish and disclose the analysed revision and its currency per `contracts/working-tree-currency.md` before explaining behavior. An explanation of code that has since changed reads as authoritative and is the hardest kind of wrong answer to detect.
+
 If the source cannot be accessed and its contents are essential, ask for that source in one precise sentence. Otherwise infer the reader's baseline from the conversation and proceed without an interview.
 
 Separate:
