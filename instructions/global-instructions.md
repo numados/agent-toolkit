@@ -130,6 +130,15 @@ Full rules: `contracts/change-artifact-hygiene.md` in `numados/agent-toolkit`.
 - Use Obsidian MCP for vault content.
 - Prefer MCP for safe, auditable access; basic read operations should be allowed by default. This is about auditability, not about preferring paid tools.
 
+## Web Search (DDG vs Tavily)
+
+Two backends: **DuckDuckGo** (free, no key needed) and **Tavily** (paid, needs `TAVILY_API_KEY`, billed per call). Tavily runs a deeper, multi-source research agent; DDG returns standard search results.
+
+- **Default to DDG.** Current events, news, quick facts, prices, dates, documentation lookups, "what is X" — DDG handles all of these. Use `web_search` with `mode='auto'` (or omit the mode parameter).
+- **Escalate to Tavily only when DDG was not enough.** Tavily is for deep research: synthesising information across many sources, resolving conflicting claims, finding obscure or poorly-indexed material, or when a DDG search returned insufficient results for a non-trivial question. Use `web_search` with `mode='deep'`.
+- **Say why you escalated.** One line: what DDG missed or why the question needs deeper coverage.
+- **Never pay for a one-answer lookup.** A single known fact, a company website, an API doc page — DDG first, every time.
+
 ---
 
 <!-- BEGIN numados:managed -->
