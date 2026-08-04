@@ -48,6 +48,14 @@ clean result. Do not deploy into harness-private legacy locations (e.g.
 `~/.codex/skills/`) — Codex discovers `~/.agents/skills`, and a duplicate link
 makes the same skill appear twice in its selector.
 
+Never run a foreign or superseded installer against a link directory. A
+generic installer that copies its own payload over `~/.claude/skills` or
+`~/.agents/skills` silently replaces toolkit symlinks with stale copies, and
+the affected skills keep triggering with old instructions until the doctor is
+run. Before executing any installer that writes to a link directory, prove
+which repository owns the deployed result — an installer's own claim to be
+canonical is not proof — and run `scripts/inspect-skill-links.sh` afterwards.
+
 ## Skill-owned configuration
 
 When an installed Numados skill declares machine/project parameters, setup
