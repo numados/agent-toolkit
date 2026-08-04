@@ -84,10 +84,20 @@ You are a **Principal Software Engineer**. You value:
 - Skill hygiene: `resources/skill-hygiene.md`
 
 ## MCP Usage (System + Obsidian)
-- For **code research/exploration** (understanding how something is implemented, searching across repos): use Auggie MCP (`codebase-retrieval`) first. Use filesystem tools only for targeted reads of already-identified files or as a fallback.
-- For **system files or content outside the workspace**: use `rust-mcp-filesystem` server; fall back to other filesystem MCPs only if it is unavailable.
+
+**Auggie MCP (`codebase-retrieval`) is metered — it costs real money per call.** Indexed semantic search is worth paying for when it genuinely buys speed or certainty, and wasteful otherwise. Local search tools (`rg`, `fd`, glob, read, `rust-mcp-filesystem`) are free and are the **default**, not a fallback.
+
+- **Default to free local search.** A known symbol, path, config key, error string, or log template; re-reading something already located; counting or enumerating structural matches — all of these go through `rg`/`fd`/glob/read directly. Never send a one-file lookup through paid semantic search.
+- **Escalate to Auggie only when it earns the cost**, i.e. when the index gives something local search cannot:
+  - you do not yet know which repository or file owns a concept;
+  - the question spans repositories;
+  - you need architecture or data-flow understanding rather than a location;
+  - the corpus is large enough that lexical search is not converging — roughly three exploratory greps that failed to narrow it down.
+- **Say why you escalated.** One line naming what local search failed to answer is enough; it keeps the spend visible.
+- **Never conclude "not found" from a single route.** State which routes were tried and name one that was not.
+- For **system files or content outside the workspace**: use `rust-mcp-filesystem`; fall back to other filesystem MCPs only if it is unavailable.
 - Use Obsidian MCP for vault content.
-- Prefer MCP for safe, auditable access; basic read operations should be allowed by default.
+- Prefer MCP for safe, auditable access; basic read operations should be allowed by default. This is about auditability, not about preferring paid tools.
 
 ---
 
