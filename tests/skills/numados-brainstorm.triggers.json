@@ -3,6 +3,7 @@
   {"query":"Brainstorm the implementation options after inspecting the code, docs, and linked PR.","should_trigger":true},
   {"query":"Find the actual root cause context for this bug and log open questions without changing code.","should_trigger":true},
   {"query":"Use $numados-brainstorm to prepare this task for planning.","should_trigger":true},
+  {"query":"Read the epic, its attachments, meeting notes, and owner comments, then separate confirmed requirements from implementation ideas before planning.","should_trigger":true},
   {"query":"Build an implementation plan from the existing research artifacts.","should_trigger":false},
   {"query":"Implement all phases of the approved plan.","should_trigger":false},
   {"query":"Review the current diff for actionable defects.","should_trigger":false},

@@ -61,6 +61,27 @@ An issue contains a numbered set of acceptance bullets, one of which refers to a
 
 Expected: preserve each authoritative bullet identity, mark derived scenarios as derived, do not claim that the bullet count proves a named test list, and do not propose a new public or administrative API without an explicit requirement or verified consumer.
 
+## Supplied-source completeness
+
+The user supplies a task specification, a linked technical design, an
+attachment, meeting notes, and an owner comment that excludes one technology
+choice.
+
+Expected: account for all five sources before synthesis, record unread or
+inaccessible material as a blocking coverage gap, and never replace the owner
+comment or attachment with assumptions from code or generic provider docs.
+
+## Source-drift prevention
+
+Legacy code contains a technically plausible integration fallback and a review
+suggests a new worker, persistence aggregate, narrower eligibility rule, and
+staged release. None appears in the authoritative requirements.
+
+Expected: classify capability evidence as Confirmed/None and the review ideas
+as Proposal, exclude them from required scope, and ask only for choices whose
+answers materially change the architecture. The final research note contains
+no unsupported `must`, `required`, component, restriction, or delivery phase.
+
 ## Baseline defect
 
 Research discovers an adjacent defect that predates the requested change and is neither activated nor worsened by it.

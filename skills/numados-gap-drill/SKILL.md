@@ -1,6 +1,6 @@
 ---
 name: numados-gap-drill
-description: Close decision-relevant gaps left by brainstorming or planning through bounded evidence gathering across Obsidian, repositories, authoritative documentation, remote artifacts, and open sources; use independent model opinions when useful, then ask the smallest high-impact question if evidence cannot decide. Use when an existing task record has unresolved assumptions, conflicting evidence, an open planning question, or needs "drill the gaps" before implementation; when no task research record exists yet, route initial task research to numados-brainstorm.
+description: Close decision-relevant gaps left by brainstorming or planning through bounded evidence gathering while separating technical facts and options from scope authority; ask the smallest high-impact question when evidence cannot authorize a choice. Use when an existing task record has unresolved assumptions, conflicting evidence, an open planning question, or needs "drill the gaps" before implementation; when no task research record exists yet, route initial task research to numados-brainstorm.
 ---
 
 # Numados Gap Drill
@@ -45,9 +45,15 @@ local source, tests, instructions, and bounded history; the supplied remote
 artifact or repository; authoritative documentation; then open-source search.
 Search candidates before reading bodies, keep roots and result limits explicit,
 and stop as soon as the decision criterion is proven or disproven. Classify
-each material claim as `Confirmed`, `Inferred`, or `Open` with a path, heading,
-line, commit, or URL. “No match” means not found with that route and scope,
-not proof of absence. See [the drill method](references/drill-method.md).
+each material claim by evidence (`Confirmed`, `Inferred`, `Open`) and authority
+(`Required`, `Approved`, `Derived safeguard`, `Proposal`, `None`) with a path,
+heading, line, commit, or URL. “No match” means not found with that route and
+scope, not proof of absence. See [the drill method](references/drill-method.md).
+
+Finding a feasible API, legacy adapter, storage pattern, fallback, or safer
+operational mechanism resolves only capability. It does not select that option
+for the task. Requirement intent or explicit owner authority remains a user
+decision unless the authoritative source already makes the choice.
 
 ## Independent challenge
 
@@ -64,13 +70,18 @@ the same checks sequentially. Never treat model agreement as evidence.
 ## Resolve or discuss
 
 - `RESOLVED`: evidence satisfies the criterion, contradictions are explained,
-  and the decision plus residual assumptions are recorded.
+  and the factual conclusion plus residual assumptions are recorded. Use this
+  for a scope choice only when Required/Approved authority is also present.
 - `NEEDS USER DECISION`: automated research narrowed the choice but authority,
-  product intent, or an unresolved conflict remains. Ask one question at a
+  requirement intent, or an unresolved conflict remains. Ask one question at a
   time, include the recommended option, alternatives, trade-offs, and exactly
   what changes after the answer. Resume from the saved event after the reply.
 - `BLOCKED`: a required source, vault, provider, or access boundary is missing;
   name the exact coverage gap and do not infer around it.
+
+Before returning `RESOLVED`, check that no recommendation or technically
+possible option was rewritten as required scope. When evidence narrows the
+options but cannot authorize one, return `NEEDS USER DECISION`.
 
 If the result changes the approved plan's architecture, phases, acceptance,
 scope, or verification, do not edit `plan.md`; set

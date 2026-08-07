@@ -1,6 +1,6 @@
 ---
 name: numados-planning
-description: Turn verified task research into a repository-aligned implementation plan with explicit architecture, stable phases, acceptance criteria, verification, and review handoff. Use after brainstorm context exists or when an implementation discovers that the current plan needs an evidence-based phase extension.
+description: Turn source-complete, scope-authorized task research into a repository-aligned implementation plan with explicit architecture, stable phases, acceptance criteria, verification, and a source-drift audit. Use after brainstorm context exists or when an implementation discovers that the current plan needs an evidence-based phase extension.
 ---
 
 # Numados Planning
@@ -41,6 +41,13 @@ discriminating check. If the research base itself is missing or too thin to
 plan from, stop and recommend `$numados-brainstorm` instead of inventing
 requirements.
 
+Require a supplied-source register or equivalent evidence that every
+decision-relevant URL, attachment, owner comment, meeting note, and directly
+linked authoritative artifact was read or explicitly marked unavailable. A
+repository survey cannot compensate for an unread requirement source. If missing
+coverage can change scope or architecture, stop and return it to
+`$numados-brainstorm` or `$numados-gap-drill`.
+
 ## Build or extend the plan
 
 Re-check material research claims against current repository instructions,
@@ -58,6 +65,9 @@ Before assigning phases, prove plan readiness:
 
 - trace every authoritative requirement and explicit user decision to a
   scenario, planned behavior, acceptance signal, and verification;
+- give every scope-bearing plan element an authority of `Required`, `Approved`,
+  or minimal `Derived safeguard`; a confirmed fact or feasible code path alone
+  has no scope authority;
 - re-run exhaustive searches for every changed contract or symbol, including
   implementers, test doubles, registration/lifetime/order, persistence and
   operational consumers;
@@ -71,6 +81,12 @@ or service-to-service surface merely because it may be useful later. Require an
 approved requirement or verified current consumer. Keep pre-existing,
 unaffected defects outside the implementation scope unless the user explicitly
 adds them.
+
+Apply the same authority gate to technology choices, persisted domain
+records, manual/support flows, fallbacks, user-visible restrictions, repository
+changes, rollout stages, recurring verification, and operational ownership.
+Review recommendations, legacy implementations, examples, and model output are
+`Proposal` inputs, never phase authorization.
 
 Treat framework/provider behavior, migration shape, deployed defaults, data
 comparison semantics, and external contracts as facts only when the evidence
@@ -92,6 +108,14 @@ The current `plan.md` contains only the executable design:
 
 Each phase must be a coherent, independently verifiable increment. Keep the
 number of phases small and meaningful.
+
+Before handoff, run a source-drift audit over the full plan. Enumerate every
+obligation word (`must`, `required`, `will`, `needs`), new/changed component,
+record, endpoint, worker, admin/manual action, provider/fallback, restriction,
+repository, rollout rule, and acceptance condition. Trace each to its
+Required/Approved source or to a minimal Derived safeguard and its prevented
+failure. Remove Proposals from executable phases; move unresolved choices to
+Open and block when they can change the plan.
 
 When phases introduce or change business behaviour, invoke `$numados-tdd` in
 planning mode to extend each phase with seams under test, a business-rule test
@@ -159,6 +183,12 @@ Remove placeholders, speculative fallbacks, and vague tasks. Make every
 remaining inference or open question visible with its validation step, and
 block approval when it can materially change the design or make verification
 invalid.
+
+Re-read the final architecture, repository map, and phase list as if they were
+requirements. No item may look mandatory merely because it is written in the
+plan. If its only provenance is code capability, provider documentation,
+historical notes, a review, or this agent's recommendation, it is unsupported
+scope and must be removed or returned for approval.
 
 Do not start implementation automatically. Ask for approval or revision unless
 the caller explicitly supplied approval for this plan/extension.

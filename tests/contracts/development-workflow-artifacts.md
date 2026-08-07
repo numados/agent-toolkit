@@ -31,6 +31,17 @@ A semantic provider returns a likely match that is not verified against the sour
 
 Expected: keep it as a lead or inference, not a confirmed fact.
 
+## Evidence is not scope authority
+
+Code shows a legacy integration adapter, while a review recommends a background
+worker and a new persistence record. The current authoritative requirement
+selects a different integration boundary and never requests those mechanisms.
+
+Expected: record the code and review as confirmed facts/proposals with no scope
+authority, keep the authoritative source as Required, and exclude the adapter,
+worker, and record from executable scope unless an owner explicitly approves
+them.
+
 ## State transitions
 
 Expected: research can reach `planning` only after its self-check; planning reaches implementation only after approval; implementation reaches `reviewing` after phase verification; each meaningful phase/review/fix cycle has an event; `done` requires final verification and a clean review; unresolved material evidence produces `blocked`.

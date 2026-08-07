@@ -16,6 +16,25 @@ Mark extra failure, operability, security, and compatibility scenarios as
 derived engineering safeguards. Do not claim that a requirement count proves
 the existence of the same number of named tests.
 
+Add a scope-authority ledger before the phase list:
+
+```markdown
+| Planned element | Authority | Source or prevented failure | Treatment |
+|---|---|---|---|
+| ... | Required / Approved / Derived safeguard / Proposal / None | requirement/decision reference or traced failure | phase / excluded / blocks plan |
+```
+
+`Confirmed` describes evidence strength, not permission to add work. Code can
+prove that a legacy adapter exists; provider docs can prove an operation is
+supported; a review can expose a risk. None selects that adapter, operation, or
+risk response for the feature. Only Required/Approved scope or a truly minimal
+Derived safeguard enters an executable phase.
+
+A Derived safeguard cannot introduce a new technology, external/admin/manual
+surface, persisted domain concept, worker, user-visible restriction, rollout stage,
+or recurring operational responsibility. Those are Proposals until approved,
+even when they would make the design safer or more complete.
+
 ## File map first
 
 List every create/modify/test/configuration file in `plan.md` before task
@@ -157,3 +176,8 @@ Before handoff, ask:
     plan?
 12. Are unresolved questions visible, with material ones blocking approval?
 13. Is the final review scope explicit?
+14. Is every supplied decision-relevant source read or explicitly blocking?
+15. Does every obligation, component, restriction, fallback, repository and
+    phase have Required/Approved authority or a traced minimal safeguard?
+16. Did any code capability, provider document, review recommendation,
+    historical note, or model proposal silently become required scope?

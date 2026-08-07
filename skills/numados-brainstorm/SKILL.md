@@ -1,6 +1,6 @@
 ---
 name: numados-brainstorm
-description: Research and structure a development task before planning by inspecting the real code, documentation, history, and remote artifacts; classify evidence, record decisions and open questions, and persist a compact Obsidian handoff. Use when a feature, bug fix, refactor, or integration needs verified context before implementation and no task research record exists yet; route already-recorded open questions or gaps in an existing task record to numados-gap-drill.
+description: Research and structure a development task before planning by reading all decision-relevant supplied sources, inspecting real code and documentation, separating evidence from scope authority, and persisting a compact Obsidian handoff without promoting proposals into requirements. Use when a feature, bug fix, refactor, or integration needs verified context before implementation and no task research record exists yet; route already-recorded open questions or gaps in an existing task record to numados-gap-drill.
 ---
 
 # Numados Brainstorm
@@ -36,6 +36,12 @@ it is available at `contracts/development-workflow-artifacts.md`.
    record the analysed revision and its currency per
    `contracts/working-tree-currency.md`; research recorded against a stale
    checkout becomes a durable handoff that misleads every later phase.
+5. Build a supplied-source register for every URL, attachment, comment thread,
+   task/epic link, meeting note, and local file explicitly provided by the user
+   or directly attached/linked by an authoritative task. Mark each as `Read`,
+   `Unavailable`, or `Not decision-relevant` with a reason. Do not conclude or
+   declare planning readiness while a decision-relevant supplied source is
+   unread; report the exact access gap instead.
 
 ## Investigate
 
@@ -74,8 +80,9 @@ Capture only information that changes the implementation decision:
 4. target behavior or decision to make, including explicit API and scope
    boundaries;
 5. two or three real options when a choice exists;
-6. `Confirmed`, `Inferred`, and `Open` claims with source paths, headings,
-   lines, or URLs;
+6. evidence strength (`Confirmed`, `Inferred`, `Open`) and scope authority
+   (`Required`, `Approved`, `Derived safeguard`, `Proposal`, `None`) with
+   source paths, headings, lines, or URLs;
 7. high-impact open questions with the smallest next check;
 8. adjacent pre-existing behavior classified separately from behavior
    introduced, activated, or worsened by the requested change.
@@ -83,6 +90,14 @@ Capture only information that changes the implementation decision:
 Do not copy whole files, remote responses, conversations, or long excerpts.
 An absent match means “not found with this route and scope,” not proof of
 absence.
+
+Code, provider documentation, historical notes, reviews, and model analysis
+may establish current behavior, capability, risk, or a candidate. They do not
+authorize feature scope. A derived safeguard must be the minimum internal
+property needed to make a Required/Approved behavior safe; if it adds a
+technology, stored domain record, public/admin/manual surface, worker, user-visible
+restriction, rollout stage, or ongoing operations, keep it as `Proposal` or
+`Open` until explicitly approved.
 
 ## Write the compact handoff
 
@@ -110,7 +125,8 @@ and bounded rediscovery checks.
 
 ## Gate and result
 
-Before handing off, confirm that every success condition is represented,
+Before handing off, confirm that every decision-relevant supplied source is
+accounted for, every success condition is represented,
 current and target behavior are separate, exhaustive searches support claims
 of completeness, material failure/recovery paths are represented, proposed
 verification can exercise the claimed behavior, decisions have evidence, open
@@ -118,7 +134,16 @@ questions have next checks, and no product file changed. Do not introduce a
 new public interface, endpoint, worker, or integration surface without an
 explicit requirement or verified consumer.
 
-`READY FOR PLANNING` requires every plan-shaping claim to be `Confirmed`.
+Run a source-drift lint over `research.md`: enumerate every `must`, `required`,
+planned repository/component/data record, provider/fallback, restriction,
+manual/admin flow, worker, rollout rule, and acceptance condition. Each must
+have Required/Approved authority or be visibly marked Derived safeguard,
+Proposal, or Open. Remove unsupported obligations instead of making them sound
+necessary.
+
+`READY FOR PLANNING` requires every plan-shaping fact to be `Confirmed` and
+every scope-bearing behavior to be `Required`, `Approved`, or a valid minimal
+`Derived safeguard`.
 An `Open` claim blocks planning when it can change external scope, data
 semantics or migration shape, consistency/recovery, component lifetime/order,
 security, or verification feasibility. Present a material user decision and

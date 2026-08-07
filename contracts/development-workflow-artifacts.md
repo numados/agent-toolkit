@@ -97,7 +97,7 @@ or revisit the planning decision. Use the following sections when applicable:
 
 - Goal and success definition
 - Scope and constraints
-- Evidence table: claim, `Confirmed`/`Inferred`/`Open`, source, consequence
+- Evidence table: claim, evidence, scope authority, source, consequence
 - Current behavior and affected flow
 - Target behavior or decision
 - Options and trade-offs
@@ -232,7 +232,16 @@ explicitly asks for them.
 
 ## Evidence and decision rules
 
-Classify every material claim:
+Evidence strength and scope authority are separate. A true observation does not
+automatically authorize a change. Record both for every plan-shaping claim:
+
+```markdown
+| Claim | Evidence | Authority | Source | Consequence |
+|---|---|---|---|---|
+| ... | Confirmed / Inferred / Open | Required / Approved / Derived safeguard / Proposal / None | path, heading, line, or URL | ... |
+```
+
+Evidence:
 
 - **Confirmed** — directly observed in source, tests, configuration, an
   artifact, or an authoritative current document; cite a path and line/heading
@@ -242,10 +251,39 @@ Classify every material claim:
 - **Open** — unresolved; record impact, confidence, and the smallest next check
   or person who can answer it.
 
+Authority:
+
+- **Required** — explicitly required by the applicable authoritative source,
+  within the wording and scope that source actually states.
+- **Approved** — explicitly chosen by the user or responsible owner; record who
+  decided and where.
+- **Derived safeguard** — the minimum internal property needed to implement a
+  Required/Approved outcome safely. Trace the failure it prevents. If it adds
+  an external surface, provider, persisted domain concept, background worker,
+  manual/admin process, product restriction, rollout stage, or ongoing
+  operational burden, it is a Proposal until approved.
+- **Proposal** — a design option, review recommendation, fallback candidate, or
+  useful future work. It does not enter executable scope.
+- **None** — a fact about current behavior or capability with no authority to
+  change scope.
+
+Code and provider documentation can confirm implementation or capability;
+review comments, model output, examples, and historical iteration notes can
+suggest checks or options. None of them alone has Required/Approved authority.
+Historical events remain evidence history, not current implementation
+instructions.
+
 Never turn a missing tool result, absent search match, stale artifact, or model
 recollection into a confirmed fact. Re-check material evidence before planning
 and again when implementation starts if the repository or external source may
 have changed.
+
+Before research or planning is handed off, audit every sentence using obligation
+language and every proposed component, record, field, worker, endpoint, admin or
+manual action, provider, fallback, restriction, repository change, rollout
+stage, and acceptance condition. It must trace to Required/Approved authority
+or remain visibly Derived safeguard/Proposal/Open. Remove unsupported scope;
+do not hide it inside architecture prose, a risk response, or a delivery phase.
 
 ## State gates and plan extension
 

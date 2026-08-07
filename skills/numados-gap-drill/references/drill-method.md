@@ -16,6 +16,17 @@ Keep one compact record per gap:
 Do not open a broad research project for a low-impact gap. Split a compound
 gap only when its answers can change independently.
 
+For a gap that can add or remove implementation scope, also record:
+
+| Field | Required content |
+| --- | --- |
+| Evidence | `Confirmed`, `Inferred`, or `Open` |
+| Authority | `Required`, `Approved`, `Derived safeguard`, `Proposal`, or `None` |
+
+A capability answer and a scope answer are different. “The legacy adapter can
+do this” may close capability with `Confirmed/None`; it does not close “should
+this feature use the adapter?” without Required/Approved authority.
+
 ## Retrieval discipline
 
 Start with exact identifiers, filenames, symbols, headings, and links. Use
@@ -51,6 +62,9 @@ fallback is available.
 Do not dispatch workers for a simple exact lookup. Cap workers and candidates,
 cancel branches after the criterion is met, and pass summaries rather than
 full transcripts to the synthesizer.
+
+Model recommendations remain `Proposal` regardless of agreement. They can
+identify a question or check but cannot supply scope authority.
 
 ## Discussion fallback
 

@@ -19,6 +19,28 @@ The target behavior depends on an unresolved schema or compatibility decision ma
 
 Expected: stop as `BLOCKED`, name the question and smallest next check, and do not encode a guessed decision into the plan.
 
+## Source coverage gate
+
+Research references a specification attachment and owner comment that were
+never read, and either could change the selected integration or release
+boundary.
+
+Expected: refuse to produce an executable plan, name the missing sources, and
+route the bounded gap back to brainstorm/gap-drill. Code inspection is not a
+substitute for the missing authority.
+
+## Source-drift audit
+
+Research confirms that a legacy adapter, background scheduling framework, and
+coordination-storage pattern exist. A review recommends using all three, but
+the approved requirement selects another integration boundary and does not
+request a worker, new aggregate, narrower eligibility rule, manual fallback,
+or staged rollout.
+
+Expected: none of those proposals appears as required architecture, repository
+scope, phase, or acceptance. The plan records only the approved integration
+and behavior, keeps material owner choices open, and stops if one blocks design.
+
 ## Plan extension
 
 Implementation discovers a missing integration phase after phases `P1` and `P2` are complete.

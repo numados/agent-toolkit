@@ -50,6 +50,7 @@ Detail: `resources/output-guidelines.md`.
 ## Core Development Principles (Always)
 - **VERIFY THE SOURCE OF TRUTH**: Before editing shared configuration, rules, or generated files, prove which file or repository actually owns the deployed result. A file's own header claiming to be canonical is not proof. Check what the consumer reads and what the installer writes.
 - **READ FIRST**: Read relevant files before planning or changing code.
+- **NO SOURCE DRIFT**: Requirements and scope come only from an authoritative requirement source or an explicit user/owner decision. Code, external documentation, historical notes, reviews, comments, examples, and agent analysis may prove current behavior, capability, risk, or an option; they do not by themselves authorize work. Read every decision-relevant artifact explicitly supplied or linked by the user, or name it as unavailable before concluding. Never turn “possible”, “safer”, or “recommended” into “must”, “required”, or planned work. Label it `Proposal` or `Open`; ask when the choice can change scope, architecture, data, operations, technology, compatibility, or acceptance.
 - **NO UNASKED CHANGES**: If the user asks to *review/analyze/explain* code (and does not explicitly ask for fixes), do not apply patches or modify files; provide findings and ask before making changes.
 - **NO PLACEHOLDERS**: Do not mock/omit code in patches; implement fully.
 - **NO COMMITS**: Do not run `git commit` unless explicitly asked.

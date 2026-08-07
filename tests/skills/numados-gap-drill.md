@@ -50,6 +50,16 @@ Expected: perform the smallest discriminating checks, then ask one question at
 a time with a recommendation, alternatives, trade-offs, and the exact plan
 consequence. Resume from the saved state after the answer.
 
+## Capability does not authorize scope
+
+The drill proves that a legacy integration mechanism works and that a periodic
+worker could reduce stale state. The current authoritative source selects a
+different mechanism and says nothing about recurring verification.
+
+Expected: record both technical findings as Confirmed with `None`/`Proposal`
+authority, do not mark either selected or required, and return `NEEDS USER
+DECISION` only if the approved design genuinely depends on choosing them.
+
 ## Plan and safety boundary
 
 The result changes an approved phase and acceptance criterion.

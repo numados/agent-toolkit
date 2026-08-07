@@ -9,15 +9,32 @@ several repositories, remote systems, or unfamiliar terminology.
 Keep `research.md` decisive and short:
 
 ```markdown
-| Claim | Class | Source | Consequence |
-|---|---|---|---|
-| ... | Confirmed / Inferred / Open | path:line, heading, artifact, or URL | ... |
+| Claim | Evidence | Authority | Source | Consequence |
+|---|---|---|---|---|
+| ... | Confirmed / Inferred / Open | Required / Approved / Derived safeguard / Proposal / None | path:line, heading, artifact, or URL | ... |
 ```
 
 Include a row only when it changes scope, design, verification, or a user
 decision. `Confirmed` requires direct evidence. `Inferred` names the evidence
 and reasoning. `Open` includes impact, confidence, and the next discriminating
-check.
+check. Evidence answers “is this true?”; authority answers “who authorized this
+work?” A confirmed code path or provider capability still has `None` authority
+unless an authoritative requirement or explicit owner decision selects it.
+
+## Supplied-source coverage
+
+Before synthesis, account for every decision-relevant source explicitly given
+by the user and every direct attachment/link in the authoritative task:
+
+```markdown
+| Source | Status | Authority/role | Decisions affected | Limitation |
+|---|---|---|---|---|
+| ... | Read / Unavailable / Not decision-relevant | Product / user decision / capability evidence / context | ... | ... |
+```
+
+Do not substitute code exploration or general provider documentation for an
+unread task attachment, linked design, meeting record, or owner comment. If it
+cannot be read and can change scope or architecture, keep the result blocked.
 
 ## Match proof to the claim
 
@@ -58,6 +75,17 @@ contracts, and new service-to-service surfaces as scope decisions. Include one
 only when an authoritative requirement, explicit user decision, or verified
 consumer needs it; the existence of nearby infrastructure is not evidence that
 the task requires another surface.
+
+Apply the same rule to technology selection, persisted domain records,
+manual/support processes, fallback mechanisms, user-visible restrictions, rollout
+stages, recurring verification, and operational ownership. A review suggestion
+or an available legacy implementation is a `Proposal`, not a requirement.
+
+Before handoff, scan obligation language (`must`, `required`, `will`, `needs`)
+and the planned change surface. For every item, record its Required/Approved
+source or downgrade it to Derived safeguard/Proposal/Open. A safeguard that
+creates a new external or operational surface is not “derived”; it needs
+approval.
 
 ## Bounded retrieval
 
