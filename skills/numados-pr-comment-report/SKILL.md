@@ -40,27 +40,30 @@ Use available PR tooling to retrieve the PR metadata and discussion threads. If 
 
 ## Output contract
 
-Return only a concise structured report, followed by a short verification summary:
+Return a clear, readable structured report, followed by a short verification summary. For each thread, explain the meaning in plain terms first (`What they asked`, `Why it's fine / Our fix`), followed by the direct copy-paste reply:
 
 ```markdown
 # PR comment response report
 
-## 1. Discussion <id> — <short topic>
+### Thread <id> — <short topic>
 - Classification: **True Alarm — Fixed**
-- Evidence: `<file/symbol/commit/test evidence>`
-- Copy-paste response:
-  > Fixed in `<commit>`: <one-sentence description>. Verified by <test/build>.
+- **What they asked:** <Plain 1-sentence summary of the reviewer's concern>
+- **Why it's fine / Our fix:** <Plain 1-sentence summary of the technical reality or fix applied>
+- **Copy-paste response:**
+  > Fixed in `<commit>`: <one-sentence description of the change and resolution>. Verified by <test/build>.
 
-## 2. Discussion <id> — <short topic>
+### Thread <id> — <short topic>
 - Classification: **False Alarm — Skip**
-- Evidence: `<guard/contract/topology/test>`
-- Copy-paste response:
-  > Skip — no change needed. <short reason>.
+- **What they asked:** <Plain 1-sentence summary of the reviewer's concern>
+- **Why it's fine / Our fix:** <Plain 1-sentence summary of why the concern cannot occur or is guarded>
+- **Copy-paste response:**
+  > Skip — no change needed. <short reason citing the guard or contract>.
 
-## 3. Discussion <id> — <short topic>
+### Thread <id> — <short topic>
 - Classification: **Needs Evidence — Defer**
-- Missing evidence: `<specific contract/data/test needed>`
-- Copy-paste response:
+- **What they asked:** <Plain 1-sentence summary of the reviewer's point>
+- **Why it's fine / Our fix:** <Plain 1-sentence summary of why this cannot be confirmed yet>
+- **Copy-paste response:**
   > Defer for now — <specific unknown>. We need <evidence> before changing this.
 
 ## Verification
@@ -78,23 +81,24 @@ For **True Alarm — Open**, use:
 For **Acknowledged — No Action**, use:
 
 ```text
-> Acknowledged, thank you. No change is required for this comment.
+> Acknowledged. <direct explanation of deliberate design decision, or that no change is required>.
 ```
 
 For **Suggestion — Optional**, use:
 
 ```text
-> Optional follow-up — valid improvement, but not required for this PR's correctness/scope: <reason>.
+> Optional follow-up — <reason why it is not required for this PR's correctness/scope>.
 ```
 
 ## Response rules
 
 - Keep each copy-paste response to 1–3 sentences.
-- Say `Fixed` only for a real issue fixed in the current source branch.
+- **No conversational filler or sycophancy**: Never use phrases like "Good catch", "Thanks for the review", "Great point", "Good idea", or similar conversational filler. Start directly with the technical resolution or factual explanation.
+- Say `Fixed in <commit>` only for a real issue fixed in the current source branch.
 - Say `Skip — no change needed` for false alarms; explain the decisive guard in one sentence.
 - Say `Defer` when evidence is missing; name exactly what would resolve it.
+- Say `Acknowledged.` without fluff for non-actionable or informational comments.
 - Do not hide unresolved high-severity findings in a general summary.
-- If a thread is merely positive review feedback, classify it **Acknowledged — No Action** and use: `> Acknowledged, thank you. No change is required for this comment.` Omit it only when the user asks for actionable comments only.
 - Report thread IDs exactly as retrieved, but order by PR appearance.
 
 ## Evaluations
