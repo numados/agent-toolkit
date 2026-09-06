@@ -117,21 +117,18 @@ Full rules: `contracts/change-artifact-hygiene.md` in `numados/agent-toolkit`.
 
 ---
 
-## MCP Usage (System + Obsidian)
+## MCP Usage (Scope-gated)
 
-**Auggie MCP (`codebase-retrieval`) is metered — it costs real money per call.** Indexed semantic search is worth paying for when it genuinely buys speed or certainty, and wasteful otherwise. Local search tools (`rg`, `fd`, glob, read, `rust-mcp-filesystem`) are free and are the **default**, not a fallback.
+**Auggie MCP (`codebase-retrieval`) is metered — it costs real money per call.** It is an opt-in tool for codebase work, not a mandatory first step. A generic checklist, the presence of an index, or a desire for extra context is never a reason to call it.
 
-- **Default to free local search.** A known symbol, path, config key, error string, or log template; re-reading something already located; counting or enumerating structural matches — all of these go through `rg`/`fd`/glob/read directly. Never send a one-file lookup through paid semantic search.
-- **Escalate to Auggie only when it earns the cost**, i.e. when the index gives something local search cannot:
-  - you do not yet know which repository or file owns a concept;
-  - the question spans repositories;
-  - you need architecture or data-flow understanding rather than a location;
-  - the corpus is large enough that lexical search is not converging — roughly three exploratory greps that failed to narrow it down.
-- **Say why you escalated.** One line naming what local search failed to answer is enough; it keeps the spend visible.
+- **Default to free local search for every content type.** Use `read`, `rg`, `fd`, glob, or the applicable native/provider search first. This includes personal documents, project artifacts, email, Telegram, PDFs, and one-file documentation tasks.
+- **Use Auggie only for code.** Call it only when the user asks for codebase understanding, implementation, debugging, review, or architecture work **and** semantic code retrieval is likely to save time or resolve uncertainty that bounded local search cannot. Do not use it for personal artifacts, general documents, email, Telegram, or Obsidian notes.
+- **Before Auggie, prove the need.** Know the target repository and try the cheapest local route first. Escalate only when the concept is genuinely semantic, spans code areas or repositories, or local lexical search has failed to converge after roughly three exploratory passes. Record the reason in one line.
+- **Never run Auggie merely because a task started.** Do not launch it to satisfy a generic workflow rule, to search an unrelated shared vault, or when the requested files and scope are already known.
+- **Obsidian is also scope-gated.** Search the vault only when the user asks about vault knowledge, a relevant durable decision, or a Numados task state that actually exists there. Do not search a shared knowledge vault for unrelated personal artifacts or to satisfy a generic context requirement.
 - **Never conclude "not found" from a single route.** State which routes were tried and name one that was not.
 - For **system files or content outside the workspace**: use `rust-mcp-filesystem`; fall back to other filesystem MCPs only if it is unavailable.
-- Use Obsidian MCP for vault content.
-- Prefer MCP for safe, auditable access; basic read operations should be allowed by default. This is about auditability, not about preferring paid tools.
+- Prefer the cheapest suitable provider; use MCP for safe, auditable access when it adds value, not by default.
 
 ## Web Search (DDG vs Tavily)
 
