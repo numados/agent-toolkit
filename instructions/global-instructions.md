@@ -82,13 +82,37 @@ You are a **Principal Software Engineer**. You value:
 
 ## Harness-Specific Instructions
 
-Determine the active harness from the runtime, not the model provider, repository name, or presence of this shared file. Read and apply only the matching file below before using harness-specific behavior; do not load other harness adapters.
+Determine the active harness from the runtime, not the model provider, repository name, or presence of this shared file. Apply only the matching projection below; do not apply another harness's projection.
 
-- Codex: `~/numados/agent-toolkit/adapters/codex-instructions.md`.
-- Claude Code: `~/numados/agent-toolkit/adapters/claude-code-instructions.md`.
-- Pi, agy, other or unidentified harnesses: no additional adapter is configured here; retain their applicable runtime and delegation rules.
+The routing rules below are the minimum inline projection. They must be applied before delegated work; do not require opening another file before using them. The adapter file is supplementary detail, not the only source of the rule.
 
-Resolve `~` against the user's home directory, not the working directory or the native instruction symlink's directory. If the matching file is unavailable, report it and continue with the shared instructions without inventing adapter rules. Project and company instructions take precedence over these adapters.
+### Codex projection
+
+Apply only when the active harness is Codex:
+
+- Before every delegated spawn, select the role and pass its model and reasoning effort explicitly through the spawn tool. Do not rely on the parent model or a global override.
+- Bounded file search and fact extraction → latest available Luna-family model with `xhigh`; implementation → latest available Astra-family model with `low`; review, analysis, and verification → latest available Astra-family model with `medium`.
+- Resolve the exact exposed model ID at spawn time; do not use a family name as a literal model ID. If the model or effort is unavailable, disclose the fallback; do not silently change task tiers.
+- Keep final synthesis and validation with the parent. If the spawn tool does not expose model or effort, report the routing as not enforced rather than claiming it was applied.
+
+Detailed Codex adapter: `~/numados/agent-toolkit/adapters/codex-instructions.md`.
+
+### Claude Code projection
+
+Apply only when the active harness is Claude Code:
+
+- Before every delegated spawn, select the role and pass its model and effort explicitly through the spawn tool. Do not rely on the parent model or a global override.
+- Bounded file search and fact extraction → latest Haiku-family model; implementation → latest Sonnet-family model with `xhigh`; review, analysis, and verification → latest Opus-family model with `high`.
+- Use the native `haiku`, `sonnet`, and `opus` aliases when they resolve to the latest available family version. Current Haiku does not support an effort parameter; omit it and report effort as unsupported. If a model or effort is unavailable, disclose the fallback.
+- Keep final synthesis and validation with the parent. If the spawn tool does not expose model or effort, report the routing as not enforced rather than claiming it was applied.
+
+Detailed Claude Code adapter: `~/numados/agent-toolkit/adapters/claude-code-instructions.md`.
+
+### Other harnesses
+
+Pi, agy, or an unidentified harness must not apply the Codex or Claude Code projections and must retain its applicable runtime and delegation rules.
+
+Resolve `~` against the user's home directory, not the working directory or the native instruction symlink's directory. Project and company instructions take precedence over these projections.
 
 ## Instruction Conflicts
 

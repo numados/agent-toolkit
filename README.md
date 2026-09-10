@@ -35,6 +35,7 @@ manifests, external-tool contracts, and the non-destructive Pi installer.
 ├── adapters/                 integration boundaries and shared adapter notes
 ├── mcp/                      non-secret MCP definitions
 ├── scripts/validate-skills.sh
+├── scripts/setup-harness-instructions.sh
 └── tests/
     ├── run-runtime-checks.sh
     ├── contracts/            scenario evaluations mirroring contracts/
@@ -80,11 +81,34 @@ The implementation skill delegates final code review to `numados-code-review`, w
 currently executing it. The native boundary is an AI-harness concern; the
 toolkit does not install or modify global Git hooks, aliases, or `core.hooksPath`.
 
+## Bootstrap harness instructions
+
+Clone the repository at the canonical user-level path so the detailed adapter
+links resolve on every machine:
+
+```bash
+mkdir -p ~/numados
+git clone git@github.com:numados/agent-toolkit.git ~/numados/agent-toolkit
+cd ~/numados/agent-toolkit
+bash scripts/setup-harness-instructions.sh --check
+bash scripts/setup-harness-instructions.sh --apply
+bash scripts/setup-harness-instructions.sh --check
+```
+
+The setup script creates only missing symlinks for `~/.codex/AGENTS.md`,
+`~/.claude/CLAUDE.md`, and `~/.pi/agent/AGENTS.md`. It refuses to overwrite an
+existing file or unexpected symlink. The inline projections in
+`instructions/global-instructions.md` provide the minimum Codex and Claude
+routing rules; the parent agent still passes the selected model and effort to
+each delegated spawn. CLI versions, model availability, authentication, and
+MCP credentials are machine-local and are not restored by this repository.
+
 ## Validation
 
 ```bash
 bash scripts/validate-skills.sh
 bash tests/run-runtime-checks.sh
+bash scripts/setup-harness-instructions.sh --check
 ```
 
 The validator checks portable metadata, bundled-resource links, orphaned reference files, `agents/openai.yaml` interface constraints, evaluation-file presence, trigger-file JSON structure, and `runtime/requirements.tsv` declarations. Runtime smoke tests cover deterministic provider selection and failure paths; client discovery still belongs in supported-harness adapters.
