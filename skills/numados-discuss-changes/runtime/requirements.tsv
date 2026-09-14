@@ -1,0 +1,2 @@
+# capability	need	when	providers	purpose
+source.remote-read	optional	a relevant requirement or implementation must be read remotely	harness:remote-read|mcp:remote-read|harness:web-search	Verify the source before explaining behaviour

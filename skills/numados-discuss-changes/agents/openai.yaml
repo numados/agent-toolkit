@@ -1,0 +1,6 @@
+interface:
+  display_name: "numados: Discuss changes"
+  short_description: "Understand changes one plain-language idea at a time"
+  default_prompt: "Use $numados-discuss-changes to help me understand these changes one idea at a time, with simple examples and short code excerpts when useful; wait for + before continuing."
+policy:
+  allow_implicit_invocation: true

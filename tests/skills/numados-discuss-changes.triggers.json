@@ -1,0 +1,12 @@
+[
+  {"query":"Use $numados-discuss-changes to help me understand this patch; I know little about this domain.","should_trigger":true},
+  {"query":"Объясняй изменения просто, по одной мысли за ответ, дальше пойдем по плюсу.","should_trigger":true},
+  {"query":"Walk me through this plan slowly. Show a little code when it helps and wait between steps.","should_trigger":true},
+  {"query":"Давай обсудим, что поменяется для пользователя. Не весь разбор сразу, я буду задавать вопросы.","should_trigger":true},
+  {"query":"Review the whole diff and report all confirmed bugs.","should_trigger":false},
+  {"query":"Give me a complete ELI18 explanation in one answer.","should_trigger":false},
+  {"query":"Update the frontend ticket with this approved API contract.","should_trigger":false},
+  {"query":"Implement this plan and run the tests.","should_trigger":false},
+  {"query":"Summarize these changes in three bullets.","should_trigger":false},
+  {"query":"Explain what this single method returns.","should_trigger":false}
+]

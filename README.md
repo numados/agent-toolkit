@@ -51,6 +51,7 @@ manifests, external-tool contracts, and the non-destructive Pi installer.
 - `numados-csharp` guides C# implementation that follows repository conventions.
 - `numados-rust` guides Rust implementation that follows repository conventions.
 - `numados-explain` turns technical material into concise explanations designed for first-read understanding.
+- `numados-discuss-changes` explains changes to a domain newcomer one idea per reply, with useful code examples and user-paced continuation.
 - `numados-skill-doctor` audits whether a skill is ready for the current machine, harness, and target scope.
 - `numados-local-search` routes local retrieval to bounded lexical, structural, semantic, document, indexed, or history providers.
 - `numados-obsidian-knowledge` provides bounded, portable Obsidian vault operations.
