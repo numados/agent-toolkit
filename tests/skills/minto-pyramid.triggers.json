@@ -1,0 +1,12 @@
+[
+  {"query":"Use minto-pyramid for your answers in this session.","should_trigger":true},
+  {"query":"Answer point first, pyramid style. I want the bottom line up front.","should_trigger":true},
+  {"query":"Structure this update with the pyramid principle: conclusion, then grouped support, then detail.","should_trigger":true},
+  {"query":"/pyramid for this status report.","should_trigger":true},
+  {"query":"I don't understand your last answer at all.","should_trigger":true},
+  {"query":"This is too complicated, you lost me after the first paragraph.","should_trigger":true},
+  {"query":"Review this diff and report confirmed bugs.","should_trigger":false},
+  {"query":"Implement the login form and run the tests.","should_trigger":false},
+  {"query":"Summarize these release notes in three bullets.","should_trigger":false},
+  {"query":"What does this single function return?","should_trigger":false}
+]

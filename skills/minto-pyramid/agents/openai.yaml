@@ -1,0 +1,6 @@
+interface:
+  display_name: "Minto Pyramid"
+  short_description: "Answer first, then grouped support, then detail"
+  default_prompt: "Use $minto-pyramid for your replies in this session: lead with the bottom line, then grouped support, then detail."
+policy:
+  allow_implicit_invocation: true

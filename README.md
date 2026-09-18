@@ -45,6 +45,7 @@ manifests, external-tool contracts, and the non-destructive Pi installer.
 ## Core Skills
 
 - `skill-author` creates, updates, and reviews reusable skills.
+- `minto-pyramid` structures replies point-first with grouped support and visible markers, persisting across turns once triggered.
 - `numados-code-review` reviews pull requests and diffs, validates candidates, and reports only actionable findings.
 - `numados-verify-finding` validates review findings before they become PR comments.
 - `numados-commit-message` generates repository-aligned commit messages without committing.
